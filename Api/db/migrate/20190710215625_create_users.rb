@@ -3,11 +3,13 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.string :rol
       t.string :name
+      t.string :token
       t.string :lastName
       t.string :email
-      t.string :password
+      t.string :password_digest
 
       t.timestamps
     end
+  add_index :users, :token
   end
 end
