@@ -23,22 +23,18 @@ function RequestsView() {
         {REQUESTS.map(request => (
           <li
             css={{
+              padding: "20px",
               border: "1px solid black",
               display: "flex",
-              flexDirection: "column"
+              flexDirection: "column",
+              "&:hover": {
+                cursor: "pointer"
+              }
             }}
           >
-            <button
-              css={{
-                border: "1px solid black",
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <p>#{request.id}</p>
-              <p>{request.name} quiere cambiar su turno contigo</p>
-              <div css={{justifyContent: "flex-end"}}>Pending </div>
-            </button>
+            <p>#{request.id}</p>
+            <p>{request.name} quiere cambiar su turno contigo</p>
+            <div css={{ alignSelf: "flex-end" }}>Pending </div>
           </li>
         ))}
       </ul>
