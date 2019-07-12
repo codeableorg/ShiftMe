@@ -3,9 +3,12 @@ require 'rails_helper'
 RSpec.describe SchedulesController, type: :controller do
 
   before do
-    @schedule = Schedule.create(
+
+    @user= User.create(rol: 'FrontDesk', name: 'Lina',lastName: 'Delgado', email: 'lina@shift.com', password: '123456')
+
+    @schedule = Schedule.create!(
       month: "Julio",
-      user_id: 1,
+      user: @user,
       workShifts: [
         {
           date:"01-07-19",
