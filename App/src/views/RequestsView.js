@@ -2,16 +2,20 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import Nabvar from "../components/Nabvar";
+import { Redirect } from "@reach/router";
+import { useUser } from "../contexts/user";
 
-const REQUESTS = [
+const request = [
   { name: "Angie", id: 3456 },
   { name: "Diego", id: 756 },
   { name: "Marieth", id: 221 }
 ];
 function RequestsView() {
+  const user = useUser();
+  if (!user) return <Redirect to="login" noThrow />;
   return (
     <>
-      <Nabvar />{" "}
+      <Nabvar />
       <ul
         css={{
           listStyle: "none",
@@ -20,7 +24,7 @@ function RequestsView() {
           margin: "0 auto"
         }}
       >
-        {REQUESTS.map(request => (
+        {request.map(request => (
           <li
             css={{
               padding: "20px",
