@@ -14,3 +14,4 @@ class User < ApplicationRecord
     user if user&.authenticate(password)
   end
 end
+

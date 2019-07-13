@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_222908) do
   create_table "schedules", force: :cascade do |t|
     t.string "month"
     t.bigint "user_id"
-    t.string "workShifts", array: true
+    t.json "workShifts", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_schedules_on_user_id"
