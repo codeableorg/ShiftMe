@@ -10,8 +10,6 @@ User.create(name: 'Diego Cuevas', email: 'diego@gmail.com', password: '123456')
 User.create(name: 'Marieth', email: 'marieth@gmail.com', password: '123456')
 User.create(name: 'Angie', email: 'angie@gmail.com', password: '123456')
 
-
-puts "Init seed"
 supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', email: 'nina@shift.com', password: '123456')
 user_1= User.create(rol: 'FrontDesk', name: 'Alina',lastName: 'Torres', email: 'alina@shift.com', password: '123456')
 user_2= User.create(rol: 'FrontDesk', name: 'Lina',lastName: 'Delgado', email: 'lina@shift.com', password: '123456')
