@@ -2,8 +2,15 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
+import { useUserUpdater } from "../contexts/user";
+import { logout } from "../services/user";
 
 function Nabvar() {
+  const updateUser = useUserUpdater();
+  async function handleLogoutClick() {
+    await logout();
+    updateUser({ type: "LOGOUT" });
+  }
   const linkStyle = {
     marginRight: "1em",
     textDecoration: "none",
@@ -36,9 +43,7 @@ function Nabvar() {
           </Link>
         </li>
         <li css={{ marginLeft: "auto" }}>
-          <Link css={linkStyle} to="/login">
-            Logout
-          </Link>
+          <button onClick={handleLogoutClick}>Logout</button>
         </li>
       </ul>
     </nav>
