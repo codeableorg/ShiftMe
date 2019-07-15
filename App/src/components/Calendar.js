@@ -205,7 +205,7 @@ function Calendar() {
     <>
       <div>
         <div>
-          <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
+          <h2 css={{ display: "flex", justifyContent: "center" }}>Schedules</h2>
           <table css={tableCss}>
             <thead>
               <tr>
