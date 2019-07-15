@@ -37,7 +37,7 @@ function Login() {
       <h1 css={{ margin: "3rem 0", fontSize: "2rem", textAlign: "center" }}>
         Login to the Application
       </h1>
-      <card styles={{ marginTop: "3rem" }}>
+      <div styles={{ marginTop: "3rem" }}>
         <form onSubmit={handleSubmit}>
           <label css={{ display: "block", margin: ".5rem 0" }} htmlFor="email">
             Email
@@ -68,7 +68,7 @@ function Login() {
             <div css={{ color: "red", marginTop: "1rem" }}>Error: {error}</div>
           )}
         </form>
-      </card>
+      </div>
     </section>
   );
 }
