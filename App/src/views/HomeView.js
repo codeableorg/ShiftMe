@@ -17,6 +17,7 @@ function HomeView() {
       setEvents(schedule);
     });
   }, []);
+
   if (!user) return <Redirect to="login" noThrow />;
   if (events.length === 0) return null;
 
