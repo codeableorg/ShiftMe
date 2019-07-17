@@ -13,14 +13,10 @@ function HomeView() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    console.log("effect");
     schedules.schedules().then(schedule => {
-      console.log(schedule);
       setEvents(schedule);
     });
   }, []);
-
-  console.log(events);
 
   if (!user) return <Redirect to="login" noThrow />;
   if (events.length === 0) return null;
@@ -48,11 +44,10 @@ function HomeView() {
     textAlign: "center"
   };
 
-  const backNextCss={
+  const backNextCss = {
     display: "flex",
     justifyContent: "center"
-
-  }
+  };
 
   function handleClickNext(event) {
     event.preventDefault();
@@ -65,8 +60,6 @@ function HomeView() {
     setStart(start - 7);
     setEnd(end - 7);
   }
-
-
 
   function handleChangeSchedule(event) {
     event.preventDefault();
@@ -132,14 +125,14 @@ function HomeView() {
               ))}
             </tbody>
           </table>
-          </div>
-          <div css={backNextCss}>
+        </div>
+        <div css={backNextCss}>
           <button onClick={handleClickBack}>Back</button>
           <button onClick={handleClickNext}>Next</button>
-          </div>
-          <div css={backNextCss}>
+        </div>
+        <div css={backNextCss}>
           <button onClick={handleChangeSchedule}>Change Schedule</button>
-          </div>
+        </div>
       </div>
     </>
   );
