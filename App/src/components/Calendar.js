@@ -247,7 +247,7 @@ function Calendar() {
           </table>
         </div>
         <div>
-          <h2 css={{ display: "flex", justifyContent: "center" }}>FORECAST</h2>
+          <h2 css={{ display: "flex", justifyContent: "center" }}>Forecast</h2>
           <table css={tableCss}>
             <thead>
               <tr>
