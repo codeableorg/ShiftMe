@@ -28,10 +28,7 @@ function RequestsView() {
           <li
             css={{
               padding: "20px",
-              border: "1➜  ShiftMe git:(master) gco feature-requestviewlist 
-              Branch 'feature-requestviewlist' set up to track remote branch 'feature-requestviewlist' from 'origin'.
-              Switched to a new branch 'feature-requestviewlist'
-              ➜  ShiftMe git:(feature-requestviewlist) git pull orpx solid black",
+              border: "1px solid black",
               display: "flex",
               flexDirection: "column",
               "&:hover": {
