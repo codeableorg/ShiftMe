@@ -27,7 +27,7 @@ function RequestsView() {
     }
     fetchData();
   }, []);
-  
+
   function handleRequestSchedule(event) {
     setModalOpen(true);
     event.preventDefault();
@@ -48,7 +48,7 @@ function RequestsView() {
           <li
             css={{
               padding: "20px",
-              border: "1px solid black",
+              border: "1x solid black",
               display: "flex",
               flexDirection: "column",
               "&:hover": {
@@ -58,32 +58,27 @@ function RequestsView() {
           >
             <p>#{request.id}</p>
             <p>
-              FrontDesk 
-              {" "}  
+              FrontDesk{" "}
               {
                 frontdesks.find(
                   frontdesk => frontdesk.id === request.requester_id
                 ).name
-              }
-               {" "}  
-              de turno  {request.current_Shift_id === 4
+              }{" "}
+              de turno{" "}
+              {request.current_Shift_id === 4
                 ? "OFF"
                 : request.current_Shift_id === 1
                 ? "Morning"
                 : request.current_Shift_id === 2
                 ? "Afternoon"
-                : "Night"} want to change workshift with 
-              FrontDesk
-                {" "}  
-               {
+                : "Night"}{" "}
+              want to change workshift with FrontDesk{" "}
+              {
                 frontdesks.find(
                   frontdesk => frontdesk.id === request.requested_id
                 ).name
-              }
-               {" "}  
-              de turno
-              {" "}  
-
+              }{" "}
+              de turno{" "}
               {request.requested_Shift_id === 4
                 ? "OFF"
                 : request.requested_Shift_id === 1
