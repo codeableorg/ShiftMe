@@ -1,4 +1,4 @@
-const API_SCHEDULES_URL = "http://localhost:4000/api/schedules/index";
+const API_SCHEDULES_URL = "http://localhost:4000/api/schedule/workshifts";
 
 async function createError(response) {
   const { errors } = await response.json();
