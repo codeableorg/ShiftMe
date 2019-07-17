@@ -33,7 +33,8 @@ class RequestsController < ApplicationController
     else
       render json: request.errors, status: :bad_request
     end
-  end
+
+
 
   private 
   def request_params

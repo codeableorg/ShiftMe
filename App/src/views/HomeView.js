@@ -116,7 +116,6 @@ function HomeView() {
     }
     fetchData();
   }, []);
-
   if (!user) return <Redirect to="login" noThrow />;
   if (events.length === 0) return null;
   if (frontdesks.length === 0) return null;
