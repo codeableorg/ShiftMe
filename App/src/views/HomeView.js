@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import Nabvar from "../components/Nabvar";
-<<<<<<< HEAD
 import ScheduleModal from "./ScheduleModal";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
@@ -117,20 +116,6 @@ function HomeView() {
     }
     fetchData();
   }, []);
-=======
-import schedules from "../services/schedule";
-
-import BigCalendar from "react-big-calendar";
-import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-
-moment.locale("en-GB");
-BigCalendar.momentLocalizer(moment);
-
-function HomeView() {
-  const schedule = schedules.schedules();
-  const user = useUser();
->>>>>>> Add schedule view
 
   if (!user) return <Redirect to="login" noThrow />;
   if (events.length === 0) return null;
@@ -216,7 +201,6 @@ function HomeView() {
   return (
     <>
       <Nabvar />
-<<<<<<< HEAD
       <div>
         <div>
           <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
@@ -293,32 +277,11 @@ function HomeView() {
           <button onClick={handleClickBack}>Back</button>
           <button onClick={handleClickNext}>Next</button>
         </div>
-        <div css={backNextCss}>
-          <ScheduleModal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setModalOpen(false)}
-          />
-          <button onClick={handleChangeSchedule}>Change Schedule</button>
-        </div>
-=======
-      <div style={{ height: 700 }}>
-        <BigCalendar
-          events={[
-            {
-              title: "My event",
-              allDay: false,
-              start: new Date(2018, 0, 1, 10, 0), // 10.00 AM
-              end: new Date(2018, 0, 1, 14, 0) // 2.00 PM
-            }
-          ]}
-          step={60}
-          view="week"
-          views={["week"]}
-          min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
-          max={new Date(2008, 0, 1, 17, 0)} // Max will be 6.00 PM!
-          date={new Date(2018, 0, 1)}
+        <ScheduleModal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalOpen(false)}
         />
->>>>>>> Add schedule view
+        <button onClick={handleChangeSchedule}>Change Schedule</button>
       </div>
     </>
   );
