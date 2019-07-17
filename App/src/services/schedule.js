@@ -16,7 +16,9 @@ async function schedules() {
     }
   });
   if (!response.ok) throw createError(response);
-  return await response.json();
+  const result = await response.json();
+
+  return result;
 }
 
-export default { schedules }
+export default { schedules };
