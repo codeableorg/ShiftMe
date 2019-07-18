@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import Nabvar from "../components/Nabvar";
+import ScheduleModal from "./ScheduleModal";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 
 function HomeView() {
+  const [modalIsOpen, setModalOpen] = useState([false]);
   const user = useUser();
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(7);
@@ -158,6 +160,7 @@ function HomeView() {
   }
 
   function handleChangeSchedule(event) {
+    setModalOpen(true);
     event.preventDefault();
   }
 
@@ -273,6 +276,10 @@ function HomeView() {
           <button onClick={handleClickNext}>Next</button>
         </div>
         <div css={backNextCss}>
+          <ScheduleModal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalOpen(false)}
+          />
           <button onClick={handleChangeSchedule}>Change Schedule</button>
         </div>
       </div>
