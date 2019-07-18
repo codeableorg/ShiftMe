@@ -13,9 +13,11 @@ function HomeView() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    schedules.schedules().then(schedule => {
-      setEvents(schedule);
-    });
+    async function fetchData() {
+      const response = await schedules.schedules();
+      setEvents(response);
+    }
+    fetchData();
   }, []);
 
   if (!user) return <Redirect to="login" noThrow />;
