@@ -5,12 +5,14 @@ import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import Nabvar from "../components/Nabvar";
 import schedules from "../services/schedule";
+import { users } from "../services/user";
 
 function HomeView() {
   const user = useUser();
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
+  const [frontdesks, setFrontdesks] = useState([]);
 
   const forecasts = [
     {
@@ -103,8 +105,17 @@ function HomeView() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await users();
+      setFrontdesks(response);
+    }
+    fetchData();
+  }, []);
+
   if (!user) return <Redirect to="login" noThrow />;
   if (events.length === 0) return null;
+  if (frontdesks.length === 0) return null;
 
   const tableCss = {
     width: "80%",
@@ -168,8 +179,6 @@ function HomeView() {
     };
   }, {});
 
-  console.log(forecastsConcat);
-
   function calcDay(date) {
     const nameDays = [
       "Sunday",
@@ -189,6 +198,7 @@ function HomeView() {
       <Nabvar />
       <div>
         <div>
+          <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
           <table css={tableCss}>
             <thead>
               <tr>
@@ -205,7 +215,14 @@ function HomeView() {
             <tbody>
               {Object.entries(workShiftConcat).map(([userId, workShifts]) => (
                 <tr>
-                  <td css={tdCss}>{userId}</td>
+                  <td css={tdCss}>
+                    {userId}-
+                    {
+                      frontdesks.find(
+                        frontdesk => frontdesk.id === parseInt(userId)
+                      ).name
+                    }
+                  </td>
                   {workShifts.slice(start, end).map(workShift => (
                     <td css={tdCss}>
                       {workShift.shift_id === 4
@@ -223,6 +240,7 @@ function HomeView() {
           </table>
         </div>
         <div>
+          <h2 css={{ display: "flex", justifyContent: "center" }}>FORECAST</h2>
           <table css={tableCss}>
             <thead>
               <tr>
