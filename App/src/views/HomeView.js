@@ -245,7 +245,7 @@ function HomeView() {
           </table>
         </div>
         <div>
-          <h2 css={{ display: "flex", justifyContent: "center" }}>Forecast</h2>
+          <h2 css={{ display: "flex", justifyContent: "center" }}>Forecasts</h2>
           <table css={tableCss}>
             <thead>
               <tr>
