@@ -4,6 +4,8 @@ class Request < ApplicationRecord
   belongs_to :current_Shift, class_name: 'Shift'
   belongs_to :requested_Shift, class_name: 'Shift'
   
+  validate :validate_requester
+  
   VALID_STATUSES = {
     pending: "pending",
     agree: "agree",
@@ -11,11 +13,10 @@ class Request < ApplicationRecord
     accepted: "accepted",
     rejected: "rejected"
   }
-
-  # private
-  #   def create_request
-  #     Request.create(requester: requester, requested: recipient) if status == "agree"
-  #   end
-
+ def validate_requester
+  if requester.id == requested.id
+    errors.add(:requester, "Can't be request")
+  end
+ end
 
 end
