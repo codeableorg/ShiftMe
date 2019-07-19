@@ -14,6 +14,7 @@ function Calendar() {
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const forecasts = [
     {
@@ -106,8 +107,6 @@ function Calendar() {
     fetchData();
   }, []);
 
-  console.log(modalIsOpen);
-
   useEffect(() => {
     async function fetchData() {
       const response = await users();
@@ -160,9 +159,14 @@ function Calendar() {
     setEnd(end - 7);
   }
 
-  function handleChangeSchedule(event) {
-    setModalOpen(true);
+  function handleClick(event) {
     event.preventDefault();
+    if (clicked) {
+      event.target.style.background = "green";
+    } else {
+      event.target.style.background = "#538898";
+    }
+    setClicked(!clicked);
   }
 
   const workShiftConcat = events.reduce((groups, event) => {
@@ -227,7 +231,7 @@ function Calendar() {
                     }
                   </td>
                   {workShifts.slice(start, end).map(workShift => (
-                    <td css={tdCss}>
+                    <td css={tdCss} onClick={handleClick}>
                       {workShift.shift_id === 4
                         ? "OFF"
                         : workShift.shift_id === 1
@@ -280,10 +284,9 @@ function Calendar() {
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
           />
-          <button onClick={handleChangeSchedule}>Change Schedule</button>
         </div>
       </div>
     </>
   );
 }
-export default Calendar
+export default Calendar;
