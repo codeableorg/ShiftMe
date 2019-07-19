@@ -289,7 +289,6 @@ function Calendar() {
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
           />
-          <button onClick={handleChangeSchedule}>Change Schedule</button>
         </div>
       </div>
     </>
