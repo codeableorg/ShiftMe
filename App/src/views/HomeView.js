@@ -107,8 +107,6 @@ function HomeView() {
     fetchData();
   }, []);
 
-  console.log(modalIsOpen);
-
   useEffect(() => {
     async function fetchData() {
       const response = await users();

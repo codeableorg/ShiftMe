@@ -78,6 +78,12 @@ function RequestsView() {
                   frontdesk => frontdesk.id === request.requested_id
                 ).name
               }{" "}
+              de turno :
+              {
+                frontdesks.find(
+                  frontdesk => frontdesk.id === request.requested_id
+                ).name
+              }{" "}
               de turno{" "}
               {request.requested_Shift_id === 4
                 ? "OFF"

@@ -169,6 +169,11 @@ function Calendar() {
     setClicked(!clicked);
   }
 
+  function handleChangeSchedule(event) {
+    setModalOpen(true);
+    event.preventDefault();
+  }
+
   const workShiftConcat = events.reduce((groups, event) => {
     return {
       ...groups,
@@ -205,7 +210,7 @@ function Calendar() {
     <>
       <div>
         <div>
-          <h2 css={{ display: "flex", justifyContent: "center" }}>Schedules</h2>
+          <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
           <table css={tableCss}>
             <thead>
               <tr>
@@ -247,7 +252,7 @@ function Calendar() {
           </table>
         </div>
         <div>
-          <h2 css={{ display: "flex", justifyContent: "center" }}>Forecast</h2>
+          <h2 css={{ display: "flex", justifyContent: "center" }}>FORECAST</h2>
           <table css={tableCss}>
             <thead>
               <tr>
@@ -284,9 +289,11 @@ function Calendar() {
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
           />
+          <button onClick={handleChangeSchedule}>Change Schedule</button>
         </div>
       </div>
     </>
   );
 }
+
 export default Calendar;
