@@ -26,8 +26,17 @@ class RequestsController < ApplicationController
     end
   end
 
+  def create 
+    request = current_user.requester_request.new(request_params)
+    if request.save
+      render json: request, status: :created
+    else
+      render json: request.errors, status: :bad_request
+    end
+  end
+
   private 
   def request_params
-    params.require(:rol).permit(:creationDate, :date_Shift, :requester_id, :requested_id, :current_Shift_id, :requested_Shift_id )
+    params.permit(:rol, :creationDate, :date_Shift, :requested_id, :current_Shift_id, :requested_Shift_id )
   end
 end
