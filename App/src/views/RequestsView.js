@@ -8,12 +8,6 @@ import RequestModal from "./RequestModal";
 import requestsFetch from "../services/request";
 import { users } from "../services/user";
 
-const request = [
-  { name: "Angie", id: 3456 },
-  { name: "Diego", id: 756 },
-  { name: "Marieth", id: 221 }
-];
-
 function RequestsView() {
   const [modalIsOpen, setModalOpen] = useState(false);
   const [requests, setRequests] = useState([]);
@@ -26,7 +20,6 @@ function RequestsView() {
     }
     fetchData();
   }, []);
-  console.log(requests);
   useEffect(() => {
     async function fetchData() {
       const response = await users();
@@ -51,7 +44,6 @@ function RequestsView() {
           margin: "0 auto"
         }}
       >
-        {/* {id: 5, creationDate: null, requester_id: 7, requested_id: 8, rol: "FrontDesk", …} */}
         {requests.map(request => (
           <li
             css={{
