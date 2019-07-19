@@ -1,5 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
+import Calendar from "../components/Calendar";
+
 
 const customStyles = {
   content: {
@@ -20,6 +22,7 @@ const ScheduleModal = ({ isOpen, onRequestClose }) => (
     contentLabel="Example Modal"
   >
     <h2>Schudule Change</h2>
+    <Calendar/>
     <div>Motive </div>
     <form>
       <input />
