@@ -9,7 +9,7 @@ import schedules from "../services/schedule";
 import { users } from "../services/user";
 
 function HomeView() {
-  const [modalIsOpen, setModalOpen] = useState([false]);
+  const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(7);
@@ -106,6 +106,8 @@ function HomeView() {
     }
     fetchData();
   }, []);
+
+  console.log(modalIsOpen);
 
   useEffect(() => {
     async function fetchData() {

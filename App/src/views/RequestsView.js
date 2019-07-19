@@ -1,17 +1,25 @@
 /** @jsx jsx */
-import React from "react";
+import React, { useState } from "react";
 import { jsx } from "@emotion/core";
 import Nabvar from "../components/Nabvar";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
+import RequestModal from "./RequestModal";
 
 const request = [
   { name: "Angie", id: 3456 },
   { name: "Diego", id: 756 },
   { name: "Marieth", id: 221 }
 ];
+
 function RequestsView() {
+  const [modalIsOpen, setModalOpen] = useState([false]);
   const user = useUser();
+
+  function handleRequestSchedule(event) {
+    setModalOpen(true);
+    event.preventDefault();
+  }
   if (!user) return <Redirect to="login" noThrow />;
   return (
     <>
@@ -39,9 +47,16 @@ function RequestsView() {
             <p>#{request.id}</p>
             <p>{request.name} quiere cambiar su turno contigo</p>
             <div css={{ alignSelf: "flex-end" }}>Pending </div>
+            <button onClick={handleRequestSchedule}>
+              See Schudule request{" "}
+            </button>
           </li>
         ))}
       </ul>
+      <RequestModal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalOpen(false)}
+      />
     </>
   );
 }
