@@ -29,7 +29,7 @@ const ScheduleModal = ({ isOpen, onRequestClose }) => (
 
         <button>Send</button>
         <button>Clear</button>
-        <button onClick={onRequestClose}>close</button>
+        <button onClick={onRequestClose}>Close</button>
       </form>
     </div>
   </Modal>
