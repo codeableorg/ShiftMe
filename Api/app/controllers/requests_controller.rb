@@ -32,19 +32,8 @@ class RequestsController < ApplicationController
       render json: request, status: :created
     else
       render json: request.errors, status: :bad_request
-  end
-
-  def update
-    @request = Request.find_by(id: params[:id])
-    if current_user.id != @request.requested_id
-      render json: { errors: "You don't have access!!" }
-    else 
-      @request.status = params[:status]
-      @request.save
-      render json: @request
     end
   end
-  
 
   private 
   def request_params
