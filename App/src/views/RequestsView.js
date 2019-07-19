@@ -5,6 +5,7 @@ import Nabvar from "../components/Nabvar";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import RequestModal from "./RequestModal";
+import requests from "../services/request"
 
 const request = [
   { name: "Angie", id: 3456 },
@@ -15,6 +16,7 @@ const request = [
 function RequestsView() {
   const [modalIsOpen, setModalOpen] = useState([false]);
   const user = useUser();
+  console.log(requests.requests())
 
   function handleRequestSchedule(event) {
     setModalOpen(true);
