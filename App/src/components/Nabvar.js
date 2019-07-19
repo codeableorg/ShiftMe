@@ -15,13 +15,26 @@ function Nabvar() {
     marginRight: "1em",
     textDecoration: "none",
     color: "black",
+    transition: "color .20s ease",
+    fontWeight: "300",
+    lineHeight: "80px",
     "&:hover": {
-      color: "#003569"
+      color: "#f33959",
+      background: "#fff"
     }
   };
   return (
     <nav>
-      <ul css={{ listStyle: "none", margin: 0, padding: 0, display: "flex" }}>
+      <ul
+        css={{
+          listStyle: "none",
+          margin: 0,
+          padding: 0,
+          display: "flex",
+          borderBottom: "1px solid #e5edef",
+          justifyContent: "center"
+        }}
+      >
         <li>
           <Link css={linkStyle} to="/">
             Shiftme
@@ -42,8 +55,10 @@ function Nabvar() {
             Create User
           </Link>
         </li>
-        <li css={{ marginLeft: "auto" }}>
-          <button onClick={handleLogoutClick}>Logout</button>
+        <li css={{ marginLeft: "auto", fontWeight: "300", cursor: "pointer" }}>
+          <div css={linkStyle} onClick={handleLogoutClick}>
+            Logout
+          </div>
         </li>
       </ul>
     </nav>
