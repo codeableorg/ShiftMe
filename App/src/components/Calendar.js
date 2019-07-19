@@ -3,12 +3,11 @@ import { jsx } from "@emotion/core";
 import React, { useState, useEffect } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
-import Nabvar from "../components/Nabvar";
-import ScheduleModal from "./ScheduleModal";
+import ScheduleModal from "../views/ScheduleModal";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 
-function HomeView() {
+function Calendar() {
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
   const [start, setStart] = useState(0);
@@ -200,7 +199,6 @@ function HomeView() {
 
   return (
     <>
-      <Nabvar />
       <div>
         <div>
           <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
@@ -288,5 +286,4 @@ function HomeView() {
     </>
   );
 }
-
-export default HomeView;
+export default Calendar
