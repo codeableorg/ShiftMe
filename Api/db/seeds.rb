@@ -13,9 +13,9 @@
 supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', email: 'nina@shift.com', password: '123456')
 
 @shift_1= Shift.create(shift_type: "morning")
-@shift_2= Shift.create(shift_type: "aftermoon")
+@shift_2= Shift.create(shift_type: "afternoon")
 @shift_3= Shift.create(shift_type: "night")
-
+@shift_4= Shift.create(shift_type: "off")
 
 @request_1 = Request.create(rol: 'FrontDesk', requester_id: @user_1.id, requested_id: @user_2.id, status: 'agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_2.id )
 @request_2 = Request.create(rol: 'FrontDesk', requester_id: @user_3.id, requested_id: @user_4.id, status: 'agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_3.id )

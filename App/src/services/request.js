@@ -8,7 +8,7 @@ async function createError(response) {
   return error;
 }
 
-async function requests() {
+async function requestsFetch() {
   const response = await fetch(API_REQUESTS_URL, {
     credentials: "include",
     headers: {
@@ -21,4 +21,4 @@ async function requests() {
   return result;
 }
 
-export default { requests };
+export default { requestsFetch };
