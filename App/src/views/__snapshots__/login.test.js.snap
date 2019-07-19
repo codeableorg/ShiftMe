@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login view 1`] = `
+<DocumentFragment>
+  <section
+    class="css-13p8oyr-Login"
+  >
+    <h1
+      class="css-1ja91ja-Login"
+    >
+      Login to the Application
+    </h1>
+    <div
+      styles="[object Object]"
+    >
+      <form>
+        <label
+          class="css-1raa8wv-Login"
+          for="email"
+        >
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value="diego@gmail.com"
+        />
+        <label
+          class="css-1raa8wv-Login"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value="123456"
+        />
+        <br />
+        <button>
+          Log In
+        </button>
+      </form>
+    </div>
+  </section>
+</DocumentFragment>
+`;

@@ -3,18 +3,18 @@ import { jsx } from "@emotion/core";
 import React, { useState, useEffect } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
-import Nabvar from "../components/Nabvar";
-import ScheduleModal from "./ScheduleModal";
+import ScheduleModal from "../views/ScheduleModal";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 
-function HomeView() {
+function Calendar() {
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const forecasts = [
     {
@@ -107,8 +107,6 @@ function HomeView() {
     fetchData();
   }, []);
 
-  console.log(modalIsOpen);
-
   useEffect(() => {
     async function fetchData() {
       const response = await users();
@@ -161,9 +159,14 @@ function HomeView() {
     setEnd(end - 7);
   }
 
-  function handleChangeSchedule(event) {
-    setModalOpen(true);
+  function handleClick(event) {
     event.preventDefault();
+    if (clicked) {
+      event.target.style.background = "green";
+    } else {
+      event.target.style.background = "#538898";
+    }
+    setClicked(!clicked);
   }
 
   const workShiftConcat = events.reduce((groups, event) => {
@@ -200,7 +203,6 @@ function HomeView() {
 
   return (
     <>
-      <Nabvar />
       <div>
         <div>
           <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
@@ -229,7 +231,7 @@ function HomeView() {
                     }
                   </td>
                   {workShifts.slice(start, end).map(workShift => (
-                    <td css={tdCss}>
+                    <td css={tdCss} onClick={handleClick}>
                       {workShift.shift_id === 4
                         ? "OFF"
                         : workShift.shift_id === 1
@@ -282,11 +284,9 @@ function HomeView() {
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
           />
-          <button onClick={handleChangeSchedule}>Change Schedule</button>
         </div>
       </div>
     </>
   );
 }
-
-export default HomeView;
+export default Calendar;

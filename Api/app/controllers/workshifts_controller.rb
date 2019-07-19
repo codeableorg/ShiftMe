@@ -1,4 +1,4 @@
-class SchedulesController < ApplicationController
+class WorkshiftsController < ApplicationController
   def index
     render json: Schedule.all
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_222908) do
+ActiveRecord::Schema.define(version: 2019_07_18_203930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_222908) do
     t.bigint "requester_id"
     t.bigint "requested_id"
     t.string "rol"
-    t.string "status"
+    t.string "status", default: "pending"
     t.date "date_Shift"
     t.bigint "current_Shift_id"
     t.bigint "requested_Shift_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_222908) do
   end
 
   create_table "shifts", force: :cascade do |t|
-    t.string "type"
+    t.string "shift_type"
     t.time "startHours"
     t.time "endHours"
     t.datetime "created_at", null: false
