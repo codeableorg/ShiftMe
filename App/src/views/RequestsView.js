@@ -61,7 +61,7 @@ function RequestsView() {
           >
             <p>#{request.id}</p>
             <span>
-              FrontDesk{" "}
+              FrontDes{" "}
               {
                 frontdesks.find(
                   frontdesk => frontdesk.id === request.requester_id
