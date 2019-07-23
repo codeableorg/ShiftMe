@@ -6,12 +6,13 @@ class Request < ApplicationRecord
   
   validate :validate_requester
   
-  VALID_STATUSES = {
-    pending: "pending",
-    agree: "agree",
-    disagree: "disagree",
-    accepted: "accepted",
-    rejected: "rejected"
+  VALID_STATUS = {
+    pending: "Pending",
+    agree: "Agree",
+    disagree: "Disagree",
+    accepted: "Accepted",
+    rejected: "Rejected",
+    cancel: "Cancel"
   }
  def validate_requester
   if requester.id == requested.id

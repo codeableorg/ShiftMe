@@ -37,6 +37,6 @@ class RequestsController < ApplicationController
 
   private 
   def request_params
-    params.permit(:rol, :creationDate, :date_Shift, :requested_id, :current_Shift_id, :requested_Shift_id )
+    params.permit(:rol, :creationDate, :date_Shift, :requested_id, :current_Shift_id, :requested_Shift_id, :motive, :status)
   end
 end
