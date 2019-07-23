@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_18_203930) do
+ActiveRecord::Schema.define(version: 2019_07_22_154742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,13 @@ ActiveRecord::Schema.define(version: 2019_07_18_203930) do
     t.bigint "requester_id"
     t.bigint "requested_id"
     t.string "rol"
-    t.string "status", default: "pending"
+    t.string "status", default: "Pending"
     t.date "date_Shift"
     t.bigint "current_Shift_id"
     t.bigint "requested_Shift_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "motive"
     t.index ["current_Shift_id"], name: "index_requests_on_current_Shift_id"
     t.index ["requested_Shift_id"], name: "index_requests_on_requested_Shift_id"
     t.index ["requested_id"], name: "index_requests_on_requested_id"

@@ -12,7 +12,7 @@ async function schedules() {
   const response = await fetch(API_SCHEDULES_URL, {
     credentials: "include",
     headers: {
-      "Content-Type": "aplication/json"
+      "Content-Type": "application/json"
     }
   });
   if (!response.ok) throw createError(response);

@@ -1,7 +1,4 @@
 import React from "react";
-import { navigate } from "@reach/router";
-
-import { login } from "../services/user";
 
 const UserStateContext = React.createContext();
 const UserDispatchContext = React.createContext();

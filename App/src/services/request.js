@@ -12,7 +12,7 @@ async function requestsFetch() {
   const response = await fetch(API_REQUESTS_URL, {
     credentials: "include",
     headers: {
-      "Content-Type": "aplication/json"
+      "Content-Type": "application/json"
     }
   });
   if (!response.ok) throw createError(response);
@@ -21,4 +21,31 @@ async function requestsFetch() {
   return result;
 }
 
-export default { requestsFetch };
+async function updateRequest(id, status) {
+  const response = await fetch(`${API_REQUESTS_URL}/${id}`, {
+    method: "PATCH",
+    credentials: "include",
+    body: JSON.stringify({ status }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (!response.ok) throw createError(response);
+  return await response.json();
+}
+
+async function createRequest(requests) {
+  const response = await fetch(API_REQUESTS_URL, {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify({requests}),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (!response.ok) throw createError(response);
+  const result = await response.json();
+  return result;
+}
+
+export { requestsFetch, createRequest, updateRequest };

@@ -4,18 +4,19 @@ import { jsx } from "@emotion/core";
 import Nabvar from "../components/Nabvar";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
-import RequestModal from "./RequestModal";
-import requestsFetch from "../services/request";
+import RequestModal from "../components/RequestModal";
+import { requestsFetch } from "../services/request";
 import { users } from "../services/user";
 
 function RequestsView() {
+  const [id, setId] = useState(0);
   const [modalIsOpen, setModalOpen] = useState(false);
   const [requests, setRequests] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const user = useUser();
   useEffect(() => {
     async function fetchData() {
-      const response = await requestsFetch.requestsFetch();
+      const response = await requestsFetch();
       setRequests(response);
     }
     fetchData();
@@ -29,8 +30,10 @@ function RequestsView() {
   }, []);
 
   function handleRequestSchedule(event) {
-    setModalOpen(true);
     event.preventDefault();
+    const id = event.target.dataset.id;
+    setId(id);
+    setModalOpen(true);
   }
   if (!user) return <Redirect to="login" noThrow />;
   return (
@@ -57,14 +60,14 @@ function RequestsView() {
             }}
           >
             <p>#{request.id}</p>
-            <p>
+            <span>
               FrontDesk{" "}
               {
                 frontdesks.find(
                   frontdesk => frontdesk.id === request.requester_id
                 ).name
               }{" "}
-              de turno{" "}
+              of workshift{" "}
               {request.current_Shift_id === 4
                 ? "OFF"
                 : request.current_Shift_id === 1
@@ -78,13 +81,7 @@ function RequestsView() {
                   frontdesk => frontdesk.id === request.requested_id
                 ).name
               }{" "}
-              de turno :
-              {
-                frontdesks.find(
-                  frontdesk => frontdesk.id === request.requested_id
-                ).name
-              }{" "}
-              de turno{" "}
+              of workshift{" "}
               {request.requested_Shift_id === 4
                 ? "OFF"
                 : request.requested_Shift_id === 1
@@ -92,17 +89,20 @@ function RequestsView() {
                 : request.requested_Shift_id === 2
                 ? "Afternoon"
                 : "Night"}
-            </p>
+            </span>
             <div css={{ alignSelf: "flex-end" }}>{request.status}</div>
-            <button onClick={handleRequestSchedule}>
-              See Schudule Request{" "}
+            <button onClick={handleRequestSchedule} data-id={request.id}>
+              See Schedule Request{" "}
             </button>
           </li>
         ))}
       </ul>
       <RequestModal
-        isOpen={modalIsOpen}
+        isOpen={!!modalIsOpen}
         onRequestClose={() => setModalOpen(false)}
+        id={id}
+        setRequests={setRequests}
+        request={requests}
       />
     </>
   );

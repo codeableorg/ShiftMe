@@ -36,7 +36,7 @@ async function users() {
   const response = await fetch(API_USERS_URL, {
     credentials: "include",
     headers: {
-      "Content-Type": "aplication/json"
+      "Content-Type": "application/json"
     }
   });
   if (!response.ok) throw createError(response);
