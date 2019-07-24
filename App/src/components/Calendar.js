@@ -1,123 +1,23 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import ScheduleModal from "../views/ScheduleModal";
-import schedules from "../services/schedule";
-import { users } from "../services/user";
 
-function Calendar() {
+function Calendar({
+  workShiftConcat,
+  frontdesks,
+  calcDay,
+  start,
+  end,
+  shiftsClicked,
+  saveShiftsClicked
+}) {
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(7);
-  const [events, setEvents] = useState([]);
-  const [frontdesks, setFrontdesks] = useState([]);
-  const [clicked, setClicked] = useState(false);
-
-  const forecasts = [
-    {
-      id: 1,
-      month: "Julio",
-      typeForecast: "Max-Occupancy",
-      dataDays: [
-        { date: "2019/07/01", data: 77.78 },
-        { date: "2019/07/02", data: 79.23 },
-        { date: "2019/07/03", data: 93.72 },
-        { date: "2019/07/04", data: 87.92 },
-        { date: "2019/07/05", data: 74.88 },
-        { date: "2019/07/06", data: 54.42 },
-        { date: "2019/07/07", data: 29.95 },
-        { date: "2019/07/08", data: 77.78 },
-        { date: "2019/07/09", data: 79.23 },
-        { date: "2019/07/10", data: 93.72 },
-        { date: "2019/07/11", data: 87.92 },
-        { date: "2019/07/12", data: 74.88 },
-        { date: "2019/07/13", data: 59.42 },
-        { date: "2019/07/14", data: 29.95 },
-        { date: "2019/07/15", data: 77.78 },
-        { date: "2019/07/16", data: 79.23 },
-        { date: "2019/07/17", data: 93.72 },
-        { date: "2019/07/18", data: 87.92 },
-        { date: "2019/07/19", data: 74.88 },
-        { date: "2019/07/20", data: 54.42 },
-        { date: "2019/07/21", data: 29.95 },
-        { date: "2019/07/22", data: 59.42 },
-        { date: "2019/07/23", data: 29.95 },
-        { date: "2019/07/24", data: 87.92 },
-        { date: "2019/07/25", data: 54.42 },
-        { date: "2019/07/26", data: 77.78 },
-        { date: "2019/07/27", data: 54.42 },
-        { date: "2019/07/28", data: 59.42 },
-        { date: "2019/07/29", data: 87.92 },
-        { date: "2019/07/30", data: 59.42 },
-        { date: "2019/07/31", data: 77.78 }
-      ],
-      created_at: "2019-07-13T00:32:07.485Z",
-      updated_at: "2019-07-13T00:32:07.485Z"
-    },
-    {
-      id: 2,
-      month: "Julio",
-      typeForecast: "Arrival-Rooms",
-      dataDays: [
-        { date: "2019/07/01", data: 36 },
-        { date: "2019/07/02", data: 70 },
-        { date: "2019/07/03", data: 60 },
-        { date: "2019/07/04", data: 41 },
-        { date: "2019/07/05", data: 31 },
-        { date: "2019/07/06", data: 24 },
-        { date: "2019/07/07", data: 10 },
-        { date: "2019/07/08", data: 36 },
-        { date: "2019/07/09", data: 70 },
-        { date: "2019/07/10", data: 60 },
-        { date: "2019/07/11", data: 41 },
-        { date: "2019/07/12", data: 31 },
-        { date: "2019/07/13", data: 24 },
-        { date: "2019/07/14", data: 10 },
-        { date: "2019/07/15", data: 31 },
-        { date: "2019/07/16", data: 24 },
-        { date: "2019/07/17", data: 36 },
-        { date: "2019/07/18", data: 70 },
-        { date: "2019/07/19", data: 60 },
-        { date: "2019/07/20", data: 41 },
-        { date: "2019/07/21", data: 31 },
-        { date: "2019/07/22", data: 24 },
-        { date: "2019/07/23", data: 10 },
-        { date: "2019/07/24", data: 60 },
-        { date: "2019/07/25", data: 41 },
-        { date: "2019/07/26", data: 24 },
-        { date: "2019/07/27", data: 60 },
-        { date: "2019/07/28", data: 30 },
-        { date: "2019/07/29", data: 41 },
-        { date: "2019/07/30", data: 24 },
-        { date: "2019/07/31", data: 31 }
-      ],
-      created_at: "2019-07-13T00:32:07.499Z",
-      updated_at: "2019-07-13T00:32:07.499Z"
-    }
-  ];
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await schedules.schedules();
-      setEvents(response);
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await users();
-      setFrontdesks(response);
-    }
-    fetchData();
-  }, []);
 
   if (!user) return <Redirect to="login" noThrow />;
-  if (events.length === 0) return null;
-  if (frontdesks.length === 0) return null;
 
   const tableCss = {
     width: "80%",
@@ -147,58 +47,44 @@ function Calendar() {
     justifyContent: "center"
   };
 
-  function handleClickNext(event) {
-    event.preventDefault();
-    setStart(start + 7);
-    setEnd(end + 7);
-  }
-
-  function handleClickBack(event) {
-    event.preventDefault();
-    setStart(start - 7);
-    setEnd(end - 7);
-  }
-
   function handleClick(event) {
     event.preventDefault();
-    if (clicked) {
-      event.target.style.background = "green";
-    } else {
-      event.target.style.background = "#538898";
+    if (shiftsClicked.length < 2) {
+      if (shiftsClicked.length === 0) {
+        if (+event.target.dataset.id === user.id) {
+          event.target.style.background = "green";
+          saveShiftsClicked([
+            ...shiftsClicked,
+            {
+              id: event.target.dataset.id,
+              date: event.target.dataset.date,
+              shift_id: event.target.dataset.value
+            }
+          ]);
+        } else {
+          alert("First select your shift");
+        }
+      } else if (
+        shiftsClicked[0].date === event.target.dataset.date &&
+        shiftsClicked[0].id !== event.target.dataset.id
+      ) {
+        event.target.style.background = "green";
+        saveShiftsClicked([
+          ...shiftsClicked,
+          {
+            id: event.target.dataset.id,
+            date: event.target.dataset.date,
+            shift_id: event.target.dataset.value
+          }
+        ]);
+      } else if (
+        shiftsClicked[0].date === event.target.dataset.date &&
+        shiftsClicked[0].id === event.target.dataset.id
+      ) {
+        event.target.style.background = "#538898";
+        saveShiftsClicked([]);
+      }
     }
-    setClicked(!clicked);
-  }
-
-  const workShiftConcat = events.reduce((groups, event) => {
-    return {
-      ...groups,
-      [event.user_id]: groups[event.user_id]
-        ? groups[event.user_id].concat(event.workShifts)
-        : event.workShifts
-    };
-  }, {});
-
-  const forecastsConcat = forecasts.reduce((groups, forecast) => {
-    return {
-      ...groups,
-      [forecast.typeForecast]: groups[forecast.typeForecast]
-        ? groups[forecast.typeForecast].concat(forecast.dataDays)
-        : forecast.dataDays
-    };
-  }, {});
-
-  function calcDay(date) {
-    const nameDays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thurday",
-      "Friday",
-      "Saturday"
-    ];
-    var d = new Date(date);
-    return nameDays[d.getDay()];
   }
 
   return (
@@ -231,7 +117,15 @@ function Calendar() {
                     }
                   </td>
                   {workShifts.slice(start, end).map(workShift => (
-                    <td css={tdCss} onClick={handleClick}>
+                    <td
+                      key={workShift.date}
+                      id={workShift.date}
+                      css={tdCss}
+                      data-id={userId}
+                      data-date={workShift.date}
+                      onClick={handleClick}
+                      data-value={workShift.shift_id}
+                    >
                       {workShift.shift_id === 4
                         ? "OFF"
                         : workShift.shift_id === 1
@@ -245,39 +139,6 @@ function Calendar() {
               ))}
             </tbody>
           </table>
-        </div>
-        <div>
-          <h2 css={{ display: "flex", justifyContent: "center" }}>FORECAST</h2>
-          <table css={tableCss}>
-            <thead>
-              <tr>
-                <th css={thCss}>Type</th>
-                {Object.entries(forecastsConcat)[0][1]
-                  .slice(start, end)
-                  .map(forecast => (
-                    <th css={thCss}>
-                      {calcDay(forecast.date)} {forecast.date}
-                    </th>
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(forecastsConcat).map(
-                ([typeForecast, dataDays]) => (
-                  <tr>
-                    <td css={tdCss}>{typeForecast}</td>
-                    {dataDays.slice(start, end).map(dataDay => (
-                      <td css={tdCss}>{dataDay.data}</td>
-                    ))}
-                  </tr>
-                )
-              )}
-            </tbody>
-          </table>
-        </div>
-        <div css={backNextCss}>
-          <button onClick={handleClickBack}>Back</button>
-          <button onClick={handleClickNext}>Next</button>
         </div>
         <div css={backNextCss}>
           <ScheduleModal
