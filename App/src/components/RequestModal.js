@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
-import { updateRequest } from "../services/request";
+import { updateRequest, cancelRequest } from "../services/request";
 
 function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
   function onClick(event) {
@@ -14,6 +14,16 @@ function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
             request.id == id ? { ...request, status } : request
           )
         );
+      });
+  }
+
+  function handleCancel(event) {
+    event.preventDefault();
+    cancelRequest(id)
+      .then(onRequestClose)
+      .then(() => {
+        onRequestClose()
+        setRequests(requests => requests.map(request => request.id == id ? { ...request, status: "Cancel" } : request))
       });
   }
 
@@ -46,6 +56,9 @@ function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
         </button>
         <button data-value="Disagree" onClick={onClick}>
           Disagree
+        </button>
+        <button onClick={handleCancel}>
+          Cancel
         </button>
       </form>
     </Modal>
