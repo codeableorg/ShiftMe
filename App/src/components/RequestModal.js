@@ -23,7 +23,7 @@ function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
       .then(onRequestClose)
       .then(() => {
         onRequestClose()
-        setRequests(requests => requests.map(request => request.id == id ? { ...request, status: "cancel" } : request))
+        setRequests(requests => requests.map(request => request.id == id ? { ...request, status: "Cancel" } : request))
       });
   }
 
@@ -45,8 +45,7 @@ function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <div>
-        Motive:
+      <div>Motive: 
         {request.map(e =>
           e.id == id ? <div>{e.motive}</div> : <div>{""}</div>
         )}
