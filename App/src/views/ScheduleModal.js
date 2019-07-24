@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Calendar from "../components/Calendar";
@@ -26,6 +27,22 @@ function ScheduleModal({
   const user = useUser();
 
   const [shiftsClicked, setShiftsClicked] = useState([]);
+  const [motive, setMotive] = useState("");
+  console.log("motivo", motive);
+
+  function nameFrontDesk(userId) {
+    return frontdesks.find(frontdesk => frontdesk.id === parseInt(userId)).name;
+  }
+
+  function onRequestClear(event) {
+    event.preventDefault();
+    setShiftsClicked([]);
+    setMotive("");
+  }
+
+  function handleChangeMotive(event) {
+    setMotive(event.target.value);
+  }
 
   return (
     <Modal
@@ -36,8 +53,6 @@ function ScheduleModal({
       ariaHideApp={isOpen}
     >
       <h2>Schudule Change</h2>
-      {/* {JSON.stringify(shiftClicked)} */}
-      {/* <button onClick={save}>Save</button> */}
       <Calendar
         workShiftConcat={workShiftConcat}
         frontdesks={frontdesks}
@@ -51,15 +66,25 @@ function ScheduleModal({
         <form>
           <ul>
             {shiftsClicked.map(shift => (
-              <li>{shift.id + shift.date + shift.shift_id}</li>
+              <li>
+                {nameFrontDesk(shift.id) +
+                  " of shift " +
+                  shift.shift_id +
+                  "of date " +
+                  shift.date}
+              </li>
             ))}
           </ul>
           <label>
             Motive
-            <textarea />
+            <textarea
+              type="text"
+              value={motive}
+              onChange={handleChangeMotive}
+            />
           </label>
           <button>Send</button>
-          <button>Clear</button>
+          <button onClick={onRequestClear}>>Clear</button>
           <button onClick={onRequestClose}>Close</button>
         </form>
       </div>
