@@ -34,6 +34,14 @@ async function updateRequest(id, status) {
   return await response.json();
 }
 
+async function cancelRequest(id) {
+  const response = await fetch(`${API_REQUESTS_URL}/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  if (!response.ok) throw createError(response);
+}
+
 async function createRequest(requests) {
   const response = await fetch(API_REQUESTS_URL, {
     method: "POST",
@@ -48,4 +56,4 @@ async function createRequest(requests) {
   return result;
 }
 
-export { requestsFetch, createRequest, updateRequest };
+export { requestsFetch, createRequest, updateRequest, cancelRequest };
