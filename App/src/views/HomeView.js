@@ -15,6 +15,7 @@ function HomeView() {
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
+  console.log(frontdesks);
 
   const forecasts = [
     {
@@ -209,7 +210,7 @@ function HomeView() {
                 {Object.entries(workShiftConcat)[0][1]
                   .slice(start, end)
                   .map(workSfhift => (
-                    <th css={thCss}>
+                    <th css={thCss} key={workSfhift.date}>
                       {calcDay(workSfhift.date)} {workSfhift.date}
                     </th>
                   ))}
@@ -275,11 +276,18 @@ function HomeView() {
           <button onClick={handleClickBack}>Back</button>
           <button onClick={handleClickNext}>Next</button>
         </div>
-        <ScheduleModal
-          isOpen={modalIsOpen}
-          onRequestClose={() => setModalOpen(false)}
-        />
-        <button onClick={handleChangeSchedule}>Change Schedule</button>
+        <div css={backNextCss}>
+          <ScheduleModal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalOpen(false)}
+            workShiftConcat={workShiftConcat}
+            frontdesks={frontdesks}
+            calcDay={calcDay}
+            start={start}
+            end={end}
+          />
+          <button onClick={handleChangeSchedule}>Change Schedule</button>
+        </div>
       </div>
     </>
   );
