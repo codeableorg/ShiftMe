@@ -46,7 +46,7 @@ async function createRequest(requests) {
   const response = await fetch(API_REQUESTS_URL, {
     method: "POST",
     credentials: "include",
-    body: JSON.stringify({requests}),
+    body: requests ? JSON.stringify(requests) : "{}",
     headers: {
       "Content-Type": "application/json"
     }
