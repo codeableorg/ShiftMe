@@ -1,4 +1,5 @@
 class Request < ApplicationRecord
+  has_many :request_notification, class_name: 'Notification', foreign_key: 'request_id'
   belongs_to :requester, class_name: 'User'
   belongs_to :requested, class_name: 'User'
   belongs_to :current_Shift, class_name: 'Shift'
