@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import Nabvar from "../components/Nabvar";
-import ScheduleModal from "./ScheduleModal";
+import ScheduleModal from "../components/ScheduleModal";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 
@@ -15,7 +15,6 @@ function HomeView() {
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
-  console.log(frontdesks);
 
   const forecasts = [
     {
@@ -218,7 +217,7 @@ function HomeView() {
             </thead>
             <tbody>
               {Object.entries(workShiftConcat).map(([userId, workShifts]) => (
-                <tr>
+                <tr key={userId}>
                   <td css={tdCss}>
                     {userId}-
                     {
@@ -227,8 +226,8 @@ function HomeView() {
                       ).name
                     }
                   </td>
-                  {workShifts.slice(start, end).map(workShift => (
-                    <td css={tdCss}>
+                  {workShifts.slice(start, end).map((workShift, index) => (
+                    <td css={tdCss} key={index}>
                       {workShift.shift_id === 4
                         ? "OFF"
                         : workShift.shift_id === 1
@@ -251,8 +250,8 @@ function HomeView() {
                 <th css={thCss}>Type</th>
                 {Object.entries(forecastsConcat)[0][1]
                   .slice(start, end)
-                  .map(forecast => (
-                    <th css={thCss}>
+                  .map((forecast, index) => (
+                    <th css={thCss} key={index}>
                       {calcDay(forecast.date)} {forecast.date}
                     </th>
                   ))}
@@ -261,10 +260,12 @@ function HomeView() {
             <tbody>
               {Object.entries(forecastsConcat).map(
                 ([typeForecast, dataDays]) => (
-                  <tr>
+                  <tr key={typeForecast}>
                     <td css={tdCss}>{typeForecast}</td>
-                    {dataDays.slice(start, end).map(dataDay => (
-                      <td css={tdCss}>{dataDay.data}</td>
+                    {dataDays.slice(start, end).map((dataDay, index) => (
+                      <td css={tdCss} key={index}>
+                        {dataDay.data}
+                      </td>
                     ))}
                   </tr>
                 )

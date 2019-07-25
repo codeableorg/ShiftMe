@@ -14,6 +14,7 @@ function RequestsView() {
   const [requests, setRequests] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const user = useUser();
+
   useEffect(() => {
     async function fetchData() {
       const response = await requestsFetch();
@@ -21,6 +22,7 @@ function RequestsView() {
     }
     fetchData();
   }, []);
+
   useEffect(() => {
     async function fetchData() {
       const response = await users();
@@ -29,13 +31,16 @@ function RequestsView() {
     fetchData();
   }, []);
 
-  function handleRequestSchedule(event) {
-    event.preventDefault();
-    const id = event.target.dataset.id;
+  function handleRequestSchedule(id) {
     setId(id);
     setModalOpen(true);
   }
+
   if (!user) return <Redirect to="login" noThrow />;
+
+  if (frontdesks.length === 0) return "Cargando...";
+  if (!requests.length === 0) return "Cargando...";
+
   return (
     <>
       <Nabvar />
@@ -49,6 +54,7 @@ function RequestsView() {
       >
         {requests.map(request => (
           <li
+            key={request.id}
             css={{
               padding: "20px",
               border: "1x solid black",
@@ -61,7 +67,7 @@ function RequestsView() {
           >
             <p>#{request.id}</p>
             <span>
-              FrontDes{" "}
+              FrontDesk{" "}
               {
                 frontdesks.find(
                   frontdesk => frontdesk.id === request.requester_id
@@ -91,19 +97,21 @@ function RequestsView() {
                 : "Night"}
             </span>
             <div css={{ alignSelf: "flex-end" }}>{request.status}</div>
-            <button onClick={handleRequestSchedule} data-id={request.id}>
+            <button onClick={() => handleRequestSchedule(request.id)}>
               See Schedule Request{" "}
             </button>
           </li>
         ))}
       </ul>
-      <RequestModal
-        isOpen={!!modalIsOpen}
-        onRequestClose={() => setModalOpen(false)}
-        id={id}
-        setRequests={setRequests}
-        request={requests}
-      />
+      {requests && (
+        <RequestModal
+          isOpen={!!modalIsOpen}
+          onRequestClose={() => setModalOpen(false)}
+          id={id}
+          setRequests={setRequests}
+          request={requests}
+        />
+      )}
     </>
   );
 }
