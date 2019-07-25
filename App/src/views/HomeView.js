@@ -15,6 +15,7 @@ function HomeView() {
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
+  console.log(frontdesks);
 
   const forecasts = [
     {
