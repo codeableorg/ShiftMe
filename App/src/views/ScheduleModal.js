@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import Calendar from "../components/Calendar";
 import { useUser } from "../contexts/user";
+import { createRequest } from "../services/request";
 
 const customStyles = {
   content: {
@@ -27,8 +28,7 @@ function ScheduleModal({
   const user = useUser();
 
   const [shiftsClicked, setShiftsClicked] = useState([]);
-  const [motive, setMotive] = useState("");
-  console.log("motivo", motive);
+  const [newmotive, setMotive] = useState("");
 
   function nameFrontDesk(userId) {
     return frontdesks.find(frontdesk => frontdesk.id === parseInt(userId)).name;
@@ -42,6 +42,26 @@ function ScheduleModal({
 
   function handleChangeMotive(event) {
     setMotive(event.target.value);
+  }
+
+  function handleCreateRequest(event) {
+    event.preventDefault();
+    const request = {
+      creationDate: new Date(),
+      requester_id: shiftsClicked[0].id,
+      requested_id: shiftsClicked[1].id,
+      date_Shift: shiftsClicked[1].date,
+      rol: "FrontDesk",
+      current_Shift_id: shiftsClicked[0].shift_id,
+      requested_Shift_id: shiftsClicked[1].shift_id,
+      motive: newmotive
+    };
+
+    try {
+      createRequest(request).then(onRequestClose());
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   return (
@@ -79,13 +99,19 @@ function ScheduleModal({
             Motive
             <textarea
               type="text"
-              value={motive}
+              value={newmotive}
               onChange={handleChangeMotive}
             />
           </label>
-          <button>Send</button>
-          <button onClick={onRequestClear}>>Clear</button>
-          <button onClick={onRequestClose}>Close</button>
+          <button type="button" onClick={handleCreateRequest}>
+            Send
+          </button>
+          <button type="button" onClick={onRequestClear}>
+            >Clear
+          </button>
+          <button type="button" onClick={onRequestClose}>
+            Close
+          </button>
         </form>
       </div>
     </Modal>
