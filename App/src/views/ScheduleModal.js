@@ -34,10 +34,20 @@ function ScheduleModal({
     return frontdesks.find(frontdesk => frontdesk.id === parseInt(userId)).name;
   }
 
-  function onRequestClear(event) {
-    event.preventDefault();
+  function clear() {
     setShiftsClicked([]);
     setMotive("");
+  }
+
+  function onRequestClear(event) {
+    event.preventDefault();
+    clear();
+  }
+
+  function onClose(event) {
+    event.preventDefault();
+    clear();
+    onRequestClose();
   }
 
   function handleChangeMotive(event) {
@@ -58,7 +68,9 @@ function ScheduleModal({
     };
 
     try {
-      createRequest(request).then(onRequestClose());
+      createRequest(request)
+        .then(() => clear())
+        .then(() => onRequestClose());
     } catch (error) {
       console.log(error.message);
     }
@@ -109,7 +121,7 @@ function ScheduleModal({
           <button type="button" onClick={onRequestClear}>
             >Clear
           </button>
-          <button type="button" onClick={onRequestClose}>
+          <button type="button" onClick={onClose}>
             Close
           </button>
         </form>
