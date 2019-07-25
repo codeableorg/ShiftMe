@@ -5,11 +5,12 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy'
 
     resources :users, only: [:show, :index] 
-
+    resources :notifications
     scope 'schedule' do
       resources :workshifts, only: :index
       # get 'schedule/workshifts' # lista de workshifts#index
-      resources :requests
+      resources :requests, only: [ :index, :post]
+      
       # post 'schedule/requests' # ca show request#show
       # patch 'schedule/requests/:id'mbio de workshifts request#create
       # get 'schedule/requests' # lista requests#index
