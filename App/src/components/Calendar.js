@@ -14,7 +14,6 @@ function Calendar({
   shiftsClicked,
   saveShiftsClicked
 }) {
-
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
 
