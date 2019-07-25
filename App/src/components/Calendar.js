@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import React, { useState } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
-import ScheduleModal from "../views/ScheduleModal";
+import ScheduleModal from "../components/ScheduleModal";
 
 function Calendar({
   workShiftConcat,
@@ -14,6 +14,7 @@ function Calendar({
   shiftsClicked,
   saveShiftsClicked
 }) {
+  console.log(shiftsClicked);
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
 
@@ -24,6 +25,7 @@ function Calendar({
     borderCollapse: "collapse",
     margin: "0 auto"
   };
+
   const thCss = {
     background: "#0D5C73",
     color: "white",
@@ -120,7 +122,18 @@ function Calendar({
                     <td
                       key={workShift.date}
                       id={workShift.date}
-                      css={tdCss}
+                      css={{
+                        ...tdCss,
+                        background:
+                          shiftsClicked.length > 1
+                            ? shiftsClicked[0].date.replace(/-/g, "/") ==
+                                workShift.date &&
+                              (shiftsClicked[0].id == userId ||
+                                shiftsClicked[1].id == userId)
+                              ? "green"
+                              : "#538898"
+                            : "#538898"
+                      }}
                       data-id={userId}
                       data-date={workShift.date}
                       onClick={handleClick}
@@ -150,4 +163,5 @@ function Calendar({
     </>
   );
 }
+
 export default Calendar;
