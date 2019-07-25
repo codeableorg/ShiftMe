@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from "react";
 import Modal from "react-modal";
-import Calendar from "../components/Calendar";
+import Calendar from "./Calendar";
 import { useUser } from "../contexts/user";
 import { createRequest } from "../services/request";
 

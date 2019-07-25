@@ -5,7 +5,7 @@ import Nabvar from "../components/Nabvar";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import RequestModal from "../components/RequestModal";
-import {requestsFetch} from "../services/request";
+import { requestsFetch } from "../services/request";
 import { users } from "../services/user";
 
 function RequestsView() {
@@ -14,6 +14,7 @@ function RequestsView() {
   const [requests, setRequests] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const user = useUser();
+
   useEffect(() => {
     async function fetchData() {
       const response = await requestsFetch();
@@ -21,6 +22,7 @@ function RequestsView() {
     }
     fetchData();
   }, []);
+
   useEffect(() => {
     async function fetchData() {
       const response = await users();
@@ -28,14 +30,17 @@ function RequestsView() {
     }
     fetchData();
   }, []);
-  
-  function handleRequestSchedule(event) {
-    event.preventDefault();
-    const id = event.target.dataset.id
+
+  function handleRequestSchedule(id) {
     setId(id);
     setModalOpen(true);
   }
+
   if (!user) return <Redirect to="login" noThrow />;
+
+  if (frontdesks.length === 0) return "Cargando...";
+  if (!requests.length === 0) return "Cargando...";
+
   return (
     <>
       <Nabvar />
@@ -49,6 +54,7 @@ function RequestsView() {
       >
         {requests.map(request => (
           <li
+            key={request.id}
             css={{
               padding: "20px",
               border: "1px solid black",
@@ -61,32 +67,27 @@ function RequestsView() {
           >
             <p>#{request.id}</p>
             <span>
-              FrontDesk 
-              {" "}  
+              FrontDesk{" "}
               {
                 frontdesks.find(
-                  (frontdesk) => frontdesk.id === request.requester_id
+                  frontdesk => frontdesk.id === request.requester_id
                 ).name
-              }
-               {" "}  
-              of workshift  {request.current_Shift_id === 4
+              }{" "}
+              of workshift{" "}
+              {request.current_Shift_id === 4
                 ? "OFF"
                 : request.current_Shift_id === 1
                 ? "Morning"
                 : request.current_Shift_id === 2
                 ? "Afternoon"
-                : "Night"} want to change workshift with 
-              FrontDesk
-                {" "}  
-               {
+                : "Night"}{" "}
+              want to change workshift with FrontDesk{" "}
+              {
                 frontdesks.find(
                   frontdesk => frontdesk.id === request.requested_id
                 ).name
-              }
-               {" "}  
-              of workshift 
-              {" "}  
-
+              }{" "}
+              of workshift{" "}
               {request.requested_Shift_id === 4
                 ? "OFF"
                 : request.requested_Shift_id === 1
@@ -96,19 +97,21 @@ function RequestsView() {
                 : "Night"}
             </span>
             <div css={{ alignSelf: "flex-end" }}>{request.status}</div>
-            <button onClick={handleRequestSchedule} data-id={request.id}>
+            <button onClick={() => handleRequestSchedule(request.id)}>
               See Schedule Request{" "}
             </button>
           </li>
         ))}
       </ul>
-      <RequestModal
-        isOpen={!!modalIsOpen}
-        onRequestClose={() => setModalOpen(false)}
-        id={id}
-        setRequests={setRequests}
-        request={requests}
-      />
+      {requests && (
+        <RequestModal
+          isOpen={!!modalIsOpen}
+          onRequestClose={() => setModalOpen(false)}
+          id={id}
+          setRequests={setRequests}
+          request={requests}
+        />
+      )}
     </>
   );
 }
