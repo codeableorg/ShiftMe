@@ -16,6 +16,7 @@ function Calendar({
 }) {
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
+  console.log(shiftsClicked);
 
   if (!user) return <Redirect to="login" noThrow />;
 
@@ -69,7 +70,6 @@ function Calendar({
         shiftsClicked[0].date === event.target.dataset.date &&
         shiftsClicked[0].id !== event.target.dataset.id
       ) {
-        event.target.style.background = "green";
         saveShiftsClicked([
           ...shiftsClicked,
           {
@@ -82,7 +82,6 @@ function Calendar({
         shiftsClicked[0].date === event.target.dataset.date &&
         shiftsClicked[0].id === event.target.dataset.id
       ) {
-        event.target.style.background = "#538898";
         saveShiftsClicked([]);
       }
     }
