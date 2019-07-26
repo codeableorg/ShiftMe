@@ -5,13 +5,13 @@ import Calendar from "./Calendar";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 
-function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
+function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const [shiftsClicked, setShiftsClicked] = useState([]);
 
   React.useEffect(() => {
-    const reqFind = request.find(req => req.id === id);
+    const reqFind = requests.find(req => req.id === id);
     const data = reqFind
       ? [
           {
@@ -27,7 +27,7 @@ function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
         ]
       : [];
     setShiftsClicked(data);
-  }, [request, id]);
+  }, [requests, id]);
 
   useEffect(() => {
     async function fetchData() {
@@ -120,7 +120,7 @@ function RequestModal({ request, isOpen, onRequestClose, id, setRequests }) {
     >
       <div>
         Motive:
-        {request.map(e =>
+        {requests.map(e =>
           e.id === id ? (
             <div key={e.id}>{e.motive}</div>
           ) : (

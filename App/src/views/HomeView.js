@@ -8,6 +8,7 @@ import ScheduleModal from "../components/ScheduleModal";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 import forecastsData from "../components/ForecastsData";
+import { Button } from "../components/Ui";
 
 function HomeView() {
   const [modalIsOpen, setModalOpen] = useState(false);
@@ -62,8 +63,8 @@ function HomeView() {
   };
 
   const backNextCss = {
-    display: "flex",
-    justifyContent: "center"
+    textAlign: "center",
+    marginTop: "1em"
   };
 
   function handleClickNext(event) {
@@ -118,8 +119,22 @@ function HomeView() {
   return (
     <>
       <Nabvar />
-      <div>
-        <div>
+      <div
+        css={{
+          maxWidth: "1000px",
+          margin: "0 auto",
+          boxSizing: "border-box",
+          marginBottom: "80px",
+          "@media (max-width: 720px)": {
+            padding: "0px 15px"
+          }
+        }}
+      >
+        <div
+          css={{
+            overflow: "auto"
+          }}
+        >
           <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
           <table css={tableCss}>
             <thead>
@@ -161,7 +176,11 @@ function HomeView() {
             </tbody>
           </table>
         </div>
-        <div>
+        <div
+          css={{
+            overflow: "auto"
+          }}
+        >
           <h2 css={{ display: "flex", justifyContent: "center" }}>FORECAST</h2>
           <table css={tableCss}>
             <thead>
@@ -193,8 +212,18 @@ function HomeView() {
           </table>
         </div>
         <div css={backNextCss}>
-          <button onClick={handleClickBack}>Back</button>
-          <button onClick={handleClickNext}>Next</button>
+          <Button
+            onClick={handleClickBack}
+            css={{ width: "75px", marginRight: "10px" }}
+          >
+            Back
+          </Button>
+          <Button
+            onClick={handleClickNext}
+            css={{ width: "75px", marginRight: "10px" }}
+          >
+            Next
+          </Button>
         </div>
         <div css={backNextCss}>
           <ScheduleModal
@@ -206,7 +235,9 @@ function HomeView() {
             start={start}
             end={end}
           />
-          <button onClick={handleChangeSchedule}>Change Schedule</button>
+          <Button onClick={handleChangeSchedule} css={{ width: "165px" }}>
+            Change Schedule
+          </Button>
         </div>
       </div>
     </>
