@@ -14,25 +14,31 @@ function Nabvar() {
   const linkStyle = {
     marginRight: "1em",
     textDecoration: "none",
-    color: "black",
+    color: "inherit",
     transition: "color .20s ease",
     fontWeight: "300",
-    lineHeight: "80px",
+    padding: "5px",
     "&:hover": {
       color: "#f33959",
       background: "#fff"
     }
   };
   return (
-    <nav>
+    <nav
+      css={{
+        background: "#fff",
+        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.1)",
+        padding: "15px"
+      }}
+    >
       <ul
         css={{
           listStyle: "none",
-          margin: 0,
           padding: 0,
           display: "flex",
-          borderBottom: "1px solid #e5edef",
-          justifyContent: "center"
+          alignItems: "center",
+          margin: "0 auto",
+          maxWidth: "1000px"
         }}
       >
         <li>
@@ -40,17 +46,17 @@ function Nabvar() {
             Shiftme
           </Link>
         </li>
-        <li css={{ marginLeft: "50px" }}>
+        <li>
           <Link css={linkStyle} to="/">
             Username
           </Link>
         </li>
-        <li css={{ marginLeft: "50px" }}>
+        <li>
           <Link css={linkStyle} to="/requests">
             Requests
           </Link>
         </li>
-        <li css={{ marginLeft: "50px" }}>
+        <li>
           <Link css={linkStyle} to="/">
             Create User
           </Link>
