@@ -109,7 +109,7 @@ function RequestsView() {
           onRequestClose={() => setModalOpen(false)}
           id={id}
           setRequests={setRequests}
-          request={requests}
+          requests={requests}
         />
       )}
     </>

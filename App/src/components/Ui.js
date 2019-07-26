@@ -25,7 +25,8 @@ function Button({ styles, ...props }) {
         backgroundColor: "#e5edef",
         border: "1px solid #e5edef",
         borderRadius: ".25rem",
-        color: "black",
+        color: "inherit",
+        fontWeight: "bold",
         cursor: "pointer",
         fontSize: ".8rem",
         padding: ".75rem 0",
@@ -34,7 +35,7 @@ function Button({ styles, ...props }) {
         textTransform: "uppercase",
         width: "100%",
         "&:hover": {
-          backgroundColor: "white",
+          backgroundColor: "#50b6bb",
           color: "#e5edef"
         },
         ...styles
@@ -42,7 +43,6 @@ function Button({ styles, ...props }) {
     />
   );
 }
-
 
 function SecondaryButton({ styles, ...props }) {
   return (
