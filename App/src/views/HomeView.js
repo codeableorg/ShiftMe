@@ -7,6 +7,7 @@ import Nabvar from "../components/Nabvar";
 import ScheduleModal from "../components/ScheduleModal";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
+import forecastsData from "../components/ForecastsData";
 
 function HomeView() {
   const [modalIsOpen, setModalOpen] = useState(false);
@@ -15,90 +16,7 @@ function HomeView() {
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
-  console.log(frontdesks);
-
-  const forecasts = [
-    {
-      id: 1,
-      month: "Julio",
-      typeForecast: "Max-Occupancy",
-      dataDays: [
-        { date: "2019/07/01", data: 77.78 },
-        { date: "2019/07/02", data: 79.23 },
-        { date: "2019/07/03", data: 93.72 },
-        { date: "2019/07/04", data: 87.92 },
-        { date: "2019/07/05", data: 74.88 },
-        { date: "2019/07/06", data: 54.42 },
-        { date: "2019/07/07", data: 29.95 },
-        { date: "2019/07/08", data: 77.78 },
-        { date: "2019/07/09", data: 79.23 },
-        { date: "2019/07/10", data: 93.72 },
-        { date: "2019/07/11", data: 87.92 },
-        { date: "2019/07/12", data: 74.88 },
-        { date: "2019/07/13", data: 59.42 },
-        { date: "2019/07/14", data: 29.95 },
-        { date: "2019/07/15", data: 77.78 },
-        { date: "2019/07/16", data: 79.23 },
-        { date: "2019/07/17", data: 93.72 },
-        { date: "2019/07/18", data: 87.92 },
-        { date: "2019/07/19", data: 74.88 },
-        { date: "2019/07/20", data: 54.42 },
-        { date: "2019/07/21", data: 29.95 },
-        { date: "2019/07/22", data: 59.42 },
-        { date: "2019/07/23", data: 29.95 },
-        { date: "2019/07/24", data: 87.92 },
-        { date: "2019/07/25", data: 54.42 },
-        { date: "2019/07/26", data: 77.78 },
-        { date: "2019/07/27", data: 54.42 },
-        { date: "2019/07/28", data: 59.42 },
-        { date: "2019/07/29", data: 87.92 },
-        { date: "2019/07/30", data: 59.42 },
-        { date: "2019/07/31", data: 77.78 }
-      ],
-      created_at: "2019-07-13T00:32:07.485Z",
-      updated_at: "2019-07-13T00:32:07.485Z"
-    },
-    {
-      id: 2,
-      month: "Julio",
-      typeForecast: "Arrival-Rooms",
-      dataDays: [
-        { date: "2019/07/01", data: 36 },
-        { date: "2019/07/02", data: 70 },
-        { date: "2019/07/03", data: 60 },
-        { date: "2019/07/04", data: 41 },
-        { date: "2019/07/05", data: 31 },
-        { date: "2019/07/06", data: 24 },
-        { date: "2019/07/07", data: 10 },
-        { date: "2019/07/08", data: 36 },
-        { date: "2019/07/09", data: 70 },
-        { date: "2019/07/10", data: 60 },
-        { date: "2019/07/11", data: 41 },
-        { date: "2019/07/12", data: 31 },
-        { date: "2019/07/13", data: 24 },
-        { date: "2019/07/14", data: 10 },
-        { date: "2019/07/15", data: 31 },
-        { date: "2019/07/16", data: 24 },
-        { date: "2019/07/17", data: 36 },
-        { date: "2019/07/18", data: 70 },
-        { date: "2019/07/19", data: 60 },
-        { date: "2019/07/20", data: 41 },
-        { date: "2019/07/21", data: 31 },
-        { date: "2019/07/22", data: 24 },
-        { date: "2019/07/23", data: 10 },
-        { date: "2019/07/24", data: 60 },
-        { date: "2019/07/25", data: 41 },
-        { date: "2019/07/26", data: 24 },
-        { date: "2019/07/27", data: 60 },
-        { date: "2019/07/28", data: 30 },
-        { date: "2019/07/29", data: 41 },
-        { date: "2019/07/30", data: 24 },
-        { date: "2019/07/31", data: 31 }
-      ],
-      created_at: "2019-07-13T00:32:07.499Z",
-      updated_at: "2019-07-13T00:32:07.499Z"
-    }
-  ];
+  const forecasts = forecastsData();
 
   useEffect(() => {
     async function fetchData() {
