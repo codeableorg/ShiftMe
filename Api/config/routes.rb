@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     scope 'schedule' do
       resources :workshifts, only: :index
       # get 'schedule/workshifts' # lista de workshifts#index
-      resources :requests, only: [ :index, :post]
+      resources :requests
       
       # post 'schedule/requests' # ca show request#show
       # patch 'schedule/requests/:id'mbio de workshifts request#create
