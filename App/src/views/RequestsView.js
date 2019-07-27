@@ -57,7 +57,7 @@ function RequestsView() {
             key={request.id}
             css={{
               padding: "20px",
-              border: "1x solid black",
+              border: "1px solid black",
               display: "flex",
               flexDirection: "column",
               "&:hover": {

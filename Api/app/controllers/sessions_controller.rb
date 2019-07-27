@@ -1,15 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :require_login, only: :create
 
-  def index
-    render json: User.all
-  end
-
-  def show
-    @user = User.find(params[:id])
-    render json: @user
-  end
-
   def create
     user = User.valid_login?(params[:email], params[:password])
     if user

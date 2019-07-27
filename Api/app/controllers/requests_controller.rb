@@ -18,7 +18,7 @@ class RequestsController < ApplicationController
   def destroy
     @request = Request.find_by(id: params[:id])
     if current_user.id != @request.requester_id
-      render json: { errors: "You can cancel!" }
+      render json: { errors: "You couldn't cancel!" }
     else 
       @request.status = "Cancel"
       @request.save

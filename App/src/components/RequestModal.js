@@ -93,7 +93,7 @@ function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
         onRequestClose();
         setRequests(requests =>
           requests.map(request =>
-            request.id == id ? { ...request, status: "cancel" } : request
+            request.id == id ? { ...request, status: "Cancel" } : request
           )
         );
       });
