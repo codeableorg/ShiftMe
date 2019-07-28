@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-expressions */
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Calendar from "./Calendar";
@@ -11,7 +13,6 @@ const customStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
-    marginRight: "-50%",
     transform: "translate(-50%, -50%)"
   }
 };
@@ -29,6 +30,49 @@ function ScheduleModal({
 
   const [shiftsClicked, setShiftsClicked] = useState([]);
   const [newmotive, setMotive] = useState("");
+
+  const cancel = {
+    fontSize: "2em",
+    cursor: "pointer",
+    color: "rgb(24, 116, 140)",
+    fontWeight: "bolder",
+    "&:hover": {
+      color: "rgb(24, 116, 140"
+    }
+  };
+
+  const container = {
+    display: "flex",
+    flexDirection: "column"
+  };
+
+  const head = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  };
+
+  const footer = {
+    display: "flex",
+    justifyContent: "flex-end"
+  };
+
+  const textareaCss = {
+    rows: 4,
+    cols: 50
+    // width: "70%",
+    // marginLeft: "5px"
+  };
+
+  const listCss = {
+    listStyleType: "none",
+    padding: 0
+  };
+
+  const formCss = {
+    display: "flex",
+    flexDirection: "column"
+  };
 
   function nameFrontDesk(userId) {
     return frontdesks.find(frontdesk => frontdesk.id === parseInt(userId)).name;
@@ -83,47 +127,58 @@ function ScheduleModal({
       contentLabel="Example Modal"
       ariaHideApp={isOpen}
     >
-      <h2>Schudule Change</h2>
-      <Calendar
-        workShiftConcat={workShiftConcat}
-        frontdesks={frontdesks}
-        calcDay={calcDay}
-        start={start}
-        end={end}
-        shiftsClicked={shiftsClicked}
-        saveShiftsClicked={setShiftsClicked}
-      />
-      <div>
-        <form>
-          <ul>
-            {shiftsClicked.map(shift => (
-              <li>
-                {nameFrontDesk(shift.id) +
-                  " of shift " +
-                  shift.shift_id +
-                  "of date " +
-                  shift.date}
-              </li>
-            ))}
-          </ul>
-          <label>
-            Motive
-            <textarea
-              type="text"
-              value={newmotive}
-              onChange={handleChangeMotive}
-            />
-          </label>
+      <div css={container}>
+        <div css={head}>
+          <h2>Schudule Change</h2>
+          <span
+            onClick={onClose}
+            css={cancel}
+            aria-label="Close schedule modal"
+          >
+            &times;
+          </span>
+        </div>
+        <Calendar
+          workShiftConcat={workShiftConcat}
+          frontdesks={frontdesks}
+          calcDay={calcDay}
+          start={start}
+          end={end}
+          shiftsClicked={shiftsClicked}
+          saveShiftsClicked={setShiftsClicked}
+        />
+        <div>
+          <form css={formCss}>
+            <ul css={listCss}>
+              {shiftsClicked.map(shift => (
+                <li>
+                  {nameFrontDesk(shift.id) +
+                    " of shift " +
+                    shift.shift_id +
+                    " of date " +
+                    shift.date}
+                </li>
+              ))}
+            </ul>
+            <div css={{ display: "flex", flexDirection: "column" }}>
+              <span css={{ fontWeight: "bold" }}> Motive: </span>
+              <textarea
+                css={textareaCss}
+                type="text"
+                value={newmotive}
+                onChange={handleChangeMotive}
+              />
+            </div>
+          </form>
+        </div>
+        <div css={footer}>
+          <button type="button" onClick={onRequestClear}>
+            Clear
+          </button>
           <button type="button" onClick={handleCreateRequest}>
             Send
           </button>
-          <button type="button" onClick={onRequestClear}>
-            >Clear
-          </button>
-          <button type="button" onClick={onClose}>
-            Close
-          </button>
-        </form>
+        </div>
       </div>
     </Modal>
   );

@@ -54,7 +54,6 @@ function Calendar({
     if (shiftsClicked.length < 2) {
       if (shiftsClicked.length === 0) {
         if (+event.target.dataset.id === user.id) {
-          event.target.style.background = "green";
           saveShiftsClicked([
             ...shiftsClicked,
             {
@@ -91,7 +90,6 @@ function Calendar({
     <>
       <div>
         <div>
-          <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
           <table css={tableCss}>
             <thead>
               <tr>
@@ -109,7 +107,6 @@ function Calendar({
               {Object.entries(workShiftConcat).map(([userId, workShifts]) => (
                 <tr>
                   <td css={tdCss}>
-                    {userId}-
                     {
                       frontdesks.find(
                         frontdesk => frontdesk.id === parseInt(userId)
@@ -128,6 +125,11 @@ function Calendar({
                                 workShift.date &&
                               (shiftsClicked[0].id == userId ||
                                 shiftsClicked[1].id == userId)
+                              ? "green"
+                              : "#538898"
+                            : shiftsClicked.length > 0
+                            ? shiftsClicked[0].date.replace(/-/g, "/") ==
+                                workShift.date && shiftsClicked[0].id == userId
                               ? "green"
                               : "#538898"
                             : "#538898"
