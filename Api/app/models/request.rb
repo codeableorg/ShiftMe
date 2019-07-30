@@ -7,6 +7,8 @@ class Request < ApplicationRecord
   belongs_to :requested_Shift, class_name: 'Shift'
 
   after_create :create_notification
+  scope :manager, -> { where(rol: ROLES[:manager], status: STATUS[:pending]) }
+
   validate :validate_requester
   after_update :notify_admin
 
