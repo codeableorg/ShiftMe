@@ -1,10 +1,5 @@
 # app/models/request.rb
 class Request < ApplicationRecord
-  ROLES = {
-    manager: 'admin',
-    user: 'FrontDesk'
-  }.freeze
-
   STATUS = {
     pending: 'Pending',
     agree: 'Agree',
@@ -21,7 +16,7 @@ class Request < ApplicationRecord
   belongs_to :requested_Shift, class_name: 'Shift'
 
   after_create :create_notification
-  scope :manager, -> { where(rol: ROLES[:manager], status: STATUS[:pending]) }
+  scope :manager, -> { where(status: STATUS[:agree]) }
 
   validates :status, inclusion: { in: STATUS.values, message: "%{value} is not a valid status" }
   validate :validate_requester
@@ -39,22 +34,7 @@ class Request < ApplicationRecord
   def notify_admin
     return unless rol == 'FrontDesk' && status == STATUS[:agree]
   def notify_change
-    return unless [STATUS[:agree], STATUS[:accepted]].include? status
-
-    if rol == ROLES[:user]
-      create_manager_request(self)
-    elsif rol == ROLES[:manager]
-      change_workshifts(self)
-    end
-  end
-
-  def create_manager_request(request)
-    new_request = request.dup
-    new_request.update(
-      rol: ROLES[:manager],
-      status: STATUS[:pending]
-    )
-    new_request.save!
+    change_workshifts(self) if status == STATUS[:accepted]
   end
 
   def change_workshifts(request)
