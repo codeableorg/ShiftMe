@@ -45,18 +45,18 @@ function HomeView() {
     margin: "0 auto"
   };
   const thCss = {
-    background: "#0D5C73",
-    color: "white",
+    background: "#f4f5f7",
+    color: "#59616b",
     fontWeight: "bolder",
-    padding: 6,
+    padding: "18px",
     border: "1px solid #ccc",
     textAlign: "center"
   };
 
   const tdCss = {
-    background: "#538898",
-    color: "white",
-    fontWeight: "bold",
+    background: "#ffffff",
+    color: "#253858",
+    fontWeight: "400",
     padding: 6,
     border: "1px solid #ccc",
     textAlign: "center"
@@ -142,9 +142,12 @@ function HomeView() {
                 <th css={thCss}>Frontdesk</th>
                 {Object.entries(workShiftConcat)[0][1]
                   .slice(start, end)
-                  .map(workSfhift => (
-                    <th css={thCss} key={workSfhift.date}>
-                      {calcDay(workSfhift.date)} {workSfhift.date}
+                  .map(workShift => (
+                    <th css={thCss} key={workShift.date}>
+                      {calcDay(workShift.date)}{" "}
+                      <span css={{ fontSize: "12px", fontWeight: "400" }}>
+                        {workShift.date}
+                      </span>
                     </th>
                   ))}
               </tr>
@@ -153,7 +156,6 @@ function HomeView() {
               {Object.entries(workShiftConcat).map(([userId, workShifts]) => (
                 <tr key={userId}>
                   <td css={tdCss}>
-                    {userId}-
                     {
                       frontdesks.find(
                         frontdesk => frontdesk.id === parseInt(userId)
@@ -190,7 +192,10 @@ function HomeView() {
                   .slice(start, end)
                   .map((forecast, index) => (
                     <th css={thCss} key={index}>
-                      {calcDay(forecast.date)} {forecast.date}
+                      {calcDay(forecast.date)}{" "}
+                      <span css={{ fontSize: "12px", fontWeight: "400" }}>
+                        {forecast.date}
+                      </span>
                     </th>
                   ))}
               </tr>
@@ -214,13 +219,28 @@ function HomeView() {
         <div css={backNextCss}>
           <Button
             onClick={handleClickBack}
-            css={{ width: "75px", marginRight: "10px" }}
+            css={{
+              width: "75px",
+              marginRight: "10px",
+              width: "100px",
+              textAlign: "center",
+              backgroundColor: "#ffffff",
+              borderColor: "#136ccd",
+              color: "#136ccd"
+            }}
           >
             Back
           </Button>
           <Button
             onClick={handleClickNext}
-            css={{ width: "75px", marginRight: "10px" }}
+            css={{
+              width: "75px",
+              textAlign: "center",
+              backgroundColor: "#ffffff",
+              width: "100px",
+              borderColor: "#136ccd",
+              color: "#136ccd"
+            }}
           >
             Next
           </Button>
@@ -235,7 +255,17 @@ function HomeView() {
             start={start}
             end={end}
           />
-          <Button onClick={handleChangeSchedule} css={{ width: "165px" }}>
+          <Button
+            onClick={handleChangeSchedule}
+            css={{
+              width: "210px",
+              backgroundColor: "#136ccd",
+              border: "1px solid #e5edef",
+              color: "white",
+              borderRadius: "0.25rem",
+              padding: ".75rem 2.25rem"
+            }}
+          >
             Change Schedule
           </Button>
         </div>

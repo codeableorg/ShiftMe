@@ -22,22 +22,17 @@ function Button({ styles, ...props }) {
     <button
       {...props}
       css={{
-        backgroundColor: "#e5edef",
-        border: "1px solid #e5edef",
+        border: "1px solid #136ccd",
         borderRadius: ".25rem",
         color: "inherit",
         fontWeight: "bold",
         cursor: "pointer",
         fontSize: ".8rem",
-        padding: ".75rem 0",
+        padding: ".75rem",
         transition: "all 200ms ease",
         textAlign: "center",
         textTransform: "uppercase",
         width: "100%",
-        "&:hover": {
-          backgroundColor: "#50b6bb",
-          color: "#e5edef"
-        },
         ...styles
       }}
     />

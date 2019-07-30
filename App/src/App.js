@@ -16,7 +16,6 @@ function App() {
         <Global
           styles={{
             body: {
-              background: "#f2f3f5",
               fontFamily: "Roboto, sans-serif",
               margin: 0,
               color: "rgba(0,0,0,0.87)"

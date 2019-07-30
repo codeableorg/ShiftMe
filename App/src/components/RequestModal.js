@@ -137,7 +137,9 @@ function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
         shiftsClicked={shiftsClicked}
         saveShiftsClicked={null}
       />
-      <form>
+      <form
+        style={{ display: "flex", justifyContent: "center", marginTop: "12px" }}
+      >
         <button data-value="Agree" onClick={onClick}>
           Agree
         </button>

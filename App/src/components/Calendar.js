@@ -27,17 +27,17 @@ function Calendar({
   };
 
   const thCss = {
-    background: "#0D5C73",
-    color: "white",
-    fontWeight: "bolder",
+    background: "#f4f5f7",
+    color: "#59616b",
+    fontWeight: "bold",
     padding: 6,
     border: "1px solid #ccc",
     textAlign: "center"
   };
 
   const tdCss = {
-    background: "#538898",
-    color: "white",
+    background: "#ffffff",
+    color: "#59616b",
     fontWeight: "bold",
     padding: 6,
     border: "1px solid #ccc",
@@ -54,7 +54,7 @@ function Calendar({
     if (shiftsClicked.length < 2) {
       if (shiftsClicked.length === 0) {
         if (+event.target.dataset.id === user.id) {
-          event.target.style.background = "green";
+          event.target.style.background = "#79f2c0";
           saveShiftsClicked([
             ...shiftsClicked,
             {
@@ -98,9 +98,12 @@ function Calendar({
                 <th css={thCss}>Frontdesk</th>
                 {Object.entries(workShiftConcat)[0][1]
                   .slice(start, end)
-                  .map(workSfhift => (
+                  .map(workShift => (
                     <th css={thCss}>
-                      {calcDay(workSfhift.date)} {workSfhift.date}
+                      {calcDay(workShift.date)}{" "}
+                      <span css={{ fontSize: "12px", fontWeight: "400" }}>
+                        {workShift.date}
+                      </span>
                     </th>
                   ))}
               </tr>
@@ -109,7 +112,6 @@ function Calendar({
               {Object.entries(workShiftConcat).map(([userId, workShifts]) => (
                 <tr>
                   <td css={tdCss}>
-                    {userId}-
                     {
                       frontdesks.find(
                         frontdesk => frontdesk.id === parseInt(userId)
@@ -128,9 +130,9 @@ function Calendar({
                                 workShift.date &&
                               (shiftsClicked[0].id == userId ||
                                 shiftsClicked[1].id == userId)
-                              ? "green"
-                              : "#538898"
-                            : "#538898"
+                              ? "#79f2c0"
+                              : "#ffffff"
+                            : "#ffffff"
                       }}
                       data-id={userId}
                       data-date={workShift.date}

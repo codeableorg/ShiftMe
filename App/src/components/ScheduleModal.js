@@ -94,7 +94,14 @@ function ScheduleModal({
         saveShiftsClicked={setShiftsClicked}
       />
       <div>
-        <form>
+        <form
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            maxWidth: "400px",
+            margin: "0 auto"
+          }}
+        >
           <ul>
             {shiftsClicked.map(shift => (
               <li>
@@ -106,23 +113,27 @@ function ScheduleModal({
               </li>
             ))}
           </ul>
-          <label>
-            Motive
-            <textarea
-              type="text"
-              value={newmotive}
-              onChange={handleChangeMotive}
-            />
-          </label>
-          <button type="button" onClick={handleCreateRequest}>
-            Send
-          </button>
-          <button type="button" onClick={onRequestClear}>
-            >Clear
-          </button>
-          <button type="button" onClick={onClose}>
-            Close
-          </button>
+          <label>Motive</label>
+
+          <textarea
+            type="text"
+            value={newmotive}
+            onChange={handleChangeMotive}
+            style={{
+              border: "1px solid #f2f5f7"
+            }}
+          />
+          <div style={{ display: "flex", marginTop: "4px" }}>
+            <button type="button" onClick={handleCreateRequest}>
+              Send
+            </button>
+            <button type="button" onClick={onRequestClear}>
+              Clear
+            </button>
+            <button type="button" onClick={onClose}>
+              Close
+            </button>
+          </div>
         </form>
       </div>
     </Modal>
