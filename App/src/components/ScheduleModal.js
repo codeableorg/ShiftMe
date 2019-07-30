@@ -28,7 +28,7 @@ function ScheduleModal({
   const user = useUser();
 
   const [shiftsClicked, setShiftsClicked] = useState([]);
-  const [newmotive, setMotive] = useState("");
+  const [newMotive, setMotive] = useState("");
 
   function nameFrontDesk(userId) {
     return frontdesks.find(frontdesk => frontdesk.id === parseInt(userId)).name;
@@ -55,6 +55,10 @@ function ScheduleModal({
 
   function handleCreateRequest(event) {
     event.preventDefault();
+    if (!newMotive || shiftsClicked.length < 2) {
+      return;
+    }
+
     const request = {
       creationDate: new Date(),
       requester_id: shiftsClicked[0].id,
@@ -63,7 +67,7 @@ function ScheduleModal({
       rol: "FrontDesk",
       current_Shift_id: shiftsClicked[0].shift_id,
       requested_Shift_id: shiftsClicked[1].shift_id,
-      motive: newmotive
+      motive: newMotive
     };
 
     try {
@@ -110,7 +114,7 @@ function ScheduleModal({
             Motive
             <textarea
               type="text"
-              value={newmotive}
+              value={newMotive}
               onChange={handleChangeMotive}
             />
           </label>
