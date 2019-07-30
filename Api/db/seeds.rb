@@ -30,7 +30,7 @@ supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', em
 
 
 schedule_1 = Schedule.create(
-    month: "Julio",
+    month: "July",
     user_id: 1,
     workShifts: [
              { date: "2019/07/01", shift_id: 4 },
@@ -68,7 +68,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_2 = Schedule.create(
-    month: "Julio",
+    month: "July",
     user_id: 2,
     workShifts: [
       { date: "2019/07/01", shift_id: 2 },
@@ -106,7 +106,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_3 = Schedule.create(
-    month: "Agosto",
+    month: "August",
     user_id: 1,
     workShifts: [
       { date: "2019/08/01", shift_id: 4 },
@@ -144,7 +144,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_4 = Schedule.create(
-    month: "Agosto",
+    month: "August",
     user_id: 2,
     workShifts: [
       { date: "2019/08/01", shift_id: 1 },
