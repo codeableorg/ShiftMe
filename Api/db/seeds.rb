@@ -17,10 +17,10 @@ supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', em
 @shift_3= Shift.create(shift_type: "night")
 @shift_4= Shift.create(shift_type: "off")
 
-@request_1 = Request.create(rol: 'FrontDesk', creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_1.id, requested_id: @user_2.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_2.id, motive: "I have a medical appointment")
-@request_2 = Request.create(rol: 'FrontDesk', creationDate:"2019/07/25", date_Shift: "2019/07/30", requester_id: @user_3.id, requested_id: @user_4.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
-@request_3 = Request.create(rol: 'FrontDesk', creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_4.id, requested_id: @user_5.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_1.id, motive: "I have a medical appointment")
-@request_4 = Request.create(rol: 'FrontDesk', creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_5.id, requested_id: @user_1.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
+@request_1 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_1.id, requested_id: @user_2.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_2.id, motive: "I have a medical appointment")
+@request_2 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30", requester_id: @user_3.id, requested_id: @user_4.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
+@request_3 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_4.id, requested_id: @user_5.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_1.id, motive: "I have a medical appointment")
+@request_4 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_5.id, requested_id: @user_1.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
 
 @notification_1 = Notification.create(notify_user_id:@user_1.id, request_id:@request_1.id , status: "Unread")
 @notification_2 = Notification.create(notify_user_id:@user_2.id, request_id:@request_2.id , status: "Unread")
@@ -30,7 +30,7 @@ supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', em
 
 
 schedule_1 = Schedule.create(
-    month: "Julio",
+    month: "July",
     user_id: 1,
     workShifts: [
              { date: "2019/07/01", shift_id: 4 },
@@ -68,7 +68,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_2 = Schedule.create(
-    month: "Julio",
+    month: "July",
     user_id: 2,
     workShifts: [
       { date: "2019/07/01", shift_id: 2 },
@@ -106,7 +106,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_3 = Schedule.create(
-    month: "Agosto",
+    month: "August",
     user_id: 1,
     workShifts: [
       { date: "2019/08/01", shift_id: 4 },
@@ -144,7 +144,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_4 = Schedule.create(
-    month: "Agosto",
+    month: "August",
     user_id: 2,
     workShifts: [
       { date: "2019/08/01", shift_id: 1 },
