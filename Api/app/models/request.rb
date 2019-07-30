@@ -1,3 +1,4 @@
+# app/models/request.rb
 class Request < ApplicationRecord
   has_many :request_notification, class_name: 'Notification', foreign_key: 'request_id'
   belongs_to :requester, class_name: 'User'
@@ -9,6 +10,8 @@ class Request < ApplicationRecord
   validate :validate_requester
   
   VALID_STATUS = {
+
+  STATUS = {
     pending: "Pending",
     agree: "Agree",
     disagree: "Disagree",
@@ -16,10 +19,13 @@ class Request < ApplicationRecord
     rejected: "Rejected",
     cancel: "Cancel"
   }
+ def validate_requester
+  if requester.id == requested.id
+    errors.add(:requester, "Can't be request")
+  }.freeze
+
   def validate_requester
-    if requester.id == requested.id
-      errors.add(:requester, "Can't be request")
-    end
+    errors.add(:requester, "Can't be request") if requester == requested
   end
 
   def create_notification
