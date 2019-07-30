@@ -12,7 +12,7 @@ module Admin
       if @request.save
         render json: @request, status: :ok
       else
-        render json: @request.errors, status: :bad_reques
+        render json: @request.errors, status: :bad_request
       end
     end
 
