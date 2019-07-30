@@ -14,5 +14,9 @@ class User < ApplicationRecord
     user = find_by(email: email)
     user if user&.authenticate(password)
   end
+
+  def admin?
+    rol == 'Supervisor'
+  end
 end
 
