@@ -5,7 +5,7 @@ import { Link } from "@reach/router";
 import { useUserUpdater } from "../contexts/user";
 import { logout } from "../services/user";
 
-function Nabvar() {
+function Nabvar({ hasNotifications }) {
   const updateUser = useUserUpdater();
   async function handleLogoutClick() {
     await logout();
@@ -52,9 +52,14 @@ function Nabvar() {
           </Link>
         </li>
         <li>
-          <Link css={linkStyle} to="/requests">
-            Requests
-          </Link>
+          <span css={{ background: hasNotifications ? "red" : "green" }}>
+            {hasNotifications ? "Yes" : "No"}
+          </span>
+          <span>
+            <Link css={linkStyle} to="/requests">
+              Requests
+            </Link>
+          </span>
         </li>
         <li>
           <Link css={linkStyle} to="/">

@@ -6,6 +6,7 @@ import { useUser } from "../contexts/user";
 import Nabvar from "../components/Nabvar";
 import ScheduleModal from "../components/ScheduleModal";
 import schedules from "../services/schedule";
+import notifications from "../services/notification";
 import { users } from "../services/user";
 import forecastsData from "../components/ForecastsData";
 import { Button } from "../components/Ui";
@@ -18,6 +19,7 @@ function HomeView() {
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const forecasts = forecastsData();
+  const [hasNotifications, setHasNotifications] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -34,6 +36,16 @@ function HomeView() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await notifications.notifications();
+      setHasNotifications(response.has_notifications);
+    }
+    fetchData();
+  }, []);
+
+  console.log(hasNotifications);
 
   if (!user) return <Redirect to="login" noThrow />;
   if (events.length === 0) return null;
@@ -118,7 +130,7 @@ function HomeView() {
 
   return (
     <>
-      <Nabvar />
+      <Nabvar hasNotifications={hasNotifications} />
       <div
         css={{
           maxWidth: "1000px",
