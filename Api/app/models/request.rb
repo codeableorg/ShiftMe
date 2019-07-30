@@ -23,9 +23,9 @@ class Request < ApplicationRecord
   after_create :create_notification
   scope :manager, -> { where(rol: ROLES[:manager], status: STATUS[:pending]) }
 
-  validates :status, inclusion: { in: STATUS, message: "%{value} is not a valid status" }
+  validates :status, inclusion: { in: STATUS.values, message: "%{value} is not a valid status" }
   validate :validate_requester
-  after_update :notify_admin
+  after_update :notify_change
 
   def validate_requester
     errors.add(:requester, "Can't be request") if requester == requested
@@ -38,14 +38,34 @@ class Request < ApplicationRecord
   
   def notify_admin
     return unless rol == 'FrontDesk' && status == STATUS[:agree]
+  def notify_change
+    return unless [STATUS[:agree], STATUS[:accepted]].include? status
 
-    manager = User.find_by_rol('Supervisor')
-    new_request = dup
+    if rol == ROLES[:user]
+      create_manager_request(self)
+    elsif rol == ROLES[:manager]
+      change_workshifts(self)
+    end
+  end
+
+  def create_manager_request(request)
+    new_request = request.dup
     new_request.update(
-      requested: manager,
       rol: ROLES[:manager],
       status: STATUS[:pending]
     )
     new_request.save!
+  end
+
+  def change_workshifts(request)
+    current_shift_id = request.current_Shift_id
+    requested_shift_id = request.requested_Shift_id
+    month = Date::MONTHNAMES[request.date_Shift.month]
+
+    requested_schedule = Schedule.find_by(month: month, user: request.requester)
+    requested_schedule&.update_workshift(requested_shift_id, current_shift_id)
+
+    requester_schedule = Schedule.find_by(month: month, user: request.requested)
+    requester_schedule&.update_workshift(current_shift_id, requested_shift_id)
   end
 end
