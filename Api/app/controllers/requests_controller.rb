@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
 
   def index
-    render json: current_user.requester_request + current_user.requested_request
+    render json: Request.order(created_at: :desc)
   end
 
   def update
