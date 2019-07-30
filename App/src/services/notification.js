@@ -21,4 +21,15 @@ async function notifications() {
   return result;
 }
 
-export default { notifications };
+async function updatedNotifications() {
+  const response = await fetch(API_NOTIFICATIONS_URL, {
+    method: "POST",
+    credentials: "include"
+    // headers: {
+    //   "Content-Type": "application/json"
+    // }
+  });
+  if (!response.ok) throw createError(response);
+}
+
+export { notifications, updatedNotifications };
