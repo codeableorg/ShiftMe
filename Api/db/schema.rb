@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2019_07_25_170118) do
     t.date "creationDate"
     t.bigint "requester_id"
     t.bigint "requested_id"
-    t.string "rol"
     t.string "status", default: "Pending"
     t.date "date_Shift"
     t.bigint "current_Shift_id"

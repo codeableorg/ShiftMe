@@ -29,10 +29,7 @@ class Request < ApplicationRecord
   def create_notification
     Notification.create!(notify_user: requested, request: self)
   end
-
-  
-  def notify_admin
-    return unless rol == 'FrontDesk' && status == STATUS[:agree]
+ 
   def notify_change
     change_workshifts(self) if status == STATUS[:accepted]
   end
@@ -42,10 +39,10 @@ class Request < ApplicationRecord
     requested_shift_id = request.requested_Shift_id
     month = Date::MONTHNAMES[request.date_Shift.month]
 
-    requested_schedule = Schedule.find_by(month: month, user: request.requester)
-    requested_schedule&.update_workshift(requested_shift_id, current_shift_id)
+    requested_schedule = Schedule.find_by(month: month, user: request.requested)
+    requested_schedule&.update_workshift(request.date_Shift.strftime("%Y/%m/%d"), requested_shift_id, current_shift_id)
 
-    requester_schedule = Schedule.find_by(month: month, user: request.requested)
-    requester_schedule&.update_workshift(current_shift_id, requested_shift_id)
+    requester_schedule = Schedule.find_by(month: month, user: request.requester)
+    requester_schedule&.update_workshift(request.date_Shift.strftime("%Y/%m/%d"), current_shift_id, requested_shift_id)
   end
 end
