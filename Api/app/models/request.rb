@@ -8,8 +8,12 @@ class Request < ApplicationRecord
 
   after_create :create_notification
   validate :validate_requester
-  
-  VALID_STATUS = {
+  after_update :notify_admin
+
+  ROLES = {
+    manager: 'admin',
+    user: 'FrontDesk'
+  }.freeze
 
   STATUS = {
     pending: "Pending",
@@ -18,10 +22,6 @@ class Request < ApplicationRecord
     accepted: "Accepted",
     rejected: "Rejected",
     cancel: "Cancel"
-  }
- def validate_requester
-  if requester.id == requested.id
-    errors.add(:requester, "Can't be request")
   }.freeze
 
   def validate_requester
@@ -33,4 +33,16 @@ class Request < ApplicationRecord
   end
 
   
+  def notify_admin
+    return unless rol == 'FrontDesk' && status == STATUS[:agree]
+
+    manager = User.find_by_rol('Supervisor')
+    new_request = dup
+    new_request.update(
+      requested: manager,
+      rol: ROLES[:manager],
+      status: STATUS[:pending]
+    )
+    new_request.save!
+  end
 end
