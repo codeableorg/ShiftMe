@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
 
     namespace 'admin' do
-      resources :requests, only: :index
+      resources :requests, only: %i[index update]
     end
   end
 end
