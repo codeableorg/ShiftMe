@@ -6,7 +6,7 @@ import { useUser } from "../contexts/user";
 import Nabvar from "../components/Nabvar";
 import ScheduleModal from "../components/ScheduleModal";
 import schedules from "../services/schedule";
-import notifications from "../services/notification";
+import { notifications } from "../services/notification";
 import { users } from "../services/user";
 import forecastsData from "../components/ForecastsData";
 import { Button } from "../components/Ui";
@@ -39,7 +39,7 @@ function HomeView() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await notifications.notifications();
+      const response = await notifications();
       setHasNotifications(response.has_notifications);
     }
     fetchData();
