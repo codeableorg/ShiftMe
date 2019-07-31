@@ -15,9 +15,8 @@ class Request < ApplicationRecord
   belongs_to :current_Shift, class_name: 'Shift'
   belongs_to :requested_Shift, class_name: 'Shift'
 
-  after_create :create_notification
-  after_update :create_notification, :notify_change
-  after_destroy :create_notification
+  after_save :create_notification
+  after_update :notify_change
   scope :manager, -> { where(status: STATUS[:agree]) }
 
   validates :status, inclusion: { in: STATUS.values, message: "%{value} is not a valid status" }
@@ -29,7 +28,9 @@ class Request < ApplicationRecord
   end
 
   def create_notification
-    Notification.create!(notify_user: requested, request: self)
+    user_notif = requested
+    user_notif = requester if [STATUS[:agree], STATUS[:disagree]].include? status
+    Notification.create!(notify_user: user_notif, request: self)
   end
  
   def notify_change

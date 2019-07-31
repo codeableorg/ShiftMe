@@ -20,7 +20,6 @@ function HomeView() {
   const [frontdesks, setFrontdesks] = useState([]);
   const forecasts = forecastsData();
   const [hasNotifications, setHasNotifications] = useState(false);
-  console.log(user);
 
   useEffect(() => {
     async function fetchData() {
@@ -45,8 +44,6 @@ function HomeView() {
     }
     fetchData();
   }, []);
-
-  console.log(hasNotifications);
 
   if (!user) return <Redirect to="login" noThrow />;
   if (events.length === 0) return null;

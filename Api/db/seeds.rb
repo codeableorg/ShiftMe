@@ -15,11 +15,6 @@ supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', em
 @request_3 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_4.id, requested_id: @user_5.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_1.id, motive: "I have a medical appointment")
 @request_4 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_5.id, requested_id: @user_1.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
 
-# @notification_1 = Notification.create(notify_user_id:@user_1.id, request_id:@request_1.id , status: "Unread")
-# @notification_2 = Notification.create(notify_user_id:@user_2.id, request_id:@request_2.id , status: "Unread")
-# @notification_3 = Notification.create(notify_user_id:@user_3.id, request_id:@request_3.id , status: "Unread")
-# @notification_4 = Notification.create(notify_user_id:@user_4.id, request_id:@request_4.id , status:  "Unread")
-# @notification_5 = Notification.create(notify_user_id:@user_5.id, request_id:@request_1.id , status: "Unread")
 
 schedule_1 = Schedule.create(
     month: "July",
