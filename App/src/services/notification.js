@@ -24,10 +24,10 @@ async function notifications() {
 async function updatedNotifications() {
   const response = await fetch(API_NOTIFICATIONS_URL, {
     method: "POST",
-    credentials: "include"
-    // headers: {
-    //   "Content-Type": "application/json"
-    // }
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
   });
   if (!response.ok) throw createError(response);
 }

@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   def create
     user = User.valid_login?(params[:email], params[:password])
     if user
-      regenerate_and_signed_token(user)
+      user.regenerate_token
+      cookies.signed[:auth_token] = { value: user.token, httponly: true }
       render json: user
     else
       render json: { errors: 'Incorrect email or password' },
