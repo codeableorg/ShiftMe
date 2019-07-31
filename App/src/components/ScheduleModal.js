@@ -29,7 +29,7 @@ function ScheduleModal({
   const user = useUser();
 
   const [shiftsClicked, setShiftsClicked] = useState([]);
-  const [newmotive, setMotive] = useState("");
+  const [newMotive, setMotive] = useState("");
 
   const cancel = {
     fontSize: "2em",
@@ -99,6 +99,10 @@ function ScheduleModal({
 
   function handleCreateRequest(event) {
     event.preventDefault();
+    if (!newMotive || shiftsClicked.length < 2) {
+      alert("Must add a motive");
+      return;
+    }
     const request = {
       creationDate: new Date(),
       requester_id: shiftsClicked[0].id,
@@ -107,7 +111,7 @@ function ScheduleModal({
       rol: "FrontDesk",
       current_Shift_id: shiftsClicked[0].shift_id,
       requested_Shift_id: shiftsClicked[1].shift_id,
-      motive: newmotive
+      motive: newMotive
     };
 
     try {
@@ -165,7 +169,7 @@ function ScheduleModal({
               <textarea
                 css={textareaCss}
                 type="text"
-                value={newmotive}
+                value={newMotive}
                 onChange={handleChangeMotive}
               />
             </div>
