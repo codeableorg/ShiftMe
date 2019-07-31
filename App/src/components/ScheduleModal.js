@@ -104,7 +104,7 @@ function ScheduleModal({
       requester_id: shiftsClicked[0].id,
       requested_id: shiftsClicked[1].id,
       date_Shift: shiftsClicked[1].date,
-      rol: "FrontDesk",
+      // rol: "FrontDesk",
       current_Shift_id: shiftsClicked[0].shift_id,
       requested_Shift_id: shiftsClicked[1].shift_id,
       motive: newmotive

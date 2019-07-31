@@ -37,7 +37,7 @@ async function updateRequest(id, status) {
 async function cancelRequest(id) {
   const response = await fetch(`${API_REQUESTS_URL}/${id}`, {
     method: "DELETE",
-    credentials: "include",
+    credentials: "include"
   });
   if (!response.ok) throw createError(response);
 }
