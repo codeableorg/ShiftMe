@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { jsx } from "@emotion/core";
 import Nabvar from "../components/Nabvar";
+import Request from "../components/request";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import RequestModal from "../components/RequestModal";
-import { requestsFetch } from "../services/request";
+import { requestsFetch, requestAdmin } from "../services/request";
 import { updatedNotifications } from "../services/notification";
 import { users } from "../services/user";
 
@@ -13,6 +14,7 @@ function RequestsView() {
   const [id, setId] = useState(0);
   const [modalIsOpen, setModalOpen] = useState(false);
   const [requests, setRequests] = useState([]);
+  const [requestsAdmin, setRequestsAdmin] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const user = useUser();
 
@@ -31,6 +33,14 @@ function RequestsView() {
     async function fetchData() {
       const response = await requestsFetch();
       setRequests(response);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await requestAdmin();
+      setRequestsAdmin(response);
     }
     fetchData();
   }, []);
@@ -56,7 +66,6 @@ function RequestsView() {
   }
 
   if (!user) return <Redirect to="login" noThrow />;
-
   if (frontdesks.length === 0) return "Cargando...";
   if (!requests.length === 0) return "Cargando...";
 
