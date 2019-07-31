@@ -20,6 +20,7 @@ function HomeView() {
   const [frontdesks, setFrontdesks] = useState([]);
   const forecasts = forecastsData();
   const [hasNotifications, setHasNotifications] = useState(false);
+  console.log(user);
 
   useEffect(() => {
     async function fetchData() {
