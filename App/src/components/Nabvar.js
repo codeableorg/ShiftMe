@@ -1,80 +1,121 @@
 /** @jsx jsx */
-import React from "react";
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 import { useUserUpdater } from "../contexts/user";
-import { logout, users } from "../services/user";
+import { logout } from "../services/user";
 
-function Nabvar({ hasNotifications }) {
+function NavLink(props) {
+  return (
+    <Link
+      {...props}
+      css={{
+        fontSize: "1em",
+        color: "#35469C",
+        textDecoration: "none",
+        display: "flex",
+        alignItems: "center",
+        padding: "0 25px",
+        "&:first-of-type": {
+          paddingLeft: 0
+        },
+        "&:last-of-type": {
+          paddingRight: 0
+        }
+      }}
+    />
+  );
+}
+
+function Notification() {
+  return (
+    <figure
+      css={{
+        display: "inline-block",
+        margin: 0,
+        backgroundColor: "#EF4E4E",
+        borderRadius: "50%",
+        width: "5px",
+        height: "5px",
+        marginLeft: "3px"
+      }}
+    />
+  );
+}
+
+function Navbar({ hasNotifications }) {
   const updateUser = useUserUpdater();
-  const user = JSON.parse(localStorage.getItem("user"));
   async function handleLogoutClick() {
     await logout();
     updateUser({ type: "LOGOUT" });
   }
-  const linkStyle = {
-    marginRight: "1em",
-    textDecoration: "none",
-    color: "inherit",
-    transition: "color .20s ease",
-    fontWeight: "300",
-    padding: "5px",
-    "&:hover": {
-      color: "#f33959",
-      background: "#fff"
-    }
-  };
+
   return (
-    <nav
+    <header
       css={{
-        background: "#fff",
-        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.1)",
-        padding: "15px"
+        background: "white",
+        display: "grid",
+        gridTemplateColumns: "auto 1fr auto",
+        gridTemplateRows: "auto",
+        gridTemplateAreas: "'logo navigation sign-out'",
+        gridColumnGap: "40px",
+        padding: "15px 30px",
+        justifyContent: "space-between",
+        alignItems: "center"
       }}
     >
-      <ul
+      <Link
         css={{
-          listStyle: "none",
-          padding: 0,
           display: "flex",
           alignItems: "center",
-          margin: "0 auto",
-          maxWidth: "1000px"
+          color: "#19216C",
+          textDecoration: "none",
+          gridArea: "logo"
         }}
+        to="/"
       >
-        <li>
-          <Link css={linkStyle} to="/">
-            Shiftme
-          </Link>
-        </li>
-        <li>
-          <Link css={linkStyle} to="/">
-            {user.name}
-          </Link>
-        </li>
-        <li>
-          <span css={{ background: hasNotifications ? "red" : "green" }}>
-            {hasNotifications ? "Yes" : "No"}
-          </span>
-          <span>
-            <Link css={linkStyle} to="/requests">
-              Requests
-            </Link>
-          </span>
-        </li>
-        <li>
-          <Link css={linkStyle} to="/">
-            Create User
-          </Link>
-        </li>
-        <li css={{ marginLeft: "auto", fontWeight: "300", cursor: "pointer" }}>
-          <div css={linkStyle} onClick={handleLogoutClick}>
-            Logout
-          </div>
-        </li>
-      </ul>
-    </nav>
+        <figure
+          css={{
+            backgroundColor: "#19216C",
+            margin: 0,
+            marginRight: "15px",
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%"
+          }}
+        />
+        <h2
+          css={{
+            color: "#19216C",
+            fontWeight: 700,
+            fontSize: "20px",
+            margin: 0
+          }}
+        >
+          ShiftMe
+        </h2>
+      </Link>
+      <nav css={{ display: "flex", gridArea: "navigation" }}>
+        <NavLink to="/requests">
+          Requests {hasNotifications && <Notification />}
+        </NavLink>
+        <NavLink to="/users">Users</NavLink>
+      </nav>
+      <div css={{ gridArea: "sign-out" }}>
+        <button
+          css={{
+            background: "none",
+            border: "none",
+            color: "#35469C",
+            cursor: "pointer",
+            fontSize: "1em"
+          }}
+          onClick={handleLogoutClick}
+        >
+          Sign Out
+        </button>
+      </div>
+    </header>
   );
 }
 
-export default Nabvar;
+export default Navbar;
