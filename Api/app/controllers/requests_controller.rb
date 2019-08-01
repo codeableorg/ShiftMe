@@ -6,7 +6,7 @@ class RequestsController < ApplicationController
 
   def update
     @request = Request.find_by(id: params[:id])
-    if current_user.id != @request.requested_id
+    if current_user.id != @request.requested_id && !current_user.admin? 
       render json: { errors: "You don't have access!!" }
     else 
       @request.status = params[:status]
