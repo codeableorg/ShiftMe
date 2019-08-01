@@ -6,11 +6,7 @@ import { useUser } from "../contexts/user";
 import Nabvar from "../components/Nabvar";
 import ScheduleModal from "../components/ScheduleModal";
 import schedules from "../services/schedule";
-<<<<<<< HEAD
 import { notifications } from "../services/notification";
-=======
-import notifications from "../services/notification";
->>>>>>> Added services for fetch notifications in homeView
 import { users } from "../services/user";
 import forecastsData from "../components/ForecastsData";
 import { Button } from "../components/Ui";
