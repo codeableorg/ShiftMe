@@ -95,10 +95,19 @@ function Input({ styles, ...props }) {
     />
   );
 }
+
+function Label({ styles, ...props }) {
+  return (
+    <label
+      {...props}
+      css={{
+        display: "block",
+        fontSize: "1em",
+        color: "#4055A8",
         ...styles
       }}
     />
   );
 }
 
-export { Button, Card, Input, SecondaryButton };
+export { Button, Card, Input, SecondaryButton, Label };
