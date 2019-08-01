@@ -95,6 +95,7 @@ function Input({ styles, ...props }) {
     />
   );
 }
+<<<<<<< HEAD
 
 function Label({ styles, ...props }) {
   return (
@@ -104,6 +105,8 @@ function Label({ styles, ...props }) {
         display: "block",
         fontSize: "1em",
         color: "#4055A8",
+=======
+>>>>>>> Add better buttons and input styles
         ...styles
       }}
     />
