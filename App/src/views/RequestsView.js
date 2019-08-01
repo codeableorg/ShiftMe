@@ -76,7 +76,7 @@ function RequestsView() {
         css={{
           listStyle: "none",
           padding: 0,
-          width: "700px",
+          width: "701px",
           margin: "0 auto"
         }}
       >
