@@ -3,10 +3,11 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 import { useUserUpdater } from "../contexts/user";
-import { logout } from "../services/user";
+import { logout, users } from "../services/user";
 
 function Nabvar() {
   const updateUser = useUserUpdater();
+  const user = JSON.parse(localStorage.getItem("user"));
   async function handleLogoutClick() {
     await logout();
     updateUser({ type: "LOGOUT" });
@@ -48,7 +49,7 @@ function Nabvar() {
         </li>
         <li>
           <Link css={linkStyle} to="/">
-            Username
+            {user.name}
           </Link>
         </li>
         <li>
