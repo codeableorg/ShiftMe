@@ -130,7 +130,7 @@ function Login() {
         }}
       >
         <img
-          role="presentation"
+          alt="Woman scheduling in a big calendar"
           src={image}
           css={{ maxWidth: "100%", height: "100vh" }}
         />
