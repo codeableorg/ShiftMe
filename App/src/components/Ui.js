@@ -1,42 +1,27 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-const styleInput = {
-  background: "none",
-  border: "1px solid #eaeaea",
-  borderRadius: ".25rem",
-  boxSizing: "border-box",
-  display: "block",
-  fontSize: "1rem",
-  padding: ".5rem",
-  color: "#34495e",
-  width: "100%",
-  "&:focus": {
-    outline: "none",
-    borderColor: "rgba(242, 107, 117, 0.5)"
-  }
-};
-
 function Button({ styles, ...props }) {
   return (
     <button
       {...props}
       css={{
-        backgroundColor: "#e5edef",
-        border: "1px solid #e5edef",
-        borderRadius: ".25rem",
-        color: "inherit",
-        fontWeight: "bold",
+        backgroundColor: "#19216C",
+        border: "none",
+        borderRadius: "4px",
+        boxShadow: "0 2px 4px rgba(0, 85, 255, 0.4)",
+        color: "white",
+        fontWeight: "500",
         cursor: "pointer",
-        fontSize: ".8rem",
-        padding: ".75rem 0",
+        fontSize: "1em",
+        padding: "14px",
         transition: "all 200ms ease",
         textAlign: "center",
-        textTransform: "uppercase",
         width: "100%",
+        outline: "none",
         "&:hover": {
-          backgroundColor: "#50b6bb",
-          color: "#e5edef"
+          backgroundColor: "#4055A8",
+          color: "white",
         },
         ...styles
       }}
@@ -92,7 +77,24 @@ function Input({ styles, ...props }) {
     <input
       {...props}
       css={{
-        ...styleInput,
+        background: "white",
+        border: "1px solid #98AEEB",
+        borderRadius: "4px",
+        boxSizing: "border-box",
+        display: "block",
+        fontSize: "1rem",
+        padding: "14px 20px",
+        color: "#98AEEB",
+        width: "100%",
+        "&:focus": {
+          outline: "none",
+          color: "#4055A8"
+        },
+        ...styles
+      }}
+    />
+  );
+}
         ...styles
       }}
     />
