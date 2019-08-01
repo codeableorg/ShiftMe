@@ -96,6 +96,9 @@ function Input({ styles, ...props }) {
   );
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add UI Label component
 
 function Label({ styles, ...props }) {
   return (
@@ -105,8 +108,11 @@ function Label({ styles, ...props }) {
         display: "block",
         fontSize: "1em",
         color: "#4055A8",
+<<<<<<< HEAD
 =======
 >>>>>>> Add better buttons and input styles
+=======
+>>>>>>> Add UI Label component
         ...styles
       }}
     />
