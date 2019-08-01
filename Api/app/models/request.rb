@@ -15,19 +15,22 @@ class Request < ApplicationRecord
   belongs_to :current_Shift, class_name: 'Shift'
   belongs_to :requested_Shift, class_name: 'Shift'
 
-  after_create :create_notification
+  after_save :create_notification
+  after_update :notify_change
   scope :manager, -> { where(status: STATUS[:agree]) }
 
   validates :status, inclusion: { in: STATUS.values, message: "%{value} is not a valid status" }
   validate :validate_requester
-  after_update :notify_change
+  
 
   def validate_requester
     errors.add(:requester, "Can't be request") if requester == requested
   end
 
   def create_notification
-    Notification.create!(notify_user: requested, request: self)
+    user_notif = requested
+    user_notif = requester if [STATUS[:agree], STATUS[:disagree]].include? status
+    Notification.create!(notify_user: user_notif, request: self)
   end
  
   def notify_change

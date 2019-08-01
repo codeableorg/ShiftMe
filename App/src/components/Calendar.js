@@ -16,7 +16,6 @@ function Calendar({
 }) {
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
-  console.log(shiftsClicked);
 
   if (!user) return <Redirect to="login" noThrow />;
 

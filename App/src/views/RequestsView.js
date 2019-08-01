@@ -6,6 +6,7 @@ import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import RequestModal from "../components/RequestModal";
 import { requestsFetch } from "../services/request";
+import { updatedNotifications } from "../services/notification";
 import { users } from "../services/user";
 
 function RequestsView() {
@@ -38,6 +39,13 @@ function RequestsView() {
     async function fetchData() {
       const response = await users();
       setFrontdesks(response);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      await updatedNotifications();
     }
     fetchData();
   }, []);
