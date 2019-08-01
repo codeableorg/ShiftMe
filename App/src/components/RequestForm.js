@@ -1,6 +1,5 @@
 import React from "react"
 
-
 function RequestForm({onClick, handleCancel}) {
   return (
     <form>

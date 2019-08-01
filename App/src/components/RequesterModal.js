@@ -4,10 +4,10 @@ import { updateRequest, cancelRequest } from "../services/request";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 import PreviewWeek from "./PreviewWeek";
-import RequestForm from "../components/RequestForm";
+import RequesterForm from "../components/RequesterForm";
 import RequestFormAdmin from "../components/RequestFormAdmin";
 
-function RequestModal({
+function RequesterModal({
   requests,
   isOpen,
   onRequestClose,
@@ -51,13 +51,11 @@ function RequestModal({
       .then(() => {
         setRequests(requests =>
           requests.map(request =>
-            
             request.id === id ? { ...request, status } : request
           )
         );
       });
   }
-
   function handleCancel(event) {
     event.preventDefault();
     cancelRequest(id)
@@ -102,14 +100,17 @@ function RequestModal({
         )}
       </div>
       <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
-      
       {isAdmin ? (
         <RequestFormAdmin onClick={onClick} />
       ) : (
-        <RequestForm onClick={onClick} handleCancel={handleCancel} frontdesks={frontdesks} requests={requests}/>
+        <RequesterForm
+          handleCancel={handleCancel}
+          frontdesks={frontdesks}
+          requests={requests}
+        />
       )}
     </Modal>
   );
 }
 
-export default RequestModal;
+export default RequesterModal;

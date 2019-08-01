@@ -9,6 +9,7 @@ import RequestModal from "../components/RequestModal";
 import { requestsFetch, requestAdmin } from "../services/request";
 import { updatedNotifications } from "../services/notification";
 import { users } from "../services/user";
+import RequesterModal from "../components/RequesterModal";
 
 function RequestsView() {
   const [id, setId] = useState(0);
@@ -88,29 +89,48 @@ function RequestsView() {
               Turn={Turn}
               request={request}
               handleRequestSchedule={handleRequestSchedule}
+              frontdesk={frontdesks}
             />
           ))}
         {requestsAdmin
           .sort((a, b) => a.id - b.id)
-          .map(request => (
-          <Request
-            findName={findName}
-            Turn={Turn}
-            request={request}
-            handleRequestSchedule={handleRequestSchedule}
-          />
-        ))}
+          .map(request => (<>
+            <Request
+              findName={findName}
+              Turn={Turn}
+              request={request}
+              handleRequestSchedule={handleRequestSchedule}
+            /><RequestModal
+            isOpen={!!modalIsOpen}
+            onRequestClose={() => setModalOpen(false)}
+            id={id}
+            setRequests={setRequests}
+            requests={requests}
+            isAdmin={user.rol === "Supervisor"}
+          /></>
+          ))}
       </ul>
-      {requests && (
-        <RequestModal
+      {/* {requests.map(e =>
+        e.requested_id === "1" ? (
+          <RequestModal
+            isOpen={!!modalIsOpen}
+            onRequestClose={() => setModalOpen(false)}
+            id={id}
+            setRequests={setRequests}
+            requests={requests}
+            isAdmin={user.rol === "Supervisor"}
+          />
+        ) : (
+          <RequesterModal
           isOpen={!!modalIsOpen}
-          onRequestClose={() => setModalOpen(false)}
           id={id}
           setRequests={setRequests}
+          onRequestClose={() => setModalOpen(false)}
           requests={requests}
           isAdmin={user.rol === "Supervisor"}
         />
-      )}
+        )
+      )} */}
     </>
   );
 }
