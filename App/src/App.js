@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import React from "react";
 import { jsx } from "@emotion/core";
 import { Global } from "@emotion/core";
 import { Router } from "@reach/router";
@@ -17,7 +16,8 @@ function App() {
           styles={{
             body: {
               background: "#f2f3f5",
-              fontFamily: "Roboto, sans-serif",
+              fontFamily:
+                "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
               margin: 0,
               color: "rgba(0,0,0,0.87)"
             },
