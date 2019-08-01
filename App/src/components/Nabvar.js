@@ -1,7 +1,11 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
+<<<<<<< HEAD
 import { useUserUpdater, useUser } from "../contexts/user";
+=======
+import { useUserUpdater } from "../contexts/user";
+>>>>>>> Add new design for the navbar
 import { logout } from "../services/user";
 
 function NavLink(props) {
@@ -34,9 +38,15 @@ function Notification() {
         margin: 0,
         backgroundColor: "#EF4E4E",
         borderRadius: "50%",
+<<<<<<< HEAD
         width: 10,
         height: 10,
         marginLeft: "5px"
+=======
+        width: "5px",
+        height: "5px",
+        marginLeft: "3px"
+>>>>>>> Add new design for the navbar
       }}
     />
   );
@@ -44,7 +54,10 @@ function Notification() {
 
 function Navbar({ hasNotifications }) {
   const updateUser = useUserUpdater();
+<<<<<<< HEAD
   const user = useUser();
+=======
+>>>>>>> Add new design for the navbar
   async function handleLogoutClick() {
     await logout();
     updateUser({ type: "LOGOUT" });
@@ -96,11 +109,18 @@ function Navbar({ hasNotifications }) {
         </h2>
       </Link>
       <nav css={{ display: "flex", gridArea: "navigation" }}>
+<<<<<<< HEAD
         <NavLink to="/">{user.name}</NavLink>
         <NavLink to="/requests">
           Requests {hasNotifications && <Notification />}
         </NavLink>
         {/* <NavLink to="/users">Users</NavLink> */}
+=======
+        <NavLink to="/requests">
+          Requests {hasNotifications && <Notification />}
+        </NavLink>
+        <NavLink to="/users">Users</NavLink>
+>>>>>>> Add new design for the navbar
       </nav>
       <div css={{ gridArea: "sign-out" }}>
         <button
