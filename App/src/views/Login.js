@@ -34,8 +34,8 @@ function Login() {
   }
 
   return (
-    <section>
-      <Card css={{ maxWidth: "500px", margin: "0 auto" }}>
+    <section css={{ display: "flex", alignItems: "center", height: "100vh" }}>
+      <Card css={{ maxWidth: "500px", margin: "1em auto" }}>
         <h1 css={{ margin: "3rem 0", fontSize: "2rem", textAlign: "center" }}>
           ShiftMe
         </h1>

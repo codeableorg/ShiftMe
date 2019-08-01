@@ -15,6 +15,17 @@ function RequestsView() {
   const [frontdesks, setFrontdesks] = useState([]);
   const user = useUser();
 
+  const Turn = {
+    1: "Morning",
+    2: "Afternoon",
+    3: "Night",
+    4: "OFF"
+  };
+
+  function findName(requester_id) {
+    return frontdesks.find(frontdesk => frontdesk.id === requester_id).name;
+  }
+
   useEffect(() => {
     async function fetchData() {
       const response = await requestsFetch();
@@ -52,56 +63,39 @@ function RequestsView() {
           margin: "0 auto"
         }}
       >
-        {requests.map(request => (
-          <li
-            key={request.id}
-            css={{
-              padding: "20px",
-              border: "1px solid black",
-              display: "flex",
-              flexDirection: "column",
-              "&:hover": {
-                cursor: "pointer"
-              }
-            }}
-          >
-            <p>#{request.id}</p>
-            <span>
-              FrontDesk{" "}
-              {
-                frontdesks.find(
-                  frontdesk => frontdesk.id === request.requester_id
-                ).name
-              }{" "}
-              of workshift{" "}
-              {request.current_Shift_id === 4
-                ? "OFF"
-                : request.current_Shift_id === 1
-                ? "Morning"
-                : request.current_Shift_id === 2
-                ? "Afternoon"
-                : "Night"}{" "}
-              want to change workshift with FrontDesk{" "}
-              {
-                frontdesks.find(
-                  frontdesk => frontdesk.id === request.requested_id
-                ).name
-              }{" "}
-              of workshift{" "}
-              {request.requested_Shift_id === 4
-                ? "OFF"
-                : request.requested_Shift_id === 1
-                ? "Morning"
-                : request.requested_Shift_id === 2
-                ? "Afternoon"
-                : "Night"}
-            </span>
-            <div css={{ alignSelf: "flex-end" }}>{request.status}</div>
-            <button onClick={() => handleRequestSchedule(request.id)}>
-              See Schedule Request{" "}
-            </button>
-          </li>
-        ))}
+        {requests
+          .sort((a, b) => a.id - b.id)
+          .map(request => (
+            <li
+              key={request.id}
+              css={{
+                padding: "20px",
+                border: "1px solid black",
+                display: "flex",
+                flexDirection: "column",
+                "&:hover": {
+                  cursor: "pointer"
+                }
+              }}
+            >
+              <p>#{request.id}</p>
+              <div>
+                <span>
+                  FrontDesk <b>{findName(request.current_Shift_id)}</b> of
+                  workshift <b>{Turn[request.current_Shift_id]} </b>
+                  want to change workshift with FrontDesk
+                </span>
+                <span>
+                  <b> {findName(request.requested_Shift_id)} </b>
+                  of workshift <b>{Turn[request.requested_Shift_id]} </b>
+                </span>
+              </div>
+              <div css={{ alignSelf: "flex-end" }}>{request.status}</div>
+              <button onClick={() => handleRequestSchedule(request.id)}>
+                See Schedule Request{" "}
+              </button>
+            </li>
+          ))}
       </ul>
       {requests && (
         <RequestModal

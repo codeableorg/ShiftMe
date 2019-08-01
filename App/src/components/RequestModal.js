@@ -4,29 +4,16 @@ import { updateRequest, cancelRequest } from "../services/request";
 import Calendar from "./Calendar";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
+import PreviewWeek from "./PreviewWeek";
 
 function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
-  const [shiftsClicked, setShiftsClicked] = useState([]);
+  const [request, setRequest] = useState({});
 
   React.useEffect(() => {
     const reqFind = requests.find(req => req.id === id);
-    const data = reqFind
-      ? [
-          {
-            id: reqFind.requester_id,
-            date: reqFind.date_Shift,
-            shift_id: reqFind.current_Shift_id
-          },
-          {
-            id: reqFind.requested_id,
-            date: reqFind.date_Shift,
-            shift_id: reqFind.requested_Shift_id
-          }
-        ]
-      : [];
-    setShiftsClicked(data);
+    setRequest(reqFind);
   }, [requests, id]);
 
   useEffect(() => {
@@ -47,29 +34,6 @@ function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
 
   if (events.length === 0) return null;
   if (frontdesks.length === 0) return null;
-
-  const workShiftConcat = events.reduce((groups, event) => {
-    return {
-      ...groups,
-      [event.user_id]: groups[event.user_id]
-        ? groups[event.user_id].concat(event.workShifts)
-        : event.workShifts
-    };
-  }, {});
-
-  function calcDay(date) {
-    const nameDays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thurday",
-      "Friday",
-      "Saturday"
-    ];
-    var d = new Date(date);
-    return nameDays[d.getDay()];
-  }
 
   function onClick(event) {
     event.preventDefault();
@@ -93,7 +57,7 @@ function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
         onRequestClose();
         setRequests(requests =>
           requests.map(request =>
-            request.id == id ? { ...request, status: "Cancel" } : request
+            request.id === id ? { ...request, status: "Cancel" } : request
           )
         );
       });
@@ -128,16 +92,10 @@ function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
           )
         )}
       </div>
-      <Calendar
-        workShiftConcat={workShiftConcat}
-        frontdesks={frontdesks}
-        calcDay={calcDay}
-        start={0}
-        end={7}
-        shiftsClicked={shiftsClicked}
-        saveShiftsClicked={null}
-      />
-      <form>
+      <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
+      <form
+        style={{ display: "flex", justifyContent: "center", marginTop: "12px" }}
+      >
         <button data-value="Agree" onClick={onClick}>
           Agree
         </button>
