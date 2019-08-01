@@ -102,6 +102,7 @@ function RequestModal({
         )}
       </div>
       <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
+      
       {isAdmin ? (
         <RequestFormAdmin onClick={onClick} />
       ) : (
