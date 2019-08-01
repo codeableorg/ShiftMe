@@ -21,7 +21,7 @@ async function login(user) {
   });
   if (!response.ok) throw createError(response);
   const { name, id, email, rol } = await response.json();
-  return { name, email, id, rol};
+  return { name, email, id, rol };
 }
 
 async function logout() {

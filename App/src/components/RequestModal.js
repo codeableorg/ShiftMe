@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { updateRequest, cancelRequest } from "../services/request";
-import Calendar from "./Calendar";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
 import PreviewWeek from "./PreviewWeek";
+import RequestForm from "../components/RequestForm";
+import RequestFormAdmin from "../components/RequestFormAdmin";
 
-function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
+function RequestModal({
+  requests,
+  isOpen,
+  onRequestClose,
+  id,
+  setRequests,
+  isAdmin = false
+}) {
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const [request, setRequest] = useState({});
@@ -93,17 +101,11 @@ function RequestModal({ requests, isOpen, onRequestClose, id, setRequests }) {
         )}
       </div>
       <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
-      <form
-        style={{ display: "flex", justifyContent: "center", marginTop: "12px" }}
-      >
-        <button data-value="Agree" onClick={onClick}>
-          Agree
-        </button>
-        <button data-value="Disagree" onClick={onClick}>
-          Disagree
-        </button>
-        <button onClick={handleCancel}>Cancel</button>
-      </form>
+      {isAdmin ? (
+        <RequestFormAdmin onClick={onClick} />
+      ) : (
+        <RequestForm onClick={onClick} handleCancel={handleCancel} />
+      )}
     </Modal>
   );
 }

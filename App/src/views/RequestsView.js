@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { jsx } from "@emotion/core";
 import Nabvar from "../components/Nabvar";
-import Request from "../components/request";
+import Request from "../components/Request";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import RequestModal from "../components/RequestModal";
@@ -104,7 +104,9 @@ function RequestsView() {
           id={id}
           setRequests={setRequests}
           requests={requests}
-        />
+          isAdmin={user.rol === "Supervisor"}
+        >
+        </RequestModal>
       )}
     </>
   );
