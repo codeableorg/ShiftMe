@@ -84,12 +84,22 @@ function RequestsView() {
           .sort((a, b) => a.id - b.id)
           .map(request => (
             <Request
+              findName={findName}
+              Turn={Turn}
+              request={request}
+              handleRequestSchedule={handleRequestSchedule}
+            />
+          ))}
+        {requestsAdmin
+          .sort((a, b) => a.id - b.id)
+          .map(request => (
+          <Request
             findName={findName}
             Turn={Turn}
             request={request}
             handleRequestSchedule={handleRequestSchedule}
           />
-          ))}
+        ))}
       </ul>
       {requests && (
         <RequestModal
@@ -99,8 +109,7 @@ function RequestsView() {
           setRequests={setRequests}
           requests={requests}
           isAdmin={user.rol === "Supervisor"}
-        >
-        </RequestModal>
+        />
       )}
     </>
   );
