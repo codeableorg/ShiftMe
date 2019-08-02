@@ -5,7 +5,10 @@ import { Link } from "@reach/router";
 import { useUserUpdater, useUser } from "../contexts/user";
 =======
 import { useUserUpdater } from "../contexts/user";
+<<<<<<< HEAD
 >>>>>>> Add new design for the navbar
+=======
+>>>>>>> Load user data in Navbar from localStorage
 import { logout } from "../services/user";
 
 function NavLink(props) {
@@ -61,9 +64,13 @@ function Notification() {
 function Navbar({ hasNotifications }) {
   const updateUser = useUserUpdater();
 <<<<<<< HEAD
+<<<<<<< HEAD
   const user = useUser();
 =======
 >>>>>>> Add new design for the navbar
+=======
+  const user = JSON.parse(localStorage.getItem("user"));
+>>>>>>> Load user data in Navbar from localStorage
   async function handleLogoutClick() {
     await logout();
     updateUser({ type: "LOGOUT" });
