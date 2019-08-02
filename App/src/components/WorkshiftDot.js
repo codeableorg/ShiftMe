@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-export function WorkshiftDot({ title, shiftId }) {
+export function WorkshiftDot({ title, shiftId, size = "medium" }) {
   const backgroundColor =
     shiftId === 1
       ? "#F7C948"
@@ -9,7 +9,9 @@ export function WorkshiftDot({ title, shiftId }) {
       ? "#EF4E4E"
       : shiftId === 3
       ? "#3EBD93"
-      : "#7B8794";
+      : shiftId === 4
+      ? "#7B8794"
+      : "#BED0F7";
   return (
     <figure
       title={title}
@@ -17,8 +19,8 @@ export function WorkshiftDot({ title, shiftId }) {
         margin: 0,
         display: "inline-block",
         borderRadius: "50%",
-        width: "15px",
-        height: "15px",
+        width: size === "medium" ? 15 : 10,
+        height: size === "medium" ? 15 : 10,
         backgroundColor
       }}
     />
