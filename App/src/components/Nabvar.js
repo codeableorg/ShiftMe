@@ -131,6 +131,9 @@ function Navbar({ hasNotifications }) {
       </Link>
       <nav css={{ display: "flex", gridArea: "navigation" }}>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Render user name before the link to /requests
         <NavLink to="/">{user.name}</NavLink>
         <NavLink to="/requests">
           Requests {hasNotifications && <Notification />}
