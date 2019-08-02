@@ -34,9 +34,9 @@ function Notification() {
         margin: 0,
         backgroundColor: "#EF4E4E",
         borderRadius: "50%",
-        width: "5px",
-        height: "5px",
-        marginLeft: "3px"
+        width: 10,
+        height: 10,
+        marginLeft: "5px"
       }}
     />
   );
@@ -98,7 +98,7 @@ function Navbar({ hasNotifications }) {
         <NavLink to="/requests">
           Requests {hasNotifications && <Notification />}
         </NavLink>
-        <NavLink to="/users">Users</NavLink>
+        {/* <NavLink to="/users">Users</NavLink> */}
       </nav>
       <div css={{ gridArea: "sign-out" }}>
         <button
