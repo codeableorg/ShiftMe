@@ -79,6 +79,46 @@ const forecastsData = () => {
       ],
       created_at: "2019-07-13T00:32:07.499Z",
       updated_at: "2019-07-13T00:32:07.499Z"
+    },
+    {
+      id: 3,
+      month: "Julio",
+      typeForecast: "Departure-Rooms",
+      dataDays: [
+        { date: "2019/07/01", data: 80 },
+        { date: "2019/07/02", data: 68 },
+        { date: "2019/07/03", data: 60 },
+        { date: "2019/07/04", data: 34 },
+        { date: "2019/07/05", data: 66 },
+        { date: "2019/07/06", data: 75 },
+        { date: "2019/07/07", data: 35 },
+        { date: "2019/07/08", data: 90 },
+        { date: "2019/07/09", data: 76 },
+        { date: "2019/07/10", data: 55 },
+        { date: "2019/07/11", data: 88 },
+        { date: "2019/07/12", data: 78 },
+        { date: "2019/07/13", data: 65 },
+        { date: "2019/07/14", data: 45 },
+        { date: "2019/07/15", data: 34 },
+        { date: "2019/07/16", data: 45 },
+        { date: "2019/07/17", data: 36 },
+        { date: "2019/07/18", data: 70 },
+        { date: "2019/07/19", data: 67 },
+        { date: "2019/07/20", data: 45 },
+        { date: "2019/07/21", data: 67 },
+        { date: "2019/07/22", data: 45 },
+        { date: "2019/07/23", data: 34 },
+        { date: "2019/07/24", data: 89 },
+        { date: "2019/07/25", data: 56 },
+        { date: "2019/07/26", data: 56 },
+        { date: "2019/07/27", data: 67 },
+        { date: "2019/07/28", data: 70 },
+        { date: "2019/07/29", data: 56 },
+        { date: "2019/07/30", data: 36 },
+        { date: "2019/07/31", data: 80 }
+      ],
+      created_at: "2019-07-13T00:32:07.499Z",
+      updated_at: "2019-07-13T00:32:07.499Z"
     }
   ];
   return forecasts;

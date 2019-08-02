@@ -58,6 +58,44 @@ schedule_1 = Schedule.create(
     month: "July",
     user_id: 2,
     workShifts: [
+             { date: "2019/07/01", shift_id: 1 },
+             { date: "2019/07/02", shift_id: 4 },
+             { date: "2019/07/03", shift_id: 1 },
+             { date: "2019/07/04", shift_id: 1 },
+             { date: "2019/07/05", shift_id: 1 },
+             { date: "2019/07/06", shift_id: 1 },
+             { date: "2019/07/07", shift_id: 1 },
+             { date: "2019/07/08", shift_id: 1 },
+             { date: "2019/07/09", shift_id: 4 },
+             { date: "2019/07/10", shift_id: 1 },
+             { date: "2019/07/11", shift_id: 1 },
+             { date: "2019/07/12", shift_id: 1 },
+             { date: "2019/07/13", shift_id: 1 },
+             { date: "2019/07/14", shift_id: 1 },
+             { date: "2019/07/15", shift_id: 1 },
+             { date: "2019/07/16", shift_id: 4 },
+             { date: "2019/07/17", shift_id: 1 },
+             { date: "2019/07/18", shift_id: 1 },
+             { date: "2019/07/19", shift_id: 1 },
+             { date: "2019/07/20", shift_id: 1 },
+             { date: "2019/07/21", shift_id: 1 },
+             { date: "2019/07/22", shift_id: 1 },
+             { date: "2019/07/23", shift_id: 4 },
+             { date: "2019/07/24", shift_id: 1 },
+             { date: "2019/07/25", shift_id: 1 },
+             { date: "2019/07/26", shift_id: 1 },
+             { date: "2019/07/27", shift_id: 1 },
+             { date: "2019/07/28", shift_id: 1 },
+             { date: "2019/07/29", shift_id: 1 },
+             { date: "2019/07/30", shift_id: 4 },
+             { date: "2019/07/31", shift_id: 1 }
+    ]
+  )
+
+  schedule_3 = Schedule.create(
+    month: "July",
+    user_id: 3,
+    workShifts: [
       { date: "2019/07/01", shift_id: 2 },
       { date: "2019/07/02", shift_id: 2 },
       { date: "2019/07/03", shift_id: 4 },
@@ -92,15 +130,91 @@ schedule_1 = Schedule.create(
     ]
   )
 
-  schedule_3 = Schedule.create(
+  schedule_4 = Schedule.create(
+    month: "July",
+    user_id: 4,
+    workShifts: [
+      { date: "2019/07/01", shift_id: 2 },
+      { date: "2019/07/02", shift_id: 2 },
+      { date: "2019/07/03", shift_id: 2 },
+      { date: "2019/07/04", shift_id: 4 },
+      { date: "2019/07/05", shift_id: 2 },
+      { date: "2019/07/06", shift_id: 2 },
+      { date: "2019/07/07", shift_id: 2 },
+      { date: "2019/07/08", shift_id: 2 },
+      { date: "2019/07/09", shift_id: 2 },
+      { date: "2019/07/10", shift_id: 2 },
+      { date: "2019/07/11", shift_id: 4 },
+      { date: "2019/07/12", shift_id: 2 },
+      { date: "2019/07/13", shift_id: 2 },
+      { date: "2019/07/14", shift_id: 2 },
+      { date: "2019/07/15", shift_id: 2 },
+      { date: "2019/07/16", shift_id: 2 },
+      { date: "2019/07/17", shift_id: 2 },
+      { date: "2019/07/18", shift_id: 4 },
+      { date: "2019/07/19", shift_id: 2 },
+      { date: "2019/07/20", shift_id: 2 },
+      { date: "2019/07/21", shift_id: 2 },
+      { date: "2019/07/22", shift_id: 2 },
+      { date: "2019/07/23", shift_id: 2 },
+      { date: "2019/07/24", shift_id: 2 },
+      { date: "2019/07/25", shift_id: 4 },
+      { date: "2019/07/26", shift_id: 2 },
+      { date: "2019/07/27", shift_id: 2 },
+      { date: "2019/07/28", shift_id: 2 },
+      { date: "2019/07/29", shift_id: 2 },
+      { date: "2019/07/30", shift_id: 2 },
+      { date: "2019/07/31", shift_id: 2 }
+    ]
+  )
+
+  schedule_5 = Schedule.create(
     month: "August",
     user_id: 1,
+    workShifts: [
+      { date: "2019/08/01", shift_id: 2 },
+      { date: "2019/08/02", shift_id: 2 },
+      { date: "2019/08/03", shift_id: 2 },
+      { date: "2019/08/04", shift_id: 2 },
+      { date: "2019/08/05", shift_id: 2 },
+      { date: "2019/08/06", shift_id: 2 },
+      { date: "2019/08/07", shift_id: 4 },
+      { date: "2019/08/08", shift_id: 2 },
+      { date: "2019/08/09", shift_id: 2 },
+      { date: "2019/08/10", shift_id: 2 },
+      { date: "2019/08/11", shift_id: 2 },
+      { date: "2019/08/12", shift_id: 2 },
+      { date: "2019/08/13", shift_id: 2 },
+      { date: "2019/08/14", shift_id: 4 },
+      { date: "2019/08/15", shift_id: 2 },
+      { date: "2019/08/16", shift_id: 2 },
+      { date: "2019/08/17", shift_id: 2 },
+      { date: "2019/08/18", shift_id: 2 },
+      { date: "2019/08/19", shift_id: 2 },
+      { date: "2019/08/20", shift_id: 2 },
+      { date: "2019/08/21", shift_id: 4 },
+      { date: "2019/08/22", shift_id: 2 },
+      { date: "2019/08/23", shift_id: 2 },
+      { date: "2019/08/24", shift_id: 2 },
+      { date: "2019/08/25", shift_id: 2 },
+      { date: "2019/08/26", shift_id: 2 },
+      { date: "2019/08/27", shift_id: 2 },
+      { date: "2019/08/28", shift_id: 4 },
+      { date: "2019/08/29", shift_id: 2 },
+      { date: "2019/08/30", shift_id: 2 },
+      { date: "2019/08/31", shift_id: 2 }
+    ]
+  )
+
+  schedule_6 = Schedule.create(
+    month: "August",
+    user_id: 2,
     workShifts: [
       { date: "2019/08/01", shift_id: 4 },
       { date: "2019/08/02", shift_id: 2 },
       { date: "2019/08/03", shift_id: 2 },
       { date: "2019/08/04", shift_id: 2 },
-      { date: "2019/08/05", shift_id: 4 },
+      { date: "2019/08/05", shift_id: 2 },
       { date: "2019/08/06", shift_id: 2 },
       { date: "2019/08/07", shift_id: 2 },
       { date: "2019/08/08", shift_id: 4 },
@@ -130,9 +244,9 @@ schedule_1 = Schedule.create(
     ]
   )
 
-  schedule_4 = Schedule.create(
+  schedule_7 = Schedule.create(
     month: "August",
-    user_id: 2,
+    user_id: 3,
     workShifts: [
       { date: "2019/08/01", shift_id: 1 },
         { date: "2019/08/02", shift_id: 1 },
@@ -161,6 +275,44 @@ schedule_1 = Schedule.create(
         { date: "2019/08/25", shift_id: 1 },
         { date: "2019/08/26", shift_id: 4 },
         { date: "2019/08/27", shift_id: 1 },
+        { date: "2019/08/28", shift_id: 1 },
+        { date: "2019/08/29", shift_id: 1 },
+        { date: "2019/08/30", shift_id: 1 },
+        { date: "2019/08/31", shift_id: 1 }
+    ]
+  )
+
+  schedule_8 = Schedule.create(
+    month: "August",
+    user_id: 4,
+    workShifts: [
+      { date: "2019/08/01", shift_id: 1 },
+        { date: "2019/08/02", shift_id: 1 },
+        { date: "2019/08/03", shift_id: 1 },
+        { date: "2019/08/04", shift_id: 1 },
+        { date: "2019/08/05", shift_id: 1 },
+        { date: "2019/08/06", shift_id: 4 },
+        { date: "2019/08/07", shift_id: 1 },
+        { date: "2019/08/08", shift_id: 1 },
+        { date: "2019/08/09", shift_id: 1 },
+        { date: "2019/08/10", shift_id: 1 },
+        { date: "2019/08/11", shift_id: 1 },
+        { date: "2019/08/12", shift_id: 1 },
+        { date: "2019/08/13", shift_id: 4 },
+        { date: "2019/08/14", shift_id: 1 },
+        { date: "2019/08/15", shift_id: 1 },
+        { date: "2019/08/16", shift_id: 1 },
+        { date: "2019/08/17", shift_id: 1 },
+        { date: "2019/08/18", shift_id: 1 },
+        { date: "2019/08/19", shift_id: 1 },
+        { date: "2019/08/20", shift_id: 4 },
+        { date: "2019/08/21", shift_id: 1 },
+        { date: "2019/08/22", shift_id: 1 },
+        { date: "2019/08/23", shift_id: 1 },
+        { date: "2019/08/24", shift_id: 1 },
+        { date: "2019/08/25", shift_id: 1 },
+        { date: "2019/08/26", shift_id: 1 },
+        { date: "2019/08/27", shift_id: 4 },
         { date: "2019/08/28", shift_id: 1 },
         { date: "2019/08/29", shift_id: 1 },
         { date: "2019/08/30", shift_id: 1 },
