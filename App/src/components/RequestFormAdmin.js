@@ -1,18 +1,17 @@
-import React from "react"
-import PreviewWeek from "./PreviewWeek";
+import React from "react";
 
-function RequestFormAdmin({onClick, request, frontdesks, events}) {
-  return (<>
-    <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
-    <form>
-      <button data-value="Accepted" onClick={onClick}>
-      Accepted
-      </button>
-      <button data-value="Rejected" onClick={onClick}>
-      Rejected
-      </button>
-    </form></>
-
+function RequestFormAdmin({ onClick }) {
+  return (
+    <>
+      <form>
+        <button data-value="Accepted" onClick={onClick}>
+          Accepted
+        </button>
+        <button data-value="Rejected" onClick={onClick}>
+          Rejected
+        </button>
+      </form>
+    </>
   );
 }
-export default RequestFormAdmin
+export default RequestFormAdmin;

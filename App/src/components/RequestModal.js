@@ -6,6 +6,8 @@ import { users } from "../services/user";
 import PreviewWeek from "./PreviewWeek";
 import RequestForm from "../components/RequestForm";
 import RequestFormAdmin from "../components/RequestFormAdmin";
+import Calendar from "./Calendar";
+import { EventEmitter } from "events";
 
 function RequestModal({
   requests,
@@ -18,9 +20,48 @@ function RequestModal({
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const [request, setRequest] = useState({});
+  const [shiftsClicked, setShiftsClicked] = useState([]);
 
-  React.useEffect(() => {
+  const workShiftConcat = events.reduce((groups, event) => {
+    return {
+      ...groups,
+      [event.user_id]: groups[event.user_id]
+        ? groups[event.user_id].concat(event.workShifts)
+        : event.workShifts
+    };
+  }, {});
+
+  function calcDay(date) {
+    const nameDays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+    var d = new Date(date);
+    return nameDays[d.getDay()];
+  }
+
+      React.useEffect(() => {
     const reqFind = requests.find(req => req.id === id);
+    const data = reqFind
+      ? [
+          {
+            id: reqFind.requester_id,
+            date: reqFind.date_Shift,
+            shift_id: reqFind.current_Shift_id
+          },
+          {
+            id: reqFind.requested_id,
+            date: reqFind.date_Shift,
+            shift_id: reqFind.requested_Shift_id
+          }
+        ]
+      : [];
+    setShiftsClicked(data);
     setRequest(reqFind);
   }, [requests, id]);
 
@@ -100,12 +141,21 @@ function RequestModal({
           )
         )}
       </div>
-      <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
-      {isAdmin ? (
-        <RequestFormAdmin onClick={onClick} />
-      ) : (
-        <RequestForm onClick={onClick} handleCancel={handleCancel} />
-      )}
+      <PreviewWeek request={request} frontdesks={frontdesks} events={events}/>
+        <Calendar
+        workShiftConcat={workShiftConcat}
+        frontdesks={frontdesks}
+        calcDay={calcDay}
+        start={0}
+        end={7}
+        shiftsClicked={shiftsClicked}
+        saveShiftsClicked={null}
+      />
+        {isAdmin ? (
+          <RequestFormAdmin onClick={onClick} />
+        ) : (
+          <RequestForm onClick={onClick} handleCancel={handleCancel} />
+        )}
     </Modal>
   );
 }
