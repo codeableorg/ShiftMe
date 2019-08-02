@@ -143,7 +143,7 @@ function Calendar({
                         : workShift.shift_id === 1
                         ? "M"
                         : workShift.shift_id === 2
-                        ? "T"
+                        ? "A"
                         : "N"}
                     </td>
                   ))}
