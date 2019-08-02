@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 import { useUserUpdater } from "../contexts/user";
-import { logout, users } from "../services/user";
+import { logout } from "../services/user";
 
 function NavLink(props) {
   return (
@@ -44,6 +44,7 @@ function Notification() {
 
 function Navbar({ hasNotifications }) {
   const updateUser = useUserUpdater();
+  const user = JSON.parse(localStorage.getItem("user"));
   async function handleLogoutClick() {
     await logout();
     updateUser({ type: "LOGOUT" });
