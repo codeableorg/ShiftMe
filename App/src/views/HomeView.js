@@ -3,17 +3,28 @@ import { jsx } from "@emotion/core";
 import React, { useState, useEffect } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
-import Nabvar from "../components/Nabvar";
+import Navbar from "../components/Nabvar";
 import ScheduleModal from "../components/ScheduleModal";
 import schedules from "../services/schedule";
 import { notifications } from "../services/notification";
 import { users } from "../services/user";
 import forecastsData from "../components/ForecastsData";
 import { Button } from "../components/Ui";
+import { WorkshiftDot } from "../components/WorkshiftDot";
+import NewCalendar from "../components/NewCalendar";
+
+function getInitialStartDate() {
+  const now = new Date();
+  const day = now.getDay();
+  if (day === 0) return now;
+  now.setDate(now.getDate() - day);
+  return now;
+}
 
 function HomeView() {
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
+  const [startDate, setStartDate] = useState(getInitialStartDate());
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
@@ -46,47 +57,23 @@ function HomeView() {
   }, []);
 
   if (!user) return <Redirect to="login" noThrow />;
-  if (events.length === 0) return null;
-  if (frontdesks.length === 0) return null;
+  // if (events.length === 0) return null;
+  // if (frontdesks.length === 0) return null;
 
-  const tableCss = {
-    width: "80%",
-    borderCollapse: "collapse",
-    margin: "0 auto"
-  };
-  const thCss = {
-    background: "#0D5C73",
-    color: "white",
-    fontWeight: "bolder",
-    padding: 6,
-    border: "1px solid #ccc",
-    textAlign: "center"
-  };
-
-  const tdCss = {
-    background: "#538898",
-    color: "white",
-    fontWeight: "bold",
-    padding: 6,
-    border: "1px solid #ccc",
-    textAlign: "center"
-  };
-
-  const backNextCss = {
-    textAlign: "center",
-    marginTop: "1em"
-  };
-
-  function handleClickNext(event) {
-    event.preventDefault();
-    setStart(start + 7);
-    setEnd(end + 7);
+  function handleNextClick() {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + 7);
+    setStartDate(date);
   }
 
-  function handleClickBack(event) {
-    event.preventDefault();
-    setStart(start - 7);
-    setEnd(end - 7);
+  function handleBackClick() {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() - 7);
+    setStartDate(date);
+  }
+
+  function handleTodayClick() {
+    setStartDate(getInitialStartDate());
   }
 
   function handleChangeSchedule(event) {
@@ -113,22 +100,18 @@ function HomeView() {
   }, {});
 
   function calcDay(date) {
-    const nameDays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thurday",
-      "Friday",
-      "Saturday"
-    ];
+    const nameDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     var d = new Date(date);
     return nameDays[d.getDay()];
   }
 
+  function handleShiftClick(event) {
+    console.log(event.currentTarget.dataset);
+  }
+
   return (
     <>
-      <Nabvar hasNotifications={hasNotifications} />
+      <Navbar hasNotifications={hasNotifications} />
       <div
         css={{
           maxWidth: "1000px",
@@ -140,102 +123,97 @@ function HomeView() {
           }
         }}
       >
+        <div css={{ overflow: "auto" }}>
+          <header
+            css={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              marginBottom: 15,
+              marginTop: 85
+            }}
+          >
+            <h1
+              css={{
+                color: "#35469C",
+                fontSize: 36,
+                margin: 0
+              }}
+            >
+              Schedules
+            </h1>
+            <div css={{ display: "flex" }}>
+              <div css={{ display: "flex", marginRight: 10 }}>
+                <WorkshiftDot shiftId={1} />{" "}
+                <span
+                  css={{
+                    color: "#F7C948",
+                    fontWeight: "bold",
+                    fontSize: 14,
+                    marginLeft: 5
+                  }}
+                >
+                  Morning
+                </span>
+              </div>
+              <div css={{ display: "flex", marginRight: 10 }}>
+                <WorkshiftDot shiftId={2} />{" "}
+                <span
+                  css={{
+                    color: "#EF4E4E",
+                    fontWeight: "bold",
+                    fontSize: 14,
+                    marginLeft: 5
+                  }}
+                >
+                  Afternoon
+                </span>
+              </div>
+              <div css={{ display: "flex", marginRight: 10 }}>
+                <WorkshiftDot shiftId={3} />{" "}
+                <span
+                  css={{
+                    color: "#3EBD93",
+                    fontWeight: "bold",
+                    fontSize: 14,
+                    marginLeft: 5
+                  }}
+                >
+                  Night
+                </span>
+              </div>
+              <div css={{ display: "flex" }}>
+                <WorkshiftDot shiftId={4} />{" "}
+                <span
+                  css={{
+                    color: "#7B8794",
+                    fontWeight: "bold",
+                    fontSize: 14,
+                    marginLeft: 5
+                  }}
+                >
+                  Day Off
+                </span>
+              </div>
+            </div>
+          </header>
+          <NewCalendar
+            onPrev={handleBackClick}
+            onNext={handleNextClick}
+            onToday={handleTodayClick}
+            onShiftClick={handleShiftClick}
+            startDate={startDate}
+            workshiftList={workShiftConcat}
+            forecast={forecastsConcat}
+            users={frontdesks}
+          />
+        </div>
         <div
           css={{
-            overflow: "auto"
+            textAlign: "center",
+            marginTop: "1em"
           }}
         >
-          <h2 css={{ display: "flex", justifyContent: "center" }}>SCHEDULES</h2>
-          <table css={tableCss}>
-            <thead>
-              <tr>
-                <th css={thCss}>Frontdesk</th>
-                {Object.entries(workShiftConcat)[0][1]
-                  .slice(start, end)
-                  .map(workSfhift => (
-                    <th css={thCss} key={workSfhift.date}>
-                      {calcDay(workSfhift.date)} {workSfhift.date}
-                    </th>
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(workShiftConcat).map(([userId, workShifts]) => (
-                <tr key={userId}>
-                  <td css={tdCss}>
-                    {userId}-
-                    {
-                      frontdesks.find(
-                        frontdesk => frontdesk.id === parseInt(userId)
-                      ).name
-                    }
-                  </td>
-                  {workShifts.slice(start, end).map((workShift, index) => (
-                    <td css={tdCss} key={index}>
-                      {workShift.shift_id === 4
-                        ? "OFF"
-                        : workShift.shift_id === 1
-                        ? "M"
-                        : workShift.shift_id === 2
-                        ? "T"
-                        : "N"}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div
-          css={{
-            overflow: "auto"
-          }}
-        >
-          <h2 css={{ display: "flex", justifyContent: "center" }}>FORECAST</h2>
-          <table css={tableCss}>
-            <thead>
-              <tr>
-                <th css={thCss}>Type</th>
-                {Object.entries(forecastsConcat)[0][1]
-                  .slice(start, end)
-                  .map((forecast, index) => (
-                    <th css={thCss} key={index}>
-                      {calcDay(forecast.date)} {forecast.date}
-                    </th>
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(forecastsConcat).map(
-                ([typeForecast, dataDays]) => (
-                  <tr key={typeForecast}>
-                    <td css={tdCss}>{typeForecast}</td>
-                    {dataDays.slice(start, end).map((dataDay, index) => (
-                      <td css={tdCss} key={index}>
-                        {dataDay.data}
-                      </td>
-                    ))}
-                  </tr>
-                )
-              )}
-            </tbody>
-          </table>
-        </div>
-        <div css={backNextCss}>
-          <Button
-            onClick={handleClickBack}
-            css={{ width: "75px", marginRight: "10px" }}
-          >
-            Back
-          </Button>
-          <Button
-            onClick={handleClickNext}
-            css={{ width: "75px", marginRight: "10px" }}
-          >
-            Next
-          </Button>
-        </div>
-        <div css={backNextCss}>
           <ScheduleModal
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
