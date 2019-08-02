@@ -96,10 +96,10 @@ function Navbar({ hasNotifications }) {
         </h2>
       </Link>
       <nav css={{ display: "flex", gridArea: "navigation" }}>
+        <NavLink to="/">{user.name}</NavLink>
         <NavLink to="/requests">
           Requests {hasNotifications && <Notification />}
         </NavLink>
-        <NavLink to="/">{user.name}</NavLink>
         {/* <NavLink to="/users">Users</NavLink> */}
       </nav>
       <div css={{ gridArea: "sign-out" }}>
