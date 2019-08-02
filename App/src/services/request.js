@@ -1,4 +1,5 @@
 const API_REQUESTS_URL = "http://localhost:4000/api/schedule/requests";
+const API_ADMIN_REQUEST_URL = "http://localhost:4000/api/admin/requests";
 
 async function createError(response) {
   const { errors } = await response.json();
@@ -56,4 +57,17 @@ async function createRequest(requests) {
   return result;
 }
 
-export { requestsFetch, createRequest, updateRequest, cancelRequest };
+async function requestAdmin() {
+  const response = await fetch(API_ADMIN_REQUEST_URL, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) throw createError(response);
+  const result = await response.json();
+  return result;
+}
+
+export { requestsFetch, createRequest, updateRequest, cancelRequest, requestAdmin };

@@ -20,8 +20,8 @@ async function login(user) {
     }
   });
   if (!response.ok) throw createError(response);
-  const { name, id, email } = await response.json();
-  return { name, email, id };
+  const { name, id, email, rol } = await response.json();
+  return { name, email, id, rol };
 }
 
 async function logout() {
