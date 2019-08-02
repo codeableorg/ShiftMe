@@ -11,19 +11,28 @@ function PreviewWeek({ request, frontdesks, events }) {
     return dateFns.format(dateFns.addDays(init, index + 1), "YYYY/MM/DD");
   }); // day of week, init in monday and end in sunday
 
-  const Names = frontdesks
-    .filter(
-      user =>
-        user.id === request.requester_id || user.id === request.requested_id
-    )
-    .map(user => user.name);
+  const names = frontdesks.filter(
+    user => user.id === request.requester_id || user.id === request.requested_id
+  );
 
-  const Turn = {
+  const shifts = {
     1: "M",
     2: "A",
     3: "N",
     4: "OFF"
   };
+
+  function findShift(date, userId) {
+    const findMonth = events.find(
+      item =>
+        item.month === dateFns.format(date, "MMMM") && item.user_id === userId
+    );
+
+    if (!findMonth) return "";
+
+    const findDay = findMonth.workShifts.find(day => date === day.date);
+    return shifts[findDay.shift_id];
+  }
 
   const styleRow = {
     display: "flex"
@@ -60,9 +69,9 @@ function PreviewWeek({ request, frontdesks, events }) {
           </div>
         ))}
       </div>
-      {Names.map(name => (
-        <div css={styleRow} key={name}>
-          <div css={styleCell}>{name}</div>
+      {names.map(user => (
+        <div css={styleRow} key={user.id}>
+          <div css={styleCell}>{user.name}</div>
           {datesWeek.map(date => (
             <div
               key={date}
@@ -71,7 +80,7 @@ function PreviewWeek({ request, frontdesks, events }) {
                 background: cursor === date ? "green" : "#538898"
               }}
             >
-              {Turn[1]}
+              {findShift(date, user.id)}
             </div>
           ))}
         </div>

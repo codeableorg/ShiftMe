@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 import { useUserUpdater } from "../contexts/user";
-import { logout } from "../services/user";
+import { logout, users } from "../services/user";
 
 function NavLink(props) {
   return (
@@ -98,6 +98,7 @@ function Navbar({ hasNotifications }) {
         <NavLink to="/requests">
           Requests {hasNotifications && <Notification />}
         </NavLink>
+        <NavLink to="/">{user.name}</NavLink>
         {/* <NavLink to="/users">Users</NavLink> */}
       </nav>
       <div css={{ gridArea: "sign-out" }}>

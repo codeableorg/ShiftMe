@@ -1,19 +1,19 @@
-@user_1= User.create(name: 'Diego Cuevas', email: 'diego@gmail.com', password: '123456')
-@user_2= User.create(name: 'Marieth', email: 'marieth@gmail.com', password: '123456')
-@user_3= User.create(name: 'Angie', email: 'angie@gmail.com', password: '123456')
-@user_4= User.create(rol: 'FrontDesk', name: 'Alina',lastName: 'Torres', email: 'alina@shift.com', password: '123456')
-@user_5= User.create(rol: 'FrontDesk', name: 'Lina',lastName: 'Delgado', email: 'lina@shift.com', password: '123456')
-supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', email: 'nina@shift.com', password: '123456')
+@user_1= User.create(rol: 'FrontDesk', name: 'Diego Cuevas', email: 'diego@gmail.com', password: '123456')
+@user_2= User.create(rol: 'FrontDesk', name: 'Marieth', email: 'marieth@gmail.com', password: '123456')
+@user_3= User.create(rol: 'FrontDesk', name: 'Angie', email: 'angie@gmail.com', password: '123456')
+@user_4= User.create(rol: 'FrontDesk', name: 'Alina',lastName: 'Torres', email: 'alina@gmail.com', password: '123456')
+@user_5= User.create(rol: 'FrontDesk', name: 'Lina',lastName: 'Delgado', email: 'lina@gmail.com', password: '123456')
+supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', email: 'nina@gmail.com', password: '123456')
 
 @shift_1= Shift.create(shift_type: "morning")
 @shift_2= Shift.create(shift_type: "afternoon")
 @shift_3= Shift.create(shift_type: "night")
 @shift_4= Shift.create(shift_type: "off")
 
-@request_1 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_1.id, requested_id: @user_2.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_2.id, motive: "I have a medical appointment")
-@request_2 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30", requester_id: @user_3.id, requested_id: @user_4.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
-@request_3 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_4.id, requested_id: @user_5.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_1.id, motive: "I have a medical appointment")
-@request_4 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/30",requester_id: @user_5.id, requested_id: @user_1.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
+@request_1 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/21",requester_id: @user_1.id, requested_id: @user_2.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_2.id, motive: "I have a medical appointment")
+@request_2 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/22", requester_id: @user_2.id, requested_id: @user_1.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
+# @request_3 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/19",requester_id: @user_4.id, requested_id: @user_5.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_1.id, motive: "I have a medical appointment")
+# @request_4 = Request.create(creationDate:"2019/07/25", date_Shift: "2019/07/20",requester_id: @user_5.id, requested_id: @user_1.id, current_Shift_id: @shift_2.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
 
 
 schedule_1 = Schedule.create(
@@ -58,6 +58,44 @@ schedule_1 = Schedule.create(
     month: "July",
     user_id: 2,
     workShifts: [
+             { date: "2019/07/01", shift_id: 1 },
+             { date: "2019/07/02", shift_id: 4 },
+             { date: "2019/07/03", shift_id: 1 },
+             { date: "2019/07/04", shift_id: 1 },
+             { date: "2019/07/05", shift_id: 1 },
+             { date: "2019/07/06", shift_id: 1 },
+             { date: "2019/07/07", shift_id: 1 },
+             { date: "2019/07/08", shift_id: 1 },
+             { date: "2019/07/09", shift_id: 4 },
+             { date: "2019/07/10", shift_id: 1 },
+             { date: "2019/07/11", shift_id: 1 },
+             { date: "2019/07/12", shift_id: 1 },
+             { date: "2019/07/13", shift_id: 1 },
+             { date: "2019/07/14", shift_id: 1 },
+             { date: "2019/07/15", shift_id: 1 },
+             { date: "2019/07/16", shift_id: 4 },
+             { date: "2019/07/17", shift_id: 1 },
+             { date: "2019/07/18", shift_id: 1 },
+             { date: "2019/07/19", shift_id: 1 },
+             { date: "2019/07/20", shift_id: 1 },
+             { date: "2019/07/21", shift_id: 1 },
+             { date: "2019/07/22", shift_id: 1 },
+             { date: "2019/07/23", shift_id: 4 },
+             { date: "2019/07/24", shift_id: 1 },
+             { date: "2019/07/25", shift_id: 1 },
+             { date: "2019/07/26", shift_id: 1 },
+             { date: "2019/07/27", shift_id: 1 },
+             { date: "2019/07/28", shift_id: 1 },
+             { date: "2019/07/29", shift_id: 1 },
+             { date: "2019/07/30", shift_id: 4 },
+             { date: "2019/07/31", shift_id: 1 }
+    ]
+  )
+
+  schedule_3 = Schedule.create(
+    month: "July",
+    user_id: 3,
+    workShifts: [
       { date: "2019/07/01", shift_id: 2 },
       { date: "2019/07/02", shift_id: 2 },
       { date: "2019/07/03", shift_id: 4 },
@@ -92,15 +130,91 @@ schedule_1 = Schedule.create(
     ]
   )
 
-  schedule_3 = Schedule.create(
+  schedule_4 = Schedule.create(
+    month: "July",
+    user_id: 4,
+    workShifts: [
+      { date: "2019/07/01", shift_id: 2 },
+      { date: "2019/07/02", shift_id: 2 },
+      { date: "2019/07/03", shift_id: 2 },
+      { date: "2019/07/04", shift_id: 4 },
+      { date: "2019/07/05", shift_id: 2 },
+      { date: "2019/07/06", shift_id: 2 },
+      { date: "2019/07/07", shift_id: 2 },
+      { date: "2019/07/08", shift_id: 2 },
+      { date: "2019/07/09", shift_id: 2 },
+      { date: "2019/07/10", shift_id: 2 },
+      { date: "2019/07/11", shift_id: 4 },
+      { date: "2019/07/12", shift_id: 2 },
+      { date: "2019/07/13", shift_id: 2 },
+      { date: "2019/07/14", shift_id: 2 },
+      { date: "2019/07/15", shift_id: 2 },
+      { date: "2019/07/16", shift_id: 2 },
+      { date: "2019/07/17", shift_id: 2 },
+      { date: "2019/07/18", shift_id: 4 },
+      { date: "2019/07/19", shift_id: 2 },
+      { date: "2019/07/20", shift_id: 2 },
+      { date: "2019/07/21", shift_id: 2 },
+      { date: "2019/07/22", shift_id: 2 },
+      { date: "2019/07/23", shift_id: 2 },
+      { date: "2019/07/24", shift_id: 2 },
+      { date: "2019/07/25", shift_id: 4 },
+      { date: "2019/07/26", shift_id: 2 },
+      { date: "2019/07/27", shift_id: 2 },
+      { date: "2019/07/28", shift_id: 2 },
+      { date: "2019/07/29", shift_id: 2 },
+      { date: "2019/07/30", shift_id: 2 },
+      { date: "2019/07/31", shift_id: 2 }
+    ]
+  )
+
+  schedule_5 = Schedule.create(
     month: "August",
     user_id: 1,
+    workShifts: [
+      { date: "2019/08/01", shift_id: 2 },
+      { date: "2019/08/02", shift_id: 2 },
+      { date: "2019/08/03", shift_id: 2 },
+      { date: "2019/08/04", shift_id: 2 },
+      { date: "2019/08/05", shift_id: 2 },
+      { date: "2019/08/06", shift_id: 2 },
+      { date: "2019/08/07", shift_id: 4 },
+      { date: "2019/08/08", shift_id: 2 },
+      { date: "2019/08/09", shift_id: 2 },
+      { date: "2019/08/10", shift_id: 2 },
+      { date: "2019/08/11", shift_id: 2 },
+      { date: "2019/08/12", shift_id: 2 },
+      { date: "2019/08/13", shift_id: 2 },
+      { date: "2019/08/14", shift_id: 4 },
+      { date: "2019/08/15", shift_id: 2 },
+      { date: "2019/08/16", shift_id: 2 },
+      { date: "2019/08/17", shift_id: 2 },
+      { date: "2019/08/18", shift_id: 2 },
+      { date: "2019/08/19", shift_id: 2 },
+      { date: "2019/08/20", shift_id: 2 },
+      { date: "2019/08/21", shift_id: 4 },
+      { date: "2019/08/22", shift_id: 2 },
+      { date: "2019/08/23", shift_id: 2 },
+      { date: "2019/08/24", shift_id: 2 },
+      { date: "2019/08/25", shift_id: 2 },
+      { date: "2019/08/26", shift_id: 2 },
+      { date: "2019/08/27", shift_id: 2 },
+      { date: "2019/08/28", shift_id: 4 },
+      { date: "2019/08/29", shift_id: 2 },
+      { date: "2019/08/30", shift_id: 2 },
+      { date: "2019/08/31", shift_id: 2 }
+    ]
+  )
+
+  schedule_6 = Schedule.create(
+    month: "August",
+    user_id: 2,
     workShifts: [
       { date: "2019/08/01", shift_id: 4 },
       { date: "2019/08/02", shift_id: 2 },
       { date: "2019/08/03", shift_id: 2 },
       { date: "2019/08/04", shift_id: 2 },
-      { date: "2019/08/05", shift_id: 4 },
+      { date: "2019/08/05", shift_id: 2 },
       { date: "2019/08/06", shift_id: 2 },
       { date: "2019/08/07", shift_id: 2 },
       { date: "2019/08/08", shift_id: 4 },
@@ -130,9 +244,9 @@ schedule_1 = Schedule.create(
     ]
   )
 
-  schedule_4 = Schedule.create(
+  schedule_7 = Schedule.create(
     month: "August",
-    user_id: 2,
+    user_id: 3,
     workShifts: [
       { date: "2019/08/01", shift_id: 1 },
         { date: "2019/08/02", shift_id: 1 },
@@ -161,6 +275,44 @@ schedule_1 = Schedule.create(
         { date: "2019/08/25", shift_id: 1 },
         { date: "2019/08/26", shift_id: 4 },
         { date: "2019/08/27", shift_id: 1 },
+        { date: "2019/08/28", shift_id: 1 },
+        { date: "2019/08/29", shift_id: 1 },
+        { date: "2019/08/30", shift_id: 1 },
+        { date: "2019/08/31", shift_id: 1 }
+    ]
+  )
+
+  schedule_8 = Schedule.create(
+    month: "August",
+    user_id: 4,
+    workShifts: [
+      { date: "2019/08/01", shift_id: 1 },
+        { date: "2019/08/02", shift_id: 1 },
+        { date: "2019/08/03", shift_id: 1 },
+        { date: "2019/08/04", shift_id: 1 },
+        { date: "2019/08/05", shift_id: 1 },
+        { date: "2019/08/06", shift_id: 4 },
+        { date: "2019/08/07", shift_id: 1 },
+        { date: "2019/08/08", shift_id: 1 },
+        { date: "2019/08/09", shift_id: 1 },
+        { date: "2019/08/10", shift_id: 1 },
+        { date: "2019/08/11", shift_id: 1 },
+        { date: "2019/08/12", shift_id: 1 },
+        { date: "2019/08/13", shift_id: 4 },
+        { date: "2019/08/14", shift_id: 1 },
+        { date: "2019/08/15", shift_id: 1 },
+        { date: "2019/08/16", shift_id: 1 },
+        { date: "2019/08/17", shift_id: 1 },
+        { date: "2019/08/18", shift_id: 1 },
+        { date: "2019/08/19", shift_id: 1 },
+        { date: "2019/08/20", shift_id: 4 },
+        { date: "2019/08/21", shift_id: 1 },
+        { date: "2019/08/22", shift_id: 1 },
+        { date: "2019/08/23", shift_id: 1 },
+        { date: "2019/08/24", shift_id: 1 },
+        { date: "2019/08/25", shift_id: 1 },
+        { date: "2019/08/26", shift_id: 1 },
+        { date: "2019/08/27", shift_id: 4 },
         { date: "2019/08/28", shift_id: 1 },
         { date: "2019/08/29", shift_id: 1 },
         { date: "2019/08/30", shift_id: 1 },

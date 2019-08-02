@@ -27,8 +27,8 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const { name, id } = await login({ email, password });
-      userUpdater({ type: "LOGIN", payload: { name, email, id } });
+      const { name, id, rol } = await login({ email, password });
+      userUpdater({ type: "LOGIN", payload: { name, email, id, rol } });
     } catch (error) {
       setError(error.message);
     }
