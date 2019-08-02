@@ -4,6 +4,8 @@ import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 import { useUserUpdater } from "../contexts/user";
 import { logout, users } from "../services/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 function Nabvar({ hasNotifications }) {
   const updateUser = useUserUpdater();
@@ -52,9 +54,17 @@ function Nabvar({ hasNotifications }) {
             {user.name}
           </Link>
         </li>
+        <li />
+
         <li>
-          <span css={{ background: hasNotifications ? "red" : "green" }}>
-            {hasNotifications ? "Yes" : "No"}
+          <span>
+            <FontAwesomeIcon
+              icon={faBell}
+              css={{
+                color: hasNotifications ? "#58D68D" : "#566573",
+                fontSize: 18
+              }}
+            />
           </span>
           <span>
             <Link css={linkStyle} to="/requests">

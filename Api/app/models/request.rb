@@ -28,9 +28,18 @@ class Request < ApplicationRecord
   end
 
   def create_notification
-    user_notif = requested
-    user_notif = requester if [STATUS[:agree], STATUS[:disagree]].include? status
-    Notification.create!(notify_user: user_notif, request: self)
+    if [STATUS[:pending], STATUS[:cancel]].include? status
+      Notification.create!(notify_user: requested, request: self)
+    elsif STATUS[:agree] == status
+      supervisor = User.find_by(rol: "Supervisor")
+      Notification.create!(notify_user: supervisor, request: self)
+      Notification.create!(notify_user: requester, request: self)
+    elsif STATUS[:disagree] == status
+      Notification.create!(notify_user: requester, request: self)
+    elsif [STATUS[:accepted], STATUS[:rejected]].include? status
+      Notification.create!(notify_user: requested, request: self)
+      Notification.create!(notify_user: requester, request: self)
+    end
   end
  
   def notify_change

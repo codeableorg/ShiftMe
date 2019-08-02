@@ -37,5 +37,3 @@ function Request({request, findName, handleRequestSchedule, Turn}) {
 }
 
 export default Request;
-
-
