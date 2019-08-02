@@ -2,6 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useUserUpdater, useUser } from "../contexts/user";
 =======
 import { useUserUpdater } from "../contexts/user";
@@ -9,6 +10,9 @@ import { useUserUpdater } from "../contexts/user";
 >>>>>>> Add new design for the navbar
 =======
 >>>>>>> Load user data in Navbar from localStorage
+=======
+import { useUserUpdater, useUser } from "../contexts/user";
+>>>>>>> Read user from context
 import { logout } from "../services/user";
 
 function NavLink(props) {
@@ -65,12 +69,16 @@ function Navbar({ hasNotifications }) {
   const updateUser = useUserUpdater();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   const user = useUser();
 =======
 >>>>>>> Add new design for the navbar
 =======
   const user = JSON.parse(localStorage.getItem("user"));
 >>>>>>> Load user data in Navbar from localStorage
+=======
+  const user = useUser();
+>>>>>>> Read user from context
   async function handleLogoutClick() {
     await logout();
     updateUser({ type: "LOGOUT" });
