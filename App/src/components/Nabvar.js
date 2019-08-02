@@ -39,6 +39,7 @@ function Notification() {
         backgroundColor: "#EF4E4E",
         borderRadius: "50%",
 <<<<<<< HEAD
+<<<<<<< HEAD
         width: 10,
         height: 10,
         marginLeft: "5px"
@@ -47,6 +48,11 @@ function Notification() {
         height: "5px",
         marginLeft: "3px"
 >>>>>>> Add new design for the navbar
+=======
+        width: 10,
+        height: 10,
+        marginLeft: "5px"
+>>>>>>> Hide link to /users
       }}
     />
   );
@@ -119,8 +125,12 @@ function Navbar({ hasNotifications }) {
         <NavLink to="/requests">
           Requests {hasNotifications && <Notification />}
         </NavLink>
+<<<<<<< HEAD
         <NavLink to="/users">Users</NavLink>
 >>>>>>> Add new design for the navbar
+=======
+        {/* <NavLink to="/users">Users</NavLink> */}
+>>>>>>> Hide link to /users
       </nav>
       <div css={{ gridArea: "sign-out" }}>
         <button
