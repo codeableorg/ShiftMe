@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import ScheduleModal from "../components/ScheduleModal";
+import { WorkshiftDot } from "./WorkshiftDot";
 
 function Calendar({
   workShiftConcat,
@@ -138,13 +139,7 @@ function Calendar({
                       onClick={handleClick}
                       data-value={workShift.shift_id}
                     >
-                      {workShift.shift_id === 4
-                        ? "OFF"
-                        : workShift.shift_id === 1
-                        ? "M"
-                        : workShift.shift_id === 2
-                        ? "T"
-                        : "N"}
+                      <WorkshiftDot shiftId={workShift.shift_id} />
                     </td>
                   ))}
                 </tr>
