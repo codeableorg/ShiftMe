@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
   scope '/api' do
-  # sessions routes
+    # sessions routes
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
-    get 'schedules/index'
+
+    resources :users, only: %i[show index]
+    resources :notifications
+    scope 'schedule' do
+      resources :workshifts, only: :index
+      resources :requests
+    end
+
+    namespace 'admin' do
+      resources :requests, only: %i[index update]
+    end
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

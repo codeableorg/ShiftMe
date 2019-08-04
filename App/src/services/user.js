@@ -1,5 +1,6 @@
 const API_LOGIN_URL = "http://localhost:4000/api/login";
 const API_LOGOUT_URL = "http://localhost:4000/api/logout";
+const API_USERS_URL = "http://localhost:4000/api/users";
 
 async function createError(response) {
   const { errors } = await response.json();
@@ -19,8 +20,8 @@ async function login(user) {
     }
   });
   if (!response.ok) throw createError(response);
-  const { name, id, email } = await response.json();
-  return { name, email, id };
+  const { name, id, email, rol } = await response.json();
+  return { name, email, id, rol };
 }
 
 async function logout() {
@@ -31,4 +32,17 @@ async function logout() {
   if (!response.ok) throw createError(response);
 }
 
-export { login, logout }; 
+async function users() {
+  const response = await fetch(API_USERS_URL, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (!response.ok) throw createError(response);
+  const result = await response.json();
+
+  return result;
+}
+
+export { login, logout, users };
