@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 import { updateRequest, cancelRequest } from "../services/request";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
@@ -10,7 +9,6 @@ import getInitialWeekDate from "../utils/get-initial-week-date";
 
 function RequestModal({
   requests,
-  isOpen,
   onRequestClose,
   id,
   setRequests,
@@ -68,6 +66,7 @@ function RequestModal({
       });
   }
 
+<<<<<<< HEAD
   const customStyles = {
     content: {
       top: "50%",
@@ -88,14 +87,10 @@ function RequestModal({
     };
   }, {});
 
+=======
+>>>>>>> Add new Request function
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      style={customStyles}
-      contentLabel="Example Modal"
-      ariaHideApp={isOpen}
-    >
+    <>
       <div>
         Motive:
         {requests.map(e =>
@@ -106,6 +101,7 @@ function RequestModal({
           )
         )}
       </div>
+<<<<<<< HEAD
 
       <NewCalendar
         users={frontdesks.filter(
@@ -116,13 +112,16 @@ function RequestModal({
         selectedUsers={[request.requester_id, request.requested_id]}
         selectedDate={request.date_Shift}
       />
+=======
+      <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
+>>>>>>> Add new Request function
 
       {isAdmin ? (
         <RequestFormAdmin onClick={onClick} />
       ) : (
         <RequestForm onClick={onClick} handleCancel={handleCancel} />
       )}
-    </Modal>
+    </>
   );
 }
 

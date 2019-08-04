@@ -1,197 +1,127 @@
 /** @jsx jsx */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { jsx } from "@emotion/core";
+import { Redirect } from "@reach/router";
 import Nabvar from "../components/Nabvar";
+import { requestsFetch, requestAdmin } from "../services/request";
+import RequestModal from "../components/RequestModal";
+import { useUser } from "../contexts/user";
+import Request from "../components/Request";
+import { users } from "../services/user";
 
-const Requests = () => (
-  <div>
-    <Nabvar />
-    <h2>Requests</h2>
-    <div
-      name="request"
-      css={{
-        flexShrink: "0",
-        display: "flex",
-        width: "1152px"
-      }}
-    >
+const Requests = () => {
+  const [requests, setRequests] = useState([]);
+  const [requestsAdmin, setRequestsAdmin] = useState([]);
+  const [frontdesks, setFrontdesks] = useState([]);
+
+  const [id, setId] = useState(0);
+  const user = useUser();
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await requestsFetch();
+      setRequests(response);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await requestAdmin();
+      setRequestsAdmin(response);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await users();
+      setFrontdesks(response);
+    }
+    fetchData();
+  }, []);
+
+  function findName(requester_id) {
+    return frontdesks.find(frontdesk => frontdesk.id === requester_id).name;
+  }
+
+  if (!user) return <Redirect to="login" noThrow />;
+  if (frontdesks.length === 0) return "Cargando...";
+  if (!requests.length === 0) return "Cargando...";
+
+  return (
+    <div>
+      <Nabvar />
       <div
-        name="requestList"
-        css={{
-          display: "block",
-          width: "350px"
-        }}
-      >
-        <ul name="list" css={{ padding: 0, margin: 0 }}>
-          <li
-            name="text"
-            css={{
-              outline: "none",
-              fontSize: "12px",
-              width: "auto",
-              padding: "10x 20px",
-              minWidth: "119px",
-              backgroundColor: "rgb(224, 232, 249)"
-            }}
-          >
-            <div css={{ display: "flex", flexDirection: "row" }}>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>Requester</p>
-                <p>Diego Cuevas</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>From</p>
-                <p>Morning</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>Status</p>
-                <p>Accepted</p>
-              </div>
-            </div>
-            <div css={{ display: "flex", flexDirection: "row" }}>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>Requested</p>
-                <p>Marieth Perez</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>To</p>
-                <p>Morning</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>On</p>
-                <p>7/29/2019</p>
-              </div>
-            </div>
-          </li>
-          <li
-            name="text"
-            css={{
-              outline: "none",
-              fontSize: "12px",
-              width: "auto",
-              padding: "10x 20px",
-              minWidth: "119px",
-              backgroundColor: "rgb(224, 232, 249)"
-            }}
-          >
-            <div css={{ display: "flex", flexDirection: "row" }}>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>Requester</p>
-                <p>Diego Cuevas</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>From</p>
-                <p>Morning</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>Status</p>
-                <p>Accepted</p>
-              </div>
-            </div>
-            <div css={{ display: "flex", flexDirection: "row" }}>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>Requested</p>
-                <p>Marieth Perez</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>To</p>
-                <p>Morning</p>
-              </div>
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100px"
-                }}
-              >
-                <p css={{ fontSize: "10px", color: "#98aeeb" }}>On</p>
-                <p>7/29/2019</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div
-        name="requestDetails"
+        name="request"
         css={{
           flexShrink: "0",
-          userSelect: "none",
-          pointerEvents: "none",
-          width: "100%",
-          backgroundColor: "#00FFFF"
+          display: "flex",
+          width: "100%"
         }}
       >
-        <p>jhgjh</p>
+        <div
+          name="requestList"
+          css={{
+            display: "block",
+            width: "350px"
+          }}
+        >
+          <h2
+            css={{
+              fontSize: "25px",
+              color: "#35469c",
+              paddingLeft: "16px",
+              fontWeight: 400
+            }}
+          >
+            Requests
+          </h2>
+          <ul name="list" css={{ padding: 0, margin: 0 }}>
+            {requests
+              .sort((a, b) => a.id - b.id)
+              .map(request => (
+                <Request
+                  key={request.id}
+                  findName={findName}
+                  request={request}
+                  active={request.id === id}
+                  onChange={() => setId(request.id)}
+                />
+              ))}
+            {/* {requestsAdmin.map(request => (
+              <Request
+                findName={findName}
+                request={request}
+                active={request.id === id}
+                onChange={() => setId(request.id)}
+              />
+            ))} */}
+          </ul>
+        </div>
+        <div
+          name="requestDetails"
+          css={{
+            flexShrink: "0",
+            flex: "1",
+            maxWidth: "100%",
+            backgroundColor: "#e0e8f9",
+            padding: "16px"
+          }}
+        >
+          {id !== 0 && (
+            <RequestModal
+              id={id}
+              setRequests={setRequests}
+              requests={requests}
+              isAdmin={user.rol === "Supervisor"}
+            />
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Requests;
