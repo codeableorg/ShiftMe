@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import Calendar from "./Calendar";
 import { useUser } from "../contexts/user";
 import { createRequest } from "../services/request";
+import Alert from "../components/Alert";
 
 const customStyles = {
   content: {
@@ -27,7 +28,7 @@ function ScheduleModal({
   end
 }) {
   const user = useUser();
-
+  const [alert, setAlert] = useState("");
   const [shiftsClicked, setShiftsClicked] = useState([]);
   const [newMotive, setMotive] = useState("");
 
@@ -99,8 +100,12 @@ function ScheduleModal({
 
   function handleCreateRequest(event) {
     event.preventDefault();
-    if (!newMotive || shiftsClicked.length < 2) {
-      alert("Must add a motive");
+    if (!newMotive) {
+      setAlert("Must add a motive");
+      return;
+    }
+    if (shiftsClicked.length < 2) {
+      setAlert("Must select a workshift");
       return;
     }
     const request = {
@@ -123,67 +128,70 @@ function ScheduleModal({
   }
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      style={customStyles}
-      contentLabel="Example Modal"
-      ariaHideApp={isOpen}
-    >
-      <div css={container}>
-        <div css={head}>
-          <h2>Schudule Change</h2>
-          <span
-            onClick={onClose}
-            css={cancel}
-            aria-label="Close schedule modal"
-          >
-            &times;
-          </span>
+    <>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        style={customStyles}
+        contentLabel="Example Modal"
+        ariaHideApp={isOpen}
+      >
+        <div css={container}>
+          <div css={head}>
+            <h2>Schudule Change</h2>
+            <span
+              onClick={onClose}
+              css={cancel}
+              aria-label="Close schedule modal"
+            >
+              &times;
+            </span>
+          </div>
+          <Calendar
+            workShiftConcat={workShiftConcat}
+            frontdesks={frontdesks}
+            calcDay={calcDay}
+            start={start}
+            end={end}
+            shiftsClicked={shiftsClicked}
+            saveShiftsClicked={setShiftsClicked}
+          />
+          <div>
+            <form css={formCss}>
+              <ul css={listCss}>
+                {shiftsClicked.map(shift => (
+                  <li>
+                    {nameFrontDesk(shift.id) +
+                      " of shift " +
+                      shift.shift_id +
+                      " of date " +
+                      shift.date}
+                  </li>
+                ))}
+              </ul>
+              <div css={{ display: "flex", flexDirection: "column" }}>
+                <span css={{ fontWeight: "bold" }}> Motive: </span>
+                <textarea
+                  css={textareaCss}
+                  type="text"
+                  value={newMotive}
+                  onChange={handleChangeMotive}
+                />
+              </div>
+            </form>
+          </div>
+          <div css={footer}>
+            <button type="button" onClick={onRequestClear}>
+              Clear
+            </button>
+            <button type="button" onClick={handleCreateRequest}>
+              Send
+            </button>
+          </div>
         </div>
-        <Calendar
-          workShiftConcat={workShiftConcat}
-          frontdesks={frontdesks}
-          calcDay={calcDay}
-          start={start}
-          end={end}
-          shiftsClicked={shiftsClicked}
-          saveShiftsClicked={setShiftsClicked}
-        />
-        <div>
-          <form css={formCss}>
-            <ul css={listCss}>
-              {shiftsClicked.map(shift => (
-                <li>
-                  {nameFrontDesk(shift.id) +
-                    " of shift " +
-                    shift.shift_id +
-                    " of date " +
-                    shift.date}
-                </li>
-              ))}
-            </ul>
-            <div css={{ display: "flex", flexDirection: "column" }}>
-              <span css={{ fontWeight: "bold" }}> Motive: </span>
-              <textarea
-                css={textareaCss}
-                type="text"
-                value={newMotive}
-                onChange={handleChangeMotive}
-              />
-            </div>
-          </form>
-        </div>
-        <div css={footer}>
-          <button type="button" onClick={onRequestClear}>
-            Clear
-          </button>
-          <button type="button" onClick={handleCreateRequest}>
-            Send
-          </button>
-        </div>
-      </div>
-    </Modal>
+      </Modal>
+      {alert !== "" && <Alert message={alert} onClose={() => setAlert("")} />}
+    </>
   );
 }
 
