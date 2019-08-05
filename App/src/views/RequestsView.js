@@ -105,7 +105,7 @@ function RequestsView() {
           onRequestClose={() => setModalOpen(false)}
           id={id}
           setRequests={setRequests}
-          requests={requests}
+          requests={[...requests, ...requestsAdmin]}
           isAdmin={user.rol === "Supervisor"}
         />
       )}
