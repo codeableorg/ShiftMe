@@ -224,6 +224,9 @@ function NewCalendar({
                 const user = users.find(
                   user => user.id === parseInt(userId, 10)
                 );
+                if (!user) return null;
+
+                const isSelectedUser = selectedUsers.includes(user.id);
                 const workshifts = workShiftsPerUser.slice(
                   startIndex,
                   startIndex + 7
