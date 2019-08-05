@@ -99,7 +99,7 @@ function RequestsView() {
           />
         ))}
       </ul>
-      {requests && (
+      {requests && !!modalIsOpen && (
         <RequestModal
           isOpen={!!modalIsOpen}
           onRequestClose={() => setModalOpen(false)}
