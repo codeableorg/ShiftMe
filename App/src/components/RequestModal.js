@@ -20,7 +20,7 @@ function RequestModal({
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const [request, setRequest] = useState({});
-
+  console.log(request);
   React.useEffect(() => {
     const reqFind = requests.find(req => req.id === id);
     setRequest(reqFind);
@@ -103,9 +103,14 @@ function RequestModal({
         )}
       </div>
       <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
-      
+
       {isAdmin ? (
-        <RequestFormAdmin onClick={onClick} workshiftList={workshiftList} users={users} forecast={forecast}  />
+        <RequestFormAdmin
+          onClick={onClick}
+          workshiftList={workshiftList}
+          users={users}
+          forecast={forecast}
+        />
       ) : (
         <RequestForm onClick={onClick} handleCancel={handleCancel} />
       )}

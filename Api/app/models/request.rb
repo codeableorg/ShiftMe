@@ -17,7 +17,7 @@ class Request < ApplicationRecord
 
   after_save :create_notification
   after_update :notify_change
-  scope :manager, -> { where(status: STATUS[:agree]) }
+  scope :manager, -> { where(status: [STATUS[:agree], STATUS[:accepted], STATUS[:rejected] ]) }
 
   validates :status, inclusion: { in: STATUS.values, message: "%{value} is not a valid status" }
   validate :validate_requester
