@@ -86,20 +86,17 @@ function formatDateTitle(startDate, endDate) {
   return `${format(startDate, "MMM YYYY")} - ${format(endDate, "MMM YYYY")}`;
 }
 
-/**
- * This component receive the props listed below
- */
 function NewCalendar({
-  onPrev,
-  onNext,
-  onToday,
-  onShiftClick,
-  startDate = new Date(),
-  workshiftList,
-  forecast,
-  users,
-  selectedUsers = [],
-  selectedDate = null
+  onPrev, // function to know when the user wants to go to the next week, button not rendered if not passed
+  onNext, // function to know when the user wants to go to the next week, button not rendered if not passed
+  onToday, // function to know when the user clicks on the button to go to the current date, button not rendered if not passed
+  onShiftClick, // function to know when the user clicks on a shift, shifts not clickables if not passed
+  startDate = new Date(), // the start date of the week, by default current date
+  workshiftList, // the list of workshifts per user
+  forecast, // the forecast data
+  users, // the list of users to show
+  selectedUsers = [], // the list of users to highlight
+  selectedDate = null // the date to highlight those users
 }) {
   const dates = Array.from({ length: 7 }, (_, index) => {
     const date = new Date(startDate);
