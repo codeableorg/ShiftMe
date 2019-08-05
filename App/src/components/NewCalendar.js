@@ -4,6 +4,7 @@ import { jsx } from "@emotion/core";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { WorkshiftDot } from "./WorkshiftDot";
 import format from "date-fns/format";
+import isEqual from "date-fns/is_equal";
 
 function TH({ styles, ...props }) {
   return (
@@ -97,7 +98,9 @@ function NewCalendar({
   startDate = new Date(),
   workshiftList,
   forecast,
-  users
+  users,
+  selectedUsers = [],
+  selectedDate = null
 }) {
   const dates = Array.from({ length: 7 }, (_, index) => {
     const date = new Date(startDate);
@@ -221,6 +224,7 @@ function NewCalendar({
                   workShift =>
                     workShift.date === format(startDate, "YYYY/MM/DD")
                 );
+
                 const user = users.find(
                   user => user.id === parseInt(userId, 10)
                 );
@@ -237,7 +241,17 @@ function NewCalendar({
                       {user && user.name}
                     </TD>
                     {workshifts.map((workShift, index) => (
-                      <TD key={workShift.date}>
+                      <TD
+                        key={workShift.date}
+                        styles={{
+                          backgroundColor:
+                            isSelectedUser &&
+                            format(new Date(workShift.date), "YYYY-MM-DD") ===
+                              format(new Date(selectedDate), "YYYY-MM-DD")
+                              ? "#35469C"
+                              : "white"
+                        }}
+                      >
                         {onShiftClick ? (
                           <button
                             css={{
