@@ -13,18 +13,12 @@ import { Button } from "../components/Ui";
 import { WorkshiftDot } from "../components/WorkshiftDot";
 import NewCalendar from "../components/NewCalendar";
 
-function getInitialStartDate() {
-  const now = new Date();
-  const day = now.getDay();
-  if (day === 0) return now;
-  now.setDate(now.getDate() - day);
-  return now;
-}
+import getInitialWeekDate from "../utils/get-initial-week-date";
 
 function HomeView() {
   const [modalIsOpen, setModalOpen] = useState(false);
   const user = useUser();
-  const [startDate, setStartDate] = useState(getInitialStartDate());
+  const [startDate, setStartDate] = useState(getInitialWeekDate());
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(7);
   const [events, setEvents] = useState([]);
@@ -73,7 +67,7 @@ function HomeView() {
   }
 
   function handleTodayClick() {
-    setStartDate(getInitialStartDate());
+    setStartDate(getInitialWeekDate());
   }
 
   function handleChangeSchedule(event) {
