@@ -6,13 +6,7 @@ import { users } from "../services/user";
 import RequestForm from "./RequestForm";
 import RequestFormAdmin from "./RequestFormAdmin";
 import NewCalendar from "./NewCalendar";
-
-function getInitialStartDate(now) {
-  const day = now.getDay();
-  if (day === 0) return now;
-  now.setDate(now.getDate() - day);
-  return now;
-}
+import getInitialWeekDate from "../utils/get-initial-week-date";
 
 function RequestModal({
   requests,
@@ -25,7 +19,7 @@ function RequestModal({
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const request = requests.find(req => req.id === id);
-  const startDate = getInitialStartDate(new Date(request.date_Shift));
+  const startDate = getInitialWeekDate(new Date(request.date_Shift));
 
   useEffect(() => {
     async function fetchData() {
