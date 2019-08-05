@@ -130,15 +130,8 @@ function Login() {
         }}
       >
         <img
-<<<<<<< HEAD
-<<<<<<< HEAD
           alt="Woman scheduling in a big calendar"
-=======
           role="presentation"
->>>>>>> Add new design for the login view
-=======
-          alt="Woman scheduling in a big calendar"
->>>>>>> Use alt value for image instead of role="presentation"
           src={image}
           css={{ maxWidth: "100%", height: "100vh" }}
         />
