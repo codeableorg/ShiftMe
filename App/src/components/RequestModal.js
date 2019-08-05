@@ -13,7 +13,9 @@ function RequestModal({
   onRequestClose,
   id,
   setRequests,
-  isAdmin = false
+  isAdmin = false,
+  workshiftList,
+  forecast
 }) {
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
@@ -103,7 +105,7 @@ function RequestModal({
       <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
       
       {isAdmin ? (
-        <RequestFormAdmin onClick={onClick} />
+        <RequestFormAdmin onClick={onClick} workshiftList={workshiftList} users={users} forecast={forecast}  />
       ) : (
         <RequestForm onClick={onClick} handleCancel={handleCancel} />
       )}

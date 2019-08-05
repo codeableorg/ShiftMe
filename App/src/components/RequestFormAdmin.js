@@ -1,10 +1,15 @@
 import React from "react";
-import PreviewWeek from "./PreviewWeek";
+import NewCalendar from "./NewCalendar";
 
-function RequestFormAdmin({ onClick, request, frontdesks, events }) {
+function RequestFormAdmin({ onClick, workshiftList, users, forecast, startDate }) {
   return (
     <>
-      <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
+      <NewCalendar
+        workshiftList={workshiftList}
+        users={users}
+        forecast={forecast}
+        startDate={startDate}
+      />
       <form>
         <button data-value="Accepted" onClick={onClick}>
           Accepted
