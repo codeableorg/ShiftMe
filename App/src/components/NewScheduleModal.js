@@ -131,8 +131,6 @@ function NewScheduleModal({
   }
 
   function handleShiftClick(event) {
-    console.log(user.id);
-    console.log(shiftsClicked);
     event.preventDefault();
     if (shiftsClicked.length < 2) {
       if (shiftsClicked.length === 0) {

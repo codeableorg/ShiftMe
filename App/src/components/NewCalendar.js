@@ -105,8 +105,6 @@ function NewCalendar({
     return date;
   });
 
-  console.log(shiftsClicked);
-
   const buttonCss = {
     background: "none",
     border: "none",

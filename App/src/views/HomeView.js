@@ -221,15 +221,9 @@ function HomeView() {
           <NewScheduleModal
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
-            // workShiftConcat={workShiftConcat}
-            // frontdesks={frontdesks}
-            // calcDay={calcDay}
-            // start={start}
-            // end={end}
             onPrev={handleBackClick}
             onNext={handleNextClick}
             onToday={handleTodayClick}
-            // onShiftClick={handleShiftClick}
             startDate={startDate}
             workshiftList={workShiftConcat}
             forecast={forecastsConcat}
