@@ -3,9 +3,16 @@ import Modal from "react-modal";
 import { updateRequest, cancelRequest } from "../services/request";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
-import PreviewWeek from "./PreviewWeek";
-import RequestForm from "../components/RequestForm";
-import RequestFormAdmin from "../components/RequestFormAdmin";
+import RequestForm from "./RequestForm";
+import RequestFormAdmin from "./RequestFormAdmin";
+import NewCalendar from "./NewCalendar";
+
+function getInitialStartDate(now) {
+  const day = now.getDay();
+  if (day === 0) return now;
+  now.setDate(now.getDate() - day);
+  return now;
+}
 
 function RequestModal({
   requests,
@@ -17,12 +24,8 @@ function RequestModal({
 }) {
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
-  const [request, setRequest] = useState({});
-
-  React.useEffect(() => {
-    const reqFind = requests.find(req => req.id === id);
-    setRequest(reqFind);
-  }, [requests, id]);
+  const request = requests.find(req => req.id === id);
+  const startDate = getInitialStartDate(new Date(request.date_Shift));
 
   useEffect(() => {
     async function fetchData() {
@@ -40,7 +43,7 @@ function RequestModal({
     fetchData();
   }, []);
 
-  if (events.length === 0) return null;
+  // if (events.length === 0) return null;
   if (frontdesks.length === 0) return null;
 
   function onClick(event) {
@@ -82,6 +85,15 @@ function RequestModal({
     }
   };
 
+  const workShiftConcat = events.reduce((groups, event) => {
+    return {
+      ...groups,
+      [event.user_id]: groups[event.user_id]
+        ? groups[event.user_id].concat(event.workShifts)
+        : event.workShifts
+    };
+  }, {});
+
   return (
     <Modal
       isOpen={isOpen}
@@ -100,8 +112,17 @@ function RequestModal({
           )
         )}
       </div>
-      <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
-      
+
+      <NewCalendar
+        users={frontdesks.filter(
+          ({ id }) => id === request.requester_id || id === request.requested_id
+        )}
+        workshiftList={workShiftConcat}
+        startDate={startDate}
+        selectedUsers={[request.requester_id, request.requested_id]}
+        selectedDate={request.date_Shift}
+      />
+
       {isAdmin ? (
         <RequestFormAdmin onClick={onClick} />
       ) : (
