@@ -4,7 +4,6 @@ import { jsx } from "@emotion/core";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { WorkshiftDot } from "./WorkshiftDot";
 import format from "date-fns/format";
-import isEqual from "date-fns/is_equal";
 
 function TH({ styles, ...props }) {
   return (
