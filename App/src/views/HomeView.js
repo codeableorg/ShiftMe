@@ -5,6 +5,7 @@ import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import Navbar from "../components/Nabvar";
 import ScheduleModal from "../components/ScheduleModal";
+import NewScheduleModal from "../components/NewScheduleModal";
 import schedules from "../services/schedule";
 import { notifications } from "../services/notification";
 import { users } from "../services/user";
@@ -51,8 +52,8 @@ function HomeView() {
   }, []);
 
   if (!user) return <Redirect to="login" noThrow />;
-  // if (events.length === 0) return null;
-  // if (frontdesks.length === 0) return null;
+  if (events.length === 0) return null;
+  if (frontdesks.length === 0) return null;
 
   function handleNextClick() {
     const date = new Date(startDate);
@@ -195,7 +196,7 @@ function HomeView() {
             onPrev={handleBackClick}
             onNext={handleNextClick}
             onToday={handleTodayClick}
-            onShiftClick={handleShiftClick}
+            // onShiftClick={handleShiftClick}
             startDate={startDate}
             workshiftList={workShiftConcat}
             forecast={forecastsConcat}
@@ -208,7 +209,7 @@ function HomeView() {
             marginTop: "1em"
           }}
         >
-          <ScheduleModal
+          {/* <ScheduleModal
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
             workShiftConcat={workShiftConcat}
@@ -216,8 +217,26 @@ function HomeView() {
             calcDay={calcDay}
             start={start}
             end={end}
+          /> */}
+          <NewScheduleModal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalOpen(false)}
+            // workShiftConcat={workShiftConcat}
+            // frontdesks={frontdesks}
+            // calcDay={calcDay}
+            // start={start}
+            // end={end}
+            onPrev={handleBackClick}
+            onNext={handleNextClick}
+            onToday={handleTodayClick}
+            // onShiftClick={handleShiftClick}
+            startDate={startDate}
+            workshiftList={workShiftConcat}
+            forecast={forecastsConcat}
+            users={frontdesks}
           />
-          <Button onClick={handleChangeSchedule} css={{ width: "165px" }}>
+
+          <Button onClick={handleChangeSchedule} css={{ width: "180px" }}>
             Change Schedule
           </Button>
         </div>

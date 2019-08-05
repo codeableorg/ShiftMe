@@ -96,13 +96,24 @@ function NewCalendar({
   forecast, // the forecast data
   users, // the list of users to show
   selectedUsers = [], // the list of users to highlight
-  selectedDate = null // the date to highlight those users
+  selectedDate = null, // the date to highlight those users
+  shiftsClicked
 }) {
   const dates = Array.from({ length: 7 }, (_, index) => {
     const date = new Date(startDate);
     date.setDate(startDate.getDate() + index);
     return date;
   });
+
+  console.log(shiftsClicked);
+
+  const buttonCss = {
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center"
+  };
 
   return (
     <table
@@ -251,9 +262,22 @@ function NewCalendar({
                         {onShiftClick ? (
                           <button
                             css={{
-                              background: "none",
-                              border: "none",
-                              cursor: "pointer"
+                              ...buttonCss,
+                              background:
+                                shiftsClicked.length > 1
+                                  ? shiftsClicked[0].date.replace(/-/g, "/") ==
+                                      workShift.date &&
+                                    (shiftsClicked[0].id === userId ||
+                                      shiftsClicked[1].id === userId)
+                                    ? "#BED0F7"
+                                    : "none"
+                                  : shiftsClicked.length > 0
+                                  ? shiftsClicked[0].date.replace(/-/g, "/") ==
+                                      workShift.date &&
+                                    shiftsClicked[0].id === userId
+                                    ? "#BED0F7"
+                                    : "none"
+                                  : "none"
                             }}
                             onClick={onShiftClick}
                             title="Select this shift"
