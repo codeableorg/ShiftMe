@@ -104,16 +104,6 @@ function NewCalendar({
     return date;
   });
 
-  const buttonCss = {
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%"
-  };
-
   return (
     <table
       css={{
@@ -261,7 +251,13 @@ function NewCalendar({
                         {onShiftClick ? (
                           <button
                             css={{
-                              ...buttonCss
+                              background: "none",
+                              border: "none",
+                              cursor: "pointer",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              width: "100%"
                             }}
                             onClick={onShiftClick}
                             title="Select this shift"
