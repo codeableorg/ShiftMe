@@ -80,7 +80,7 @@ function Request({
             width: "100px"
           }}
         >
-          <p css={{ fontSize: "10px", color: "#98aeeb" }}>To</p>
+          <p css={{ fontSize: 12, color: "#98aeeb" }}>Requester</p>
           <p>{Turn[request.requested_Shift_id]}</p>
         </div>
         <div
