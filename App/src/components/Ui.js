@@ -15,7 +15,6 @@ function Button({ styles, ...props }) {
         cursor: "pointer",
         fontSize: "1em",
         height: 50,
-        // padding: "14px",
         transition: "all 200ms ease",
         textAlign: "center",
         width: "100%",

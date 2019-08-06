@@ -9,15 +9,14 @@ import getInitialWeekDate from "../utils/get-initial-week-date";
 
 function RequestModal({
   requests,
-  onRequestClose,
   id,
   setRequests,
+  setRequestsAdmin,
   isAdmin = false
 }) {
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const request = requests.find(req => req.id === id);
-
   const startDate = getInitialWeekDate(new Date(request.date_Shift));
 
   useEffect(() => {
@@ -36,16 +35,20 @@ function RequestModal({
     fetchData();
   }, []);
 
-  // if (events.length === 0) return null;
   if (frontdesks.length === 0) return null;
 
   function onClick(event) {
     event.preventDefault();
     const status = event.target.dataset.value;
     updateRequest(id, status)
-      .then(onRequestClose)
       .then(() => {
         setRequests(requests =>
+          requests.map(request =>
+            request.id === id ? { ...request, status } : request
+          )
+        );
+      }).then(() => {
+        setRequestsAdmin(requests =>
           requests.map(request =>
             request.id === id ? { ...request, status } : request
           )
@@ -56,9 +59,7 @@ function RequestModal({
   function handleCancel(event) {
     event.preventDefault();
     cancelRequest(id)
-      .then(onRequestClose)
       .then(() => {
-        onRequestClose();
         setRequests(requests =>
           requests.map(request =>
             request.id === id ? { ...request, status: "Cancel" } : request

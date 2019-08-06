@@ -1,19 +1,19 @@
+/* eslint-disable no-unused-expressions */
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
 import React from "react";
-import PreviewWeek from "./PreviewWeek";
+import { Button } from "./Ui";
 
 function RequestFormAdmin({ onClick, request, frontdesks, events }) {
   return (
-    <>
-      <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
       <form>
-        <button data-value="Accepted" onClick={onClick}>
+        <Button css={{ width: "80px", height: "40px", margin: "3px" }}  data-value="Accepted" onClick={onClick}>
           Accepted
-        </button>
-        <button data-value="Rejected" onClick={onClick}>
+        </Button>
+        <Button css={{ width: "80px", height: "40px", margin: "3px" }}  data-value="Rejected" onClick={onClick}>
           Rejected
-        </button>
+        </Button>
       </form>
-    </>
   );
 }
 export default RequestFormAdmin;
