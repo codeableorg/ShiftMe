@@ -196,7 +196,6 @@ function HomeView() {
             onPrev={handleBackClick}
             onNext={handleNextClick}
             onToday={handleTodayClick}
-            // onShiftClick={handleShiftClick}
             startDate={startDate}
             workshiftList={workShiftConcat}
             forecast={forecastsConcat}
