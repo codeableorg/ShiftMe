@@ -152,7 +152,7 @@ function NewScheduleModal({
           ]);
           setSelectedUsers([
             ...selectedUsers,
-            event.currentTarget.dataset.userid
+            parseInt(event.currentTarget.dataset.userid, 10)
           ]);
           setSelectedDate(event.currentTarget.dataset.date);
         } else {
