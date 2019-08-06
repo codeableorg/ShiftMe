@@ -109,7 +109,8 @@ function NewCalendar({
     border: "none",
     cursor: "pointer",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%"
   };
 
   return (
