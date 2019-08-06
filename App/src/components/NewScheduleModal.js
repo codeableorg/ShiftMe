@@ -35,6 +35,8 @@ function NewScheduleModal({
 
   const [shiftsClicked, setShiftsClicked] = useState([]);
   const [newMotive, setMotive] = useState("");
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedDate, setSelectedDate] = useState();
 
   const cancel = {
     fontSize: "2em",
@@ -67,8 +69,6 @@ function NewScheduleModal({
     cols: 50,
     color: "#35469C",
     border: "1px solid #35469C"
-    // width: "70%",
-    // marginLeft: "5px"
   };
 
   const listCss = {
@@ -88,6 +88,8 @@ function NewScheduleModal({
 
   function clear() {
     setShiftsClicked([]);
+    setSelectedUsers([]);
+    setSelectedDate();
     setMotive("");
   }
 
@@ -108,7 +110,11 @@ function NewScheduleModal({
   function handleCreateRequest(event) {
     event.preventDefault();
     if (!newMotive || shiftsClicked.length < 2) {
-      alert("Must add a motive");
+      if (shiftsClicked.length < 2) {
+        alert("Must select min 2 shifts");
+      } else {
+        alert("Must add a motive");
+      }
       return;
     }
     const request = {
@@ -121,13 +127,14 @@ function NewScheduleModal({
       motive: newMotive
     };
 
-    try {
-      createRequest(request)
-        .then(() => clear())
-        .then(() => onRequestClose());
-    } catch (error) {
-      console.log(error.message);
-    }
+    createRequest(request)
+      .then(() => {
+        clear();
+        onRequestClose();
+      })
+      .catch(error => {
+        alert(`Error happened at the time of creation:  ${error.message}`);
+      });
   }
 
   function handleShiftClick(event) {
@@ -143,6 +150,11 @@ function NewScheduleModal({
               shift_id: event.currentTarget.dataset.shiftid
             }
           ]);
+          setSelectedUsers([
+            ...selectedUsers,
+            event.currentTarget.dataset.userid
+          ]);
+          setSelectedDate(event.currentTarget.dataset.date);
         } else {
           alert("First select your shift");
         }
@@ -158,11 +170,18 @@ function NewScheduleModal({
             shift_id: event.currentTarget.dataset.shiftid
           }
         ]);
+        setSelectedUsers([
+          ...selectedUsers,
+          event.currentTarget.dataset.userid
+        ]);
+        setSelectedDate(event.currentTarget.dataset.date);
       } else if (
         shiftsClicked[0].date === event.currentTarget.dataset.date &&
         shiftsClicked[0].id === event.currentTarget.dataset.userid
       ) {
         setShiftsClicked([]);
+        setSelectedUsers([]);
+        setSelectedDate();
       }
     }
   }
@@ -202,7 +221,8 @@ function NewScheduleModal({
           startDate={startDate}
           workshiftList={workshiftList}
           users={users}
-          shiftsClicked={shiftsClicked}
+          selectedUsers={selectedUsers}
+          selectedDate={selectedDate}
         />
         <div>
           <form css={formCss}>

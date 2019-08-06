@@ -96,8 +96,8 @@ function NewCalendar({
   forecast, // the forecast data
   users, // the list of users to show
   selectedUsers = [], // the list of users to highlight
-  selectedDate = null, // the date to highlight those users
-  shiftsClicked
+  selectedDate = null // the date to highlight those users
+  // shiftsClicked
 }) {
   const dates = Array.from({ length: 7 }, (_, index) => {
     const date = new Date(startDate);
@@ -262,17 +262,17 @@ function NewCalendar({
                             css={{
                               ...buttonCss,
                               background:
-                                shiftsClicked.length > 1
-                                  ? shiftsClicked[0].date.replace(/-/g, "/") ==
+                                selectedUsers.length > 1
+                                  ? selectedDate.replace(/-/g, "/") ==
                                       workShift.date &&
-                                    (shiftsClicked[0].id === userId ||
-                                      shiftsClicked[1].id === userId)
+                                    (selectedUsers[0] === userId ||
+                                      selectedUsers[1] === userId)
                                     ? "#BED0F7"
                                     : "none"
-                                  : shiftsClicked.length > 0
-                                  ? shiftsClicked[0].date.replace(/-/g, "/") ==
+                                  : selectedUsers.length > 0
+                                  ? selectedDate.replace(/-/g, "/") ==
                                       workShift.date &&
-                                    shiftsClicked[0].id === userId
+                                    selectedUsers[0] === userId
                                     ? "#BED0F7"
                                     : "none"
                                   : "none"
