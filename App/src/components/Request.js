@@ -6,7 +6,7 @@ const Turn = {
   1: "Morning",
   2: "Afternoon",
   3: "Night",
-  4: "OFF"
+  4: "Day Off"
 };
 
 function Request({
