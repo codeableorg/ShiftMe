@@ -190,7 +190,7 @@ function ScheduleModal({
           </div>
         </div>
       </Modal>
-      {alert !== "" && <Alert message={alert} onClose={() => setAlert("")} />}
+      {alert && <Alert message={alert} onClose={() => setAlert("")} />}
     </>
   );
 }

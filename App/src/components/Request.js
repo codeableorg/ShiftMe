@@ -11,13 +11,13 @@ const Turn = {
 
 function Request({ request, findName, onChange, active }) {
   return (
-    <li
+    <article
       key={request.id}
       onClick={onChange}
       name="text"
       css={{
         outline: "none",
-        fontSize: "12px",
+        fontSize: "14px",
         width: "auto",
         padding: "10px 20px",
         minWidth: "119px",
@@ -33,7 +33,7 @@ function Request({ request, findName, onChange, active }) {
             width: "100px"
           }}
         >
-          <p css={{ fontSize: "10px", color: "#98aeeb" }}>Requester</p>
+          <p css={{ fontSize: "12px", color: "#98aeeb" }}>Requester</p>
           <p>{findName(request.requester_id)}</p>
         </div>
         <div
@@ -43,7 +43,7 @@ function Request({ request, findName, onChange, active }) {
             width: "100px"
           }}
         >
-          <p css={{ fontSize: "10px", color: "#98aeeb" }}>From</p>
+          <p css={{ fontSize: "12px", color: "#98aeeb" }}>From</p>
           <p>{Turn[request.current_Shift_id]}</p>
         </div>
         <div
@@ -85,11 +85,11 @@ function Request({ request, findName, onChange, active }) {
             width: "100px"
           }}
         >
-          <p css={{ fontSize: "10px", color: "#98aeeb" }}>On</p>
+          <p css={{ fontSize: "12px", color: "#98aeeb" }}>On</p>
           <p>7/29/2019</p>
         </div>
       </div>
-    </li>
+    </article>
   );
 }
 

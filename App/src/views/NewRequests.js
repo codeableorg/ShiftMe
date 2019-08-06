@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { jsx } from "@emotion/core";
 import { Redirect } from "@reach/router";
 import Nabvar from "../components/Nabvar";
@@ -47,8 +47,20 @@ const Requests = () => {
   }
 
   if (!user) return <Redirect to="login" noThrow />;
-  if (frontdesks.length === 0) return "Cargando...";
-  if (!requests.length === 0) return "Cargando...";
+  if (frontdesks.length === 0)
+    return (
+      <>
+        <Nabvar />
+        <h3
+          css={{
+            fontSize: "1em",
+            color: "#35469C"
+          }}
+        >
+          Loading...
+        </h3>
+      </>
+    );
 
   return (
     <div>
@@ -80,6 +92,7 @@ const Requests = () => {
           </h2>
           <ul name="list" css={{ padding: 0, margin: 0 }}>
             {requests
+              .concat(requestsAdmin)
               .sort((a, b) => a.id - b.id)
               .map(request => (
                 <Request
