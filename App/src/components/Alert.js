@@ -10,11 +10,11 @@ function Alert({ message, onClose }) {
         display: "flex",
         position: "fixed",
         top: "0",
-        backgroundColor: "rgba(19, 19, 19, 0.45)",
+        // backgroundColor: "rgba(19, 19, 19, 0.45)",
         zIndex: "10000",
-        width: "100%",
+        width: "90%",
         justifyContent: "center",
-        height: "100%",
+        height: "90%",
         alignItems: "center"
       }}
     >
@@ -26,6 +26,7 @@ function Alert({ message, onClose }) {
           alignItems: "center",
           flexDirection: "column",
           borderRadius: "5px",
+          border: "2px solid #4055A8",
           padding: "16px"
         }}
       >
@@ -42,7 +43,7 @@ function Alert({ message, onClose }) {
           {message}
         </div>
         <div>
-          <Button onClick={onClose}>Ok</Button>
+          <Button css= {{padding: "16px"}} onClick={onClose}>Ok</Button>
         </div>
       </div>
     </div>

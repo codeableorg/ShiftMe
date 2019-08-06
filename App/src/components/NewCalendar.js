@@ -176,18 +176,16 @@ function NewCalendar({
             )}
             {Object.entries(forecast).map(([forecastType, dataDays]) => {
               const startIndex = dataDays.findIndex(
-                datum => datum.date === format(startDate, "YYYY/MM/DD")
+                datum => datum.date === format(startDate, "YYYY-MM-DD")
               );
               return (
                 <tr key={forecastType}>
                   <TD styles={{ textAlign: "left", minWidth: "180px" }}>
                     {forecastType}
                   </TD>
-                  {dataDays
-                    .slice(startIndex, startIndex + 7)
-                    .map((dataDay, index) => (
-                      <TD key={dataDay.date}>{dataDay.data}</TD>
-                    ))}
+                  {dataDays.slice(startIndex, startIndex + 7).map(dataDay => (
+                    <TD key={dataDay.date}>{dataDay.data}</TD>
+                  ))}
                 </tr>
               );
             })}
@@ -218,9 +216,8 @@ function NewCalendar({
               ([userId, workShiftsPerUser]) => {
                 const startIndex = workShiftsPerUser.findIndex(
                   workShift =>
-                    workShift.date === format(startDate, "YYYY/MM/DD")
+                    workShift.date === format(startDate, "YYYY-MM-DD")
                 );
-
                 const user = users.find(
                   user => user.id === parseInt(userId, 10)
                 );
@@ -236,14 +233,12 @@ function NewCalendar({
                     <TD styles={{ textAlign: "left", minWidth: "180px" }}>
                       {user && user.name}
                     </TD>
-                    {workshifts.map((workShift, index) => (
+                    {workshifts.map(workShift => (
                       <TD
                         key={workShift.date}
                         styles={{
                           backgroundColor:
-                            isSelectedUser &&
-                            format(new Date(workShift.date), "YYYY-MM-DD") ===
-                              format(new Date(selectedDate), "YYYY-MM-DD")
+                            isSelectedUser && workShift.date === selectedDate
                               ? "#35469C"
                               : "white"
                         }}
@@ -257,7 +252,10 @@ function NewCalendar({
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
-                              width: "100%"
+                              width: "100%",
+                              ":focus": {
+                                outline: "none"
+                              }
                             }}
                             onClick={onShiftClick}
                             title="Select this shift"

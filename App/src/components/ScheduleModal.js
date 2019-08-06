@@ -185,9 +185,8 @@ function ScheduleModal({
             Send
           </button>
         </div>
-      </Modal>
-      {alert && <Alert message={alert} onClose={() => setAlert("")} />}
-    </>
+      </div>
+    </Modal>
   );
 }
 

@@ -8,6 +8,8 @@ import { useUser } from "../contexts/user";
 import { createRequest } from "../services/request";
 import NewCalendar from "../components/NewCalendar";
 import { Button } from "../components/Ui";
+import Alert from "../components/Alert";
+
 
 const customStyles = {
   content: {
@@ -32,7 +34,7 @@ function NewScheduleModal({
   users
 }) {
   const user = useUser();
-
+  const [alert, setAlert] = useState("");
   const [shiftsClicked, setShiftsClicked] = useState([]);
   const [newMotive, setMotive] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -111,9 +113,9 @@ function NewScheduleModal({
     event.preventDefault();
     if (!newMotive || shiftsClicked.length < 2) {
       if (shiftsClicked.length < 2) {
-        alert("Must select min 2 shifts");
+        setAlert("Must select min 2 shifts");
       } else {
-        alert("Must add a motive");
+        setAlert("Must add a motive");
       }
       return;
     }
@@ -133,7 +135,7 @@ function NewScheduleModal({
         onRequestClose();
       })
       .catch(error => {
-        alert(`Error happened at the time of creation:  ${error.message}`);
+        setAlert(`Error happened at the time of creation:  ${error.message}`);
       });
   }
 
@@ -150,13 +152,13 @@ function NewScheduleModal({
               shift_id: event.currentTarget.dataset.shiftid
             }
           ]);
-          setSelectedUsers([
+          setSelectedUsers([Alert,
             ...selectedUsers,
             parseInt(event.currentTarget.dataset.userid, 10)
           ]);
           setSelectedDate(event.currentTarget.dataset.date);
         } else {
-          alert("First select your shift");
+          setAlert("First select your shift");
         }
       } else if (
         shiftsClicked[0].date === event.currentTarget.dataset.date &&
@@ -275,6 +277,7 @@ function NewScheduleModal({
           </Button>
         </div>
       </div>
+      {alert && <Alert message={alert} onClose={() => setAlert("")} />}
     </Modal>
   );
 }
