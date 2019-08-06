@@ -9,7 +9,13 @@ const Turn = {
   4: "OFF"
 };
 
-function Request({ request, findName, onChange, active }) {
+function Request({
+  request,
+  findName,
+  onChange,
+  active
+  // handleRequestSchedule
+}) {
   return (
     <article
       key={request.id}

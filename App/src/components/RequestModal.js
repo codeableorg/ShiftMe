@@ -17,6 +17,7 @@ function RequestModal({
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const request = requests.find(req => req.id === id);
+
   const startDate = getInitialWeekDate(new Date(request.date_Shift));
 
   useEffect(() => {
@@ -66,18 +67,6 @@ function RequestModal({
       });
   }
 
-<<<<<<< HEAD
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)"
-    }
-  };
-
   const workShiftConcat = events.reduce((groups, event) => {
     return {
       ...groups,
@@ -87,8 +76,6 @@ function RequestModal({
     };
   }, {});
 
-=======
->>>>>>> Add new Request function
   return (
     <>
       <div>
@@ -101,7 +88,6 @@ function RequestModal({
           )
         )}
       </div>
-<<<<<<< HEAD
 
       <NewCalendar
         users={frontdesks.filter(
@@ -112,9 +98,6 @@ function RequestModal({
         selectedUsers={[request.requester_id, request.requested_id]}
         selectedDate={request.date_Shift}
       />
-=======
-      <PreviewWeek request={request} frontdesks={frontdesks} events={events} />
->>>>>>> Add new Request function
 
       {isAdmin ? (
         <RequestFormAdmin onClick={onClick} />

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { jsx } from "@emotion/core";
 import { Redirect } from "@reach/router";
 import Nabvar from "../components/Nabvar";
@@ -9,13 +9,13 @@ import RequestModal from "../components/RequestModal";
 import { useUser } from "../contexts/user";
 import Request from "../components/Request";
 import { users } from "../services/user";
+import { updatedNotifications } from "../services/notification";
 
-const Requests = () => {
+const NewRequests = () => {
+  const [id, setId] = useState(0);
   const [requests, setRequests] = useState([]);
   const [requestsAdmin, setRequestsAdmin] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
-
-  const [id, setId] = useState(0);
   const user = useUser();
 
   useEffect(() => {
@@ -42,6 +42,13 @@ const Requests = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      await updatedNotifications();
+    }
+    fetchData();
+  }, []);
+
   function findName(requester_id) {
     return frontdesks.find(frontdesk => frontdesk.id === requester_id).name;
   }
@@ -61,6 +68,8 @@ const Requests = () => {
         </h3>
       </>
     );
+
+  if (!requests.length === 0) return "Loading...";
 
   return (
     <div>
@@ -92,7 +101,7 @@ const Requests = () => {
           </h2>
           <ul name="list" css={{ padding: 0, margin: 0 }}>
             {requests
-              .concat(requestsAdmin)
+              // .concat(requestsAdmin)
               .sort((a, b) => a.id - b.id)
               .map(request => (
                 <Request
@@ -103,14 +112,14 @@ const Requests = () => {
                   onChange={() => setId(request.id)}
                 />
               ))}
-            {/* {requestsAdmin.map(request => (
+            {requestsAdmin.map(request => (
               <Request
                 findName={findName}
                 request={request}
                 active={request.id === id}
                 onChange={() => setId(request.id)}
               />
-            ))} */}
+            ))}
           </ul>
         </div>
         <div
@@ -127,7 +136,7 @@ const Requests = () => {
             <RequestModal
               id={id}
               setRequests={setRequests}
-              requests={requests}
+              requests={[...requests, ...requestsAdmin]}
               isAdmin={user.rol === "Supervisor"}
             />
           )}
@@ -137,4 +146,4 @@ const Requests = () => {
   );
 };
 
-export default Requests;
+export default NewRequests;
