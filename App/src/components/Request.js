@@ -70,7 +70,7 @@ function Request({
             width: "100px"
           }}
         >
-          <p css={{ fontSize: "10px", color: "#98aeeb" }}>Requested</p>
+          <p css={{ fontSize: 12, color: "#98aeeb" }}>Requester</p>
           <p>{findName(request.requested_id)}</p>
         </div>
         <div
