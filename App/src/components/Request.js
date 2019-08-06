@@ -14,7 +14,6 @@ function Request({
   findName,
   onChange,
   active
-  // handleRequestSchedule
 }) {
   return (
     <article
