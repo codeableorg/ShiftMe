@@ -58,7 +58,7 @@ function Request({
             width: "100px"
           }}
         >
-          <p css={{ fontSize: "10px", color: "#98aeeb" }}>Status</p>
+          <p css={{ fontSize: 12, color: "#98aeeb" }}>Requester</p>
           <p>{request.status}</p>
         </div>
       </div>
