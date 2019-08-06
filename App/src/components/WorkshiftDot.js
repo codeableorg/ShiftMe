@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-
 export function WorkshiftDot({ title, shiftId, size = "medium" }) {
   const backgroundColor =
     shiftId === 1

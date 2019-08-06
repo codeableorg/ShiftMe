@@ -25,7 +25,6 @@ function NavLink(props) {
     />
   );
 }
-
 function Notification() {
   return (
     <figure
@@ -41,7 +40,6 @@ function Notification() {
     />
   );
 }
-
 function Navbar({ hasNotifications }) {
   const updateUser = useUserUpdater();
   const user = useUser();
@@ -49,7 +47,6 @@ function Navbar({ hasNotifications }) {
     await logout();
     updateUser({ type: "LOGOUT" });
   }
-
   return (
     <header
       css={{
@@ -119,5 +116,4 @@ function Navbar({ hasNotifications }) {
     </header>
   );
 }
-
 export default Navbar;

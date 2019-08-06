@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 import { updateRequest, cancelRequest } from "../services/request";
 import schedules from "../services/schedule";
 import { users } from "../services/user";
@@ -10,7 +9,6 @@ import getInitialWeekDate from "../utils/get-initial-week-date";
 
 function RequestModal({
   requests,
-  isOpen,
   onRequestClose,
   id,
   setRequests,
@@ -19,6 +17,7 @@ function RequestModal({
   const [events, setEvents] = useState([]);
   const [frontdesks, setFrontdesks] = useState([]);
   const request = requests.find(req => req.id === id);
+
   const startDate = getInitialWeekDate(new Date(request.date_Shift));
 
   useEffect(() => {
@@ -68,17 +67,6 @@ function RequestModal({
       });
   }
 
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)"
-    }
-  };
-
   const workShiftConcat = events.reduce((groups, event) => {
     return {
       ...groups,
@@ -89,13 +77,7 @@ function RequestModal({
   }, {});
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      style={customStyles}
-      contentLabel="Example Modal"
-      ariaHideApp={isOpen}
-    >
+    <>
       <div>
         Motive:
         {requests.map(e =>
@@ -122,7 +104,7 @@ function RequestModal({
       ) : (
         <RequestForm onClick={onClick} handleCancel={handleCancel} />
       )}
-    </Modal>
+    </>
   );
 }
 

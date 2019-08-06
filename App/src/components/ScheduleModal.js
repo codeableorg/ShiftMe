@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import Calendar from "./Calendar";
 import { useUser } from "../contexts/user";
 import { createRequest } from "../services/request";
+import Alert from "../components/Alert";
 
 const customStyles = {
   content: {
@@ -27,7 +28,7 @@ function ScheduleModal({
   end
 }) {
   const user = useUser();
-
+  const [alert, setAlert] = useState("");
   const [shiftsClicked, setShiftsClicked] = useState([]);
   const [newMotive, setMotive] = useState("");
 
@@ -97,8 +98,12 @@ function ScheduleModal({
 
   function handleCreateRequest(event) {
     event.preventDefault();
-    if (!newMotive || shiftsClicked.length < 2) {
-      alert("Must add a motive");
+    if (!newMotive) {
+      setAlert("Must add a motive");
+      return;
+    }
+    if (shiftsClicked.length < 2) {
+      setAlert("Must select a workshift");
       return;
     }
     const request = {
@@ -180,8 +185,9 @@ function ScheduleModal({
             Send
           </button>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+      {alert && <Alert message={alert} onClose={() => setAlert("")} />}
+    </>
   );
 }
 
