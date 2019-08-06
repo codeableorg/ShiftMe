@@ -253,7 +253,11 @@ function NewCalendar({
                             css={{
                               background: "none",
                               border: "none",
-                              cursor: "pointer"
+                              cursor: "pointer",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              width: "100%"
                             }}
                             onClick={onShiftClick}
                             title="Select this shift"

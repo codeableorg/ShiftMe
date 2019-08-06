@@ -60,8 +60,6 @@ function ScheduleModal({
   const textareaCss = {
     rows: 4,
     cols: 50
-    // width: "70%",
-    // marginLeft: "5px"
   };
 
   const listCss = {
@@ -132,7 +130,7 @@ function ScheduleModal({
     >
       <div css={container}>
         <div css={head}>
-          <h2>Schudule Change</h2>
+          <h2>Schedule Change</h2>
           <span
             onClick={onClose}
             css={cancel}
