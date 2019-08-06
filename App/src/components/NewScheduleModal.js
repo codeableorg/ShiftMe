@@ -203,7 +203,7 @@ function NewScheduleModal({
               margin: 0
             }}
           >
-            Schudule Change
+            Request a schedule change
           </h2>
           <span
             onClick={onClose}
