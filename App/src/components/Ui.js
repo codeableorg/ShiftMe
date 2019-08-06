@@ -14,7 +14,7 @@ function Button({ styles, ...props }) {
         fontWeight: "500",
         cursor: "pointer",
         fontSize: "1em",
-        height: "50px",
+        height: 50,
         // padding: "14px",
         transition: "all 200ms ease",
         textAlign: "center",
