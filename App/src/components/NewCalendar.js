@@ -260,22 +260,7 @@ function NewCalendar({
                         {onShiftClick ? (
                           <button
                             css={{
-                              ...buttonCss,
-                              background:
-                                selectedUsers.length > 1
-                                  ? selectedDate.replace(/-/g, "/") ==
-                                      workShift.date &&
-                                    (selectedUsers[0] === userId ||
-                                      selectedUsers[1] === userId)
-                                    ? "#BED0F7"
-                                    : "none"
-                                  : selectedUsers.length > 0
-                                  ? selectedDate.replace(/-/g, "/") ==
-                                      workShift.date &&
-                                    selectedUsers[0] === userId
-                                    ? "#BED0F7"
-                                    : "none"
-                                  : "none"
+                              ...buttonCss
                             }}
                             onClick={onShiftClick}
                             title="Select this shift"

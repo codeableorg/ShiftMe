@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "@reach/router";
 import { useUser } from "../contexts/user";
 import Navbar from "../components/Nabvar";
-import ScheduleModal from "../components/ScheduleModal";
 import NewScheduleModal from "../components/NewScheduleModal";
 import schedules from "../services/schedule";
 import { notifications } from "../services/notification";
@@ -93,16 +92,6 @@ function HomeView() {
         : forecast.dataDays
     };
   }, {});
-
-  function calcDay(date) {
-    const nameDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    var d = new Date(date);
-    return nameDays[d.getDay()];
-  }
-
-  function handleShiftClick(event) {
-    console.log(event.currentTarget.dataset);
-  }
 
   return (
     <>
@@ -208,15 +197,6 @@ function HomeView() {
             marginTop: "1em"
           }}
         >
-          {/* <ScheduleModal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setModalOpen(false)}
-            workShiftConcat={workShiftConcat}
-            frontdesks={frontdesks}
-            calcDay={calcDay}
-            start={start}
-            end={end}
-          /> */}
           <NewScheduleModal
             isOpen={modalIsOpen}
             onRequestClose={() => setModalOpen(false)}
