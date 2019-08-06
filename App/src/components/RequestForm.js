@@ -1,7 +1,6 @@
-import React from "react"
+import React from "react";
 
-
-function RequestForm({onClick, handleCancel}) {
+function RequestForm({ onClick, handleCancel }) {
   return (
     <form>
       <button data-value="Agree" onClick={onClick}>
@@ -14,4 +13,4 @@ function RequestForm({onClick, handleCancel}) {
     </form>
   );
 }
-export default RequestForm
+export default RequestForm;

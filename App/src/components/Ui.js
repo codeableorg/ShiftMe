@@ -14,14 +14,15 @@ function Button({ styles, ...props }) {
         fontWeight: "500",
         cursor: "pointer",
         fontSize: "1em",
-        padding: "14px",
+        height: 50,
+        // padding: "14px",
         transition: "all 200ms ease",
         textAlign: "center",
         width: "100%",
         outline: "none",
         "&:hover": {
           backgroundColor: "#4055A8",
-          color: "white",
+          color: "white"
         },
         ...styles
       }}

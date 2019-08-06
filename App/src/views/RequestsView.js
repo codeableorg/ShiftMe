@@ -85,6 +85,7 @@ function RequestsView() {
           .map(request => (
             <Request
               findName={findName}
+              active={request.id === id}
               Turn={Turn}
               request={request}
               handleRequestSchedule={handleRequestSchedule}
@@ -95,6 +96,7 @@ function RequestsView() {
             findName={findName}
             Turn={Turn}
             request={request}
+            active={request.id === id}
             handleRequestSchedule={handleRequestSchedule}
           />
         ))}

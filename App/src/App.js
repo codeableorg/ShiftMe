@@ -5,7 +5,7 @@ import { Router } from "@reach/router";
 import Login from "./views/Login";
 import HomeView from "./views/HomeView";
 import UsersView from "./views/UsersView";
-import RequestsView from "./views/RequestsView";
+import NewRequests from "./views/NewRequests";
 import { UserProvider } from "./contexts/user";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Router>
           <HomeView path="/" />
           <Login path="/login" />
-          <RequestsView path="/requests" />
+          <NewRequests path="/requests" />
           <UsersView path="/users" />
         </Router>
       </main>
