@@ -97,7 +97,6 @@ function NewCalendar({
   users, // the list of users to show
   selectedUsers = [], // the list of users to highlight
   selectedDate = null // the date to highlight those users
-  // shiftsClicked
 }) {
   const dates = Array.from({ length: 7 }, (_, index) => {
     const date = new Date(startDate);
