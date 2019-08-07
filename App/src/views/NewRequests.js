@@ -121,6 +121,7 @@ const NewRequests = () => {
             ))}
           </ul>
         </div>
+
         <div
           name="requestDetails"
           css={{
@@ -138,6 +139,7 @@ const NewRequests = () => {
               requests={[...requests, ...requestsAdmin]}
               isAdmin={user.rol === "Supervisor"}
               setRequestsAdmin={setRequestsAdmin}
+              findName={findName}
             />
           )}
         </div>
