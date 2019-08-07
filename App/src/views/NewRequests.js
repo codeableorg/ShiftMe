@@ -101,7 +101,6 @@ const NewRequests = () => {
           </h2>
           <ul name="list" css={{ padding: 0, margin: 0 }}>
             {requests
-              // .concat(requestsAdmin)
               .sort((a, b) => a.id - b.id)
               .map(request => (
                 <Request
@@ -122,6 +121,7 @@ const NewRequests = () => {
             ))}
           </ul>
         </div>
+
         <div
           name="requestDetails"
           css={{
@@ -138,6 +138,8 @@ const NewRequests = () => {
               setRequests={setRequests}
               requests={[...requests, ...requestsAdmin]}
               isAdmin={user.rol === "Supervisor"}
+              setRequestsAdmin={setRequestsAdmin}
+              findName={findName}
             />
           )}
         </div>

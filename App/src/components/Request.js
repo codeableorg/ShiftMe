@@ -9,12 +9,7 @@ const Turn = {
   4: "Day Off"
 };
 
-function Request({
-  request,
-  findName,
-  onChange,
-  active
-}) {
+function Request({ request, findName, onChange, active }) {
   return (
     <article
       key={request.id}
@@ -58,7 +53,7 @@ function Request({
             width: "100px"
           }}
         >
-          <p css={{ fontSize: 12, color: "#98aeeb" }}>Requester</p>
+          <p css={{ fontSize: 12, color: "#98aeeb" }}>Status</p>
           <p>{request.status}</p>
         </div>
       </div>
@@ -70,7 +65,7 @@ function Request({
             width: "100px"
           }}
         >
-          <p css={{ fontSize: 12, color: "#98aeeb" }}>Requester</p>
+          <p css={{ fontSize: 12, color: "#98aeeb" }}>Requested</p>
           <p>{findName(request.requested_id)}</p>
         </div>
         <div
@@ -80,7 +75,7 @@ function Request({
             width: "100px"
           }}
         >
-          <p css={{ fontSize: 12, color: "#98aeeb" }}>Requester</p>
+          <p css={{ fontSize: 12, color: "#98aeeb" }}>To</p>
           <p>{Turn[request.requested_Shift_id]}</p>
         </div>
         <div
@@ -91,7 +86,7 @@ function Request({
           }}
         >
           <p css={{ fontSize: "12px", color: "#98aeeb" }}>On</p>
-          <p>7/29/2019</p>
+          <p>{request.creationDate}</p>
         </div>
       </div>
     </article>
