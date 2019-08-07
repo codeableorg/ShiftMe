@@ -10,7 +10,6 @@ import NewCalendar from "../components/NewCalendar";
 import { Button } from "../components/Ui";
 import Alert from "../components/Alert";
 
-
 const customStyles = {
   content: {
     top: "50%",
@@ -39,6 +38,13 @@ function NewScheduleModal({
   const [newMotive, setMotive] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState();
+
+  const Turn = {
+    1: "Morning",
+    2: "Afternoon",
+    3: "Night",
+    4: "Day Off"
+  };
 
   const cancel = {
     fontSize: "2em",
@@ -152,7 +158,8 @@ function NewScheduleModal({
               shift_id: event.currentTarget.dataset.shiftid
             }
           ]);
-          setSelectedUsers([Alert,
+          setSelectedUsers([
+            Alert,
             ...selectedUsers,
             parseInt(event.currentTarget.dataset.userid, 10)
           ]);
@@ -231,11 +238,8 @@ function NewScheduleModal({
             <ul css={listCss}>
               {shiftsClicked.map(shift => (
                 <li>
-                  {nameFrontDesk(shift.id) +
-                    " of shift " +
-                    shift.shift_id +
-                    " of date " +
-                    shift.date}
+                  <b>{nameFrontDesk(shift.id)}</b> of shift{" "}
+                  <b>{Turn[shift.shift_id]}</b> of date {shift.date}
                 </li>
               ))}
             </ul>

@@ -190,7 +190,11 @@ function RequestModal({
       {isAdmin ? (
         <RequestFormAdmin onClick={onClick} />
       ) : (
-        <RequestForm onClick={onClick} handleCancel={handleCancel} />
+        <RequestForm
+          onClick={onClick}
+          handleCancel={handleCancel}
+          requesterId={request.requester_id}
+        />
       )}
     </>
   );
