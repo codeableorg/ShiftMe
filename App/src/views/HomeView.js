@@ -114,7 +114,7 @@ function HomeView() {
               justifyContent: "space-between",
               alignItems: "baseline",
               marginBottom: 15,
-              marginTop: 85
+              marginTop: 20
             }}
           >
             <h1
