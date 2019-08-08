@@ -354,7 +354,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_10 = Schedule.create(
-    month: "August",
+    month: "September",
     user_id: 6,
     workShifts: [
       { date: "2019-09-01", shift_id: 2 },
@@ -391,7 +391,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_11 = Schedule.create(
-    month: "August",
+    month: "September",
     user_id: 1,
     workShifts: [
       { date: "2019-09-01", shift_id: 3 },
@@ -428,7 +428,7 @@ schedule_1 = Schedule.create(
   )
 
   schedule_12 = Schedule.create(
-    month: "August",
+    month: "September",
     user_id: 2,
     workShifts: [
       { date: "2019-09-01", shift_id: 3 },
