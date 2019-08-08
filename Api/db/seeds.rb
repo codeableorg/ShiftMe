@@ -11,8 +11,6 @@ supervisor_1= User.create(rol: 'Supervisor', name: 'Nina',lastName: 'Suarez', em
 @shift_3= Shift.create(shift_type: "night")
 @shift_4= Shift.create(shift_type: "off")
 
-@request_1 = Request.create(creationDate:"2019-08-25", date_Shift: "2019-08-21",requester_id: @user_1.id, requested_id: @user_2.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_2.id, motive: "I have a medical appointment")
-@request_2 = Request.create(creationDate:"2019-08-25", date_Shift: "2019-08-22", requester_id: @user_2.id, requested_id: @user_1.id, status: 'Agree', current_Shift_id: @shift_1.id, requested_Shift_id: @shift_3.id, motive: "I have a medical appointment")
 
 schedule_1 = Schedule.create(
     month: "August",

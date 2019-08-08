@@ -25,6 +25,7 @@ function RequestModal({
   findName
 }) {
   const [events, setEvents] = useState([]);
+  const [isActionSuccess, setIsActionSuccess] = useState(false);
   const [frontdesks, setFrontdesks] = useState([]);
   const request = requests.find(req => req.id === id);
   const startDate = getInitialWeekDate(new Date(request.date_Shift));
@@ -34,7 +35,7 @@ function RequestModal({
       setEvents(response);
     }
     fetchData();
-  }, []);
+  }, [isActionSuccess]);
 
   useEffect(() => {
     async function fetchData() {
@@ -63,6 +64,7 @@ function RequestModal({
             request.id === id ? { ...request, status } : request
           )
         );
+        setIsActionSuccess(true);
       });
   }
 

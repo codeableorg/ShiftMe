@@ -22,7 +22,8 @@ function Request({ request, findName, onChange, active }) {
         padding: "10px 20px",
         minWidth: "119px",
         cursor: "pointer",
-        backgroundColor: active ? "rgb(224, 232, 249)" : "#fff"
+        backgroundColor: active ? "rgb(224, 232, 249)" : "#fff",
+        borderBottom: "1px solid #35469c"
       }}
     >
       <div css={{ display: "flex", flexDirection: "row" }}>
